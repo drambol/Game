@@ -167,8 +167,8 @@ public class Algorithm {
 		return false;
 	}
 	
-	public static boolean getDraw(int chance) {
-		if (chance < 1 || chance > 99) {
+	public static boolean getDraw(double chance) {
+		if (chance <= 0 || chance >= 100) {
 			return true;
 		}
 		int randomKey = getRandomInt(1, 60000)%100;
