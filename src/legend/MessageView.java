@@ -17,7 +17,7 @@ import legend.LegendView;
 
 public class MessageView extends JFrame implements ActionListener {
 	
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 3L;
 	private JPanel panel1 = new JPanel();
 	private JPanel panel2 = new JPanel();
 	private JLabel label = new JLabel();
@@ -26,15 +26,19 @@ public class MessageView extends JFrame implements ActionListener {
 	private Box box = Box.createVerticalBox();
 	public boolean flag = false;
 	public final LegendView legendView = WindowStore.legendViewTL.get();
+	public final WarehouseView warehouseView = WindowStore.warehouseViewTL.get();
 	String item = "";
 	int position = 0;
-	int count = 0;
+	String detailProperty = "";
 	
-	public MessageView(String s, int a, int b) {
+	public MessageView(String s, int a, String detail) {
 		super(s);
+		WindowStore.messageViewTL.set(this);
+		setResizable(false);
+		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		item = s;
 		position = a;
-		count = b;
+		detailProperty = detail;
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		String str = "Which " + s + " would you like to replace?";
 		label.setText(str);
@@ -59,9 +63,16 @@ public class MessageView extends JFrame implements ActionListener {
 			flag =  true;
 		}
 		this.dispose();
-		legendView.reactFromMessage(flag, item, position, count);
-		legendView.setEnabled(true);
+		legendView.reactFromDialog(flag, item, position, detailProperty);
 		legendView.requestFocus();
+		if (legendView.fromMonster) {
+			legendView.setEnabled(true);
+		} else {
+			warehouseView.reactFromDialog();
+			warehouseView.setEnabled(true);
+			legendView.requestFocus();
+			warehouseView.requestFocus();
+		}
 	}
 
 }

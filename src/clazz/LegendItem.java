@@ -105,9 +105,9 @@ public class LegendItem {
 	}
 	
 	public String printItem() {
-		String str = name;
+		String str = code + "~" + name;
 		if (defence[0] != 0 || defence[1] != 0) {
-			str = str + " 防御: " + defence[0] + "-" + defence[1];
+			str = str + "  防御: " + defence[0] + "-" + defence[1];
 		}
 		if (magicDefence[0] != 0 || magicDefence[1] != 0) {
 			str = str + "  魔御: " + magicDefence[0] + "-" + magicDefence[1];
