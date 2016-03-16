@@ -68,7 +68,6 @@ public class MessageView extends JFrame implements ActionListener {
 		if (legendView.fromMonster) {
 			legendView.setEnabled(true);
 		} else {
-			warehouseView.reactFromDialog();
 			warehouseView.setEnabled(true);
 			legendView.requestFocus();
 			warehouseView.requestFocus();

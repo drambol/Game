@@ -1,37 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?><Global>
 	<Char1>
-		<name>血妖花</name>
-		<gender>女</gender>
-		<career>战士</career>
-		<level>40</level>
-		<exp>0</exp>
-		<dc>7-8</dc>
-		<sc>0-0</sc>
+		<name>胖勇勇</name>
+		<gender>男</gender>
+		<career>道士</career>
+		<level>30</level>
+		<exp>42718</exp>
+		<dc>4-4</dc>
+		<sc>4-4</sc>
 		<mc>0-0</mc>
-		<ac>4-5</ac>
-		<mac>0-0</mac>
-		<hp>674</hp>
-		<mp>123</mp>
-		<hit>17</hit>
+		<ac>0-0</ac>
+		<mac>4-4</mac>
+		<hp>250</hp>
+		<mp>361</mp>
+		<hit>15</hit>
 		<dex>15</dex>
-		<weapon>w20~炼狱  攻击: 0-25  重量: 60  持久: 28  需等级26</weapon>
-		<armor>c8~重盔甲(女)  防御: 4-7  魔御: 2-6  攻击: 0-1  道术: 0-1  魔法: 0-2  重量: 23  持久: 25  需等级22</armor>
-		<helmet>h6~记忆头盔  防御: 3-3  重量: 7  持久: 8  需等级26</helmet>
-		<amulet>s19~记忆项链  攻击: 2-4  重量: 1  持久: 8  需等级26</amulet>
+		<weapon>w14~降魔  攻击: 6-11  道术: 1-2  准确 +1  重量: 20  持久: 17  需等级20</weapon>
+		<armor>c9~灵魂道袍(男)  防御: 3-6  魔御: 3-3  道术: 0-4  魔法: 0-1  重量: 15  持久: 20  需等级22</armor>
+		<helmet>h4~道士头盔  防御: 1-2  魔御: 2-3  重量: 3  持久: 8  需等级24</helmet>
+		<amulet>a17~天珠项链  道术: 1-5  重量: 1  持久: 7  需道术22</amulet>
 		<medal/>
-		<leftBracelet>i12~死神手套  攻击: 1-2  重量: 1  持久: 8  需等级22</leftBracelet>
-		<rightBracelet>i18~幽灵手套  防御: 0-4  重量: 5  持久: 8  需等级25</rightBracelet>
-		<leftRing>r40~麻痹戒指  攻击: 0-1  重量: 1  持久: 5  需等级16</leftRing>
-		<rightRing>r25~圣战戒指  魔御: 0-1  攻击: 0-7  重量: 2  持久: 7  需攻击40</rightRing>
+		<leftBracelet>i8~道士手镯  道术: 0-1  重量: 1  持久: 7  需等级20</leftBracelet>
+		<rightBracelet>i8~道士手镯  道术: 0-1  重量: 1  持久: 7  需等级20</rightBracelet>
+		<leftRing>r8~珍珠戒指  道术: 0-4  魔法: 0-1  重量: 1  持久: 6  需等级20</leftRing>
+		<rightRing>r15~降妖除魔戒指  魔御: 0-4  攻击: 1-2  道术: 1-2  魔法: 1-2  重量: 1  持久: 5  需等级25</rightRing>
 		<belt/>
 		<boots/>
 		<gem/>
 	</Char1>
 	<WareHouse>
-		<item>w21~银蛇  攻击: 7-14  道术: 1-3  准确 +1  重量: 26  持久: 24  需等级26</item>
-		<item>c14~战神盔甲(女)  防御: 5-9  魔御: 3-5  重量: 40  持久: 30  需攻击46</item>
-		<item>c13~战神盔甲(男)  防御: 5-10  魔御: 3-5  重量: 40  持久: 30  需攻击46</item>
-		<item/>
+		<item>r6~生铁戒指  防御: 0-2  道术: 0-4  魔法: 0-3  重量: 1  持久: 6  需魔法9</item>
+		<item>r9~蛇眼戒指  攻击: 0-1  道术: 0-2  魔法: 0-3  重量: 1  持久: 6  需等级20</item>
+		<item>w22~魔杖  攻击: 5-10  魔法: 2-5  重量: 10  持久: 15  需等级26</item>
+		<item>c15~幽灵战衣(男)  防御: 4-7  魔御: 3-4  道术: 1-4  重量: 26  持久: 28  需道术27</item>
 		<item/>
 		<item/>
 		<item/>

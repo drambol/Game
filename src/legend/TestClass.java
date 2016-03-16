@@ -3,8 +3,11 @@ package legend;
 public class TestClass {
 	
 	public static void main(String[] args) {
-		String str = "你好中国";
-		System.out.print(str.substring(1, 3));
+		for (int n = 1; n <= 60; n++) {
+			int exp = (int) (Math.pow(1.25, n - 1) * 100);
+			System.out.println(n + ": " + exp);
+		}
+		
 	}
 
 }

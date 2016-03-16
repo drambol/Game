@@ -66,7 +66,6 @@ public class DialogView extends JDialog implements ActionListener {
 			legendView.setEnabled(true);
 			legendView.requestFocus();
 		} else {
-			warehouseView.reactFromDialog();
 			warehouseView.setEnabled(true);
 			legendView.requestFocus();
 			warehouseView.requestFocus();

@@ -28,18 +28,18 @@ public class PropertyView extends JFrame implements ActionListener {
 	XmlParser xmlParser = new XmlParser("runSuite\\LegendHero.xml");
 	public String headerInfo = "";
 	public final LegendView legendView = WindowStore.legendViewTL.get();
-	private String weaponProperty = xmlParser.getNodeByName("weapon").getTextContent();
-	private String armorProperty = xmlParser.getNodeByName("armor").getTextContent();
-	private String helmetProperty = xmlParser.getNodeByName("helmet").getTextContent();
-	private String amuletProperty = xmlParser.getNodeByName("amulet").getTextContent();
-	private String medalProperty = xmlParser.getNodeByName("medal").getTextContent();
-	private String leftBraceletProperty = xmlParser.getNodeByName("leftBracelet").getTextContent();
-	private String rightBraceletProperty = xmlParser.getNodeByName("rightBracelet").getTextContent();
-	private String leftRingProperty = xmlParser.getNodeByName("leftRing").getTextContent();
-	private String rightRingProperty = xmlParser.getNodeByName("rightRing").getTextContent();
-	private String beltProperty = xmlParser.getNodeByName("belt").getTextContent();
-	private String bootsProperty = xmlParser.getNodeByName("boots").getTextContent();
-	private String gemProperty = xmlParser.getNodeByName("gem").getTextContent();
+	private String weaponProperty;
+	private String armorProperty;
+	private String helmetProperty;
+	private String amuletProperty;
+	private String medalProperty;
+	private String leftBraceletProperty;
+	private String rightBraceletProperty;
+	private String leftRingProperty;
+	private String rightRingProperty;
+	private String beltProperty;
+	private String bootsProperty;
+	private String gemProperty;
 	public int attack;
 	public int daoAttack;
 	public int magicAttack;
@@ -79,29 +79,46 @@ public class PropertyView extends JFrame implements ActionListener {
 		setVisible(visibility);
 	}
 	
-	private void loadPorpertyFromXML() {
-		headerLabel.setText(headerInfo);
-		label[0].setText(StringTranslate.Attack);
-		label[1].setText(calculate(StringTranslate.Attack));
-		label[2].setText(StringTranslate.DaoAttack);
-		label[3].setText(calculate(StringTranslate.DaoAttack));
-		label[4].setText(StringTranslate.MagicAttack);
-		label[5].setText(calculate(StringTranslate.MagicAttack));
-		label[6].setText(StringTranslate.Defence);
-		label[7].setText(calculate(StringTranslate.Defence));
-		label[8].setText(StringTranslate.MagicDefence);
-		label[9].setText(calculate(StringTranslate.MagicDefence));
+	public void loadPorpertyFromXML() {
+		xmlParser = new XmlParser("runSuite\\LegendHero.xml");
+		weaponProperty = xmlParser.getNodeByName("weapon").getTextContent();
+		armorProperty = xmlParser.getNodeByName("armor").getTextContent();
+		helmetProperty = xmlParser.getNodeByName("helmet").getTextContent();
+		amuletProperty = xmlParser.getNodeByName("amulet").getTextContent();
+		medalProperty = xmlParser.getNodeByName("medal").getTextContent();
+		leftBraceletProperty = xmlParser.getNodeByName("leftBracelet").getTextContent();
+		rightBraceletProperty = xmlParser.getNodeByName("rightBracelet").getTextContent();
+		leftRingProperty = xmlParser.getNodeByName("leftRing").getTextContent();
+		rightRingProperty = xmlParser.getNodeByName("rightRing").getTextContent();
+		beltProperty = xmlParser.getNodeByName("belt").getTextContent();
+		bootsProperty = xmlParser.getNodeByName("boots").getTextContent();
+		gemProperty = xmlParser.getNodeByName("gem").getTextContent();
+		if (headerInfo.length() > 2) {
+			String charLevel = xmlParser.getNodeByName("level").getTextContent();
+			headerInfo = headerInfo.substring(0, headerInfo.length() - 2) + charLevel + ")";
+			headerLabel.setText(headerInfo);
+		}
+		label[0].setText(LegendConstant.Attack);
+		label[1].setText(calculate(LegendConstant.Attack));
+		label[2].setText(LegendConstant.DaoAttack);
+		label[3].setText(calculate(LegendConstant.DaoAttack));
+		label[4].setText(LegendConstant.MagicAttack);
+		label[5].setText(calculate(LegendConstant.MagicAttack));
+		label[6].setText(LegendConstant.Defence);
+		label[7].setText(calculate(LegendConstant.Defence));
+		label[8].setText(LegendConstant.MagicDefence);
+		label[9].setText(calculate(LegendConstant.MagicDefence));
 		label[10].setText("HP");
 		label[11].setText(xmlParser.getNodeByName("hp").getTextContent());
 		label[12].setText("MP");
 		label[13].setText(xmlParser.getNodeByName("mp").getTextContent());
-		label[14].setText(StringTranslate.Hit);
-		label[15].setText("" + getOther(StringTranslate.Hit));
-		label[16].setText(StringTranslate.Dexterity);
-		label[17].setText("" + getOther(StringTranslate.Dexterity));
-		attack = Integer.parseInt(calculate(StringTranslate.Attack).split("-")[1]);
-		daoAttack = Integer.parseInt(calculate(StringTranslate.DaoAttack).split("-")[1]);
-		magicAttack = Integer.parseInt(calculate(StringTranslate.MagicAttack).split("-")[1]);
+		label[14].setText(LegendConstant.Hit);
+		label[15].setText("" + getOther(LegendConstant.Hit));
+		label[16].setText(LegendConstant.Dexterity);
+		label[17].setText("" + getOther(LegendConstant.Dexterity));
+		attack = Integer.parseInt(calculate(LegendConstant.Attack).split("-")[1]);
+		daoAttack = Integer.parseInt(calculate(LegendConstant.DaoAttack).split("-")[1]);
+		magicAttack = Integer.parseInt(calculate(LegendConstant.MagicAttack).split("-")[1]);
 		level = Integer.parseInt(xmlParser.getNodeByName("level").getTextContent());
 	}
 	
@@ -113,22 +130,23 @@ public class PropertyView extends JFrame implements ActionListener {
 	}
 	
 	private int getMin(String str) {
+		xmlParser = new XmlParser("runSuite\\LegendHero.xml");
 		String string = str + ": ";
 		int min = 0;
 		switch (str) {
-		case StringTranslate.Attack:
+		case LegendConstant.Attack:
 			min = Integer.parseInt(xmlParser.getNodeByName("dc").getTextContent().split("-")[0]);
 			break;
-		case StringTranslate.DaoAttack:
+		case LegendConstant.DaoAttack:
 			min = Integer.parseInt(xmlParser.getNodeByName("sc").getTextContent().split("-")[0]);
 			break;
-		case StringTranslate.MagicAttack:
+		case LegendConstant.MagicAttack:
 			min = Integer.parseInt(xmlParser.getNodeByName("mc").getTextContent().split("-")[0]);
 			break;
-		case StringTranslate.Defence:
+		case LegendConstant.Defence:
 			min = Integer.parseInt(xmlParser.getNodeByName("ac").getTextContent().split("-")[0]);
 			break;
-		case StringTranslate.MagicDefence:
+		case LegendConstant.MagicDefence:
 			min = Integer.parseInt(xmlParser.getNodeByName("mac").getTextContent().split("-")[0]);
 			break;
 		}
@@ -172,22 +190,23 @@ public class PropertyView extends JFrame implements ActionListener {
 	}
 	
 	private int getMax(String str) {
+		xmlParser = new XmlParser("runSuite\\LegendHero.xml");
 		String string = str + ": ";
 		int max = 0;
 		switch (str) {
-		case StringTranslate.Attack:
+		case LegendConstant.Attack:
 			max = Integer.parseInt(xmlParser.getNodeByName("dc").getTextContent().split("-")[1]);
 			break;
-		case StringTranslate.DaoAttack:
+		case LegendConstant.DaoAttack:
 			max = Integer.parseInt(xmlParser.getNodeByName("sc").getTextContent().split("-")[1]);
 			break;
-		case StringTranslate.MagicAttack:
+		case LegendConstant.MagicAttack:
 			max = Integer.parseInt(xmlParser.getNodeByName("mc").getTextContent().split("-")[1]);
 			break;
-		case StringTranslate.Defence:
+		case LegendConstant.Defence:
 			max = Integer.parseInt(xmlParser.getNodeByName("ac").getTextContent().split("-")[1]);
 			break;
-		case StringTranslate.MagicDefence:
+		case LegendConstant.MagicDefence:
 			max = Integer.parseInt(xmlParser.getNodeByName("mac").getTextContent().split("-")[1]);
 			break;
 		}
@@ -231,13 +250,14 @@ public class PropertyView extends JFrame implements ActionListener {
 	}
 	
 	private int getOther(String str) {
+		xmlParser = new XmlParser("runSuite\\LegendHero.xml");
 		String string = str + " +";
 		int result = 0;
 		switch (str) {
-		case StringTranslate.Hit:
+		case LegendConstant.Hit:
 			result = Integer.parseInt(xmlParser.getNodeByName("hit").getTextContent());
 			break;
-		case StringTranslate.Dexterity:
+		case LegendConstant.Dexterity:
 			result = Integer.parseInt(xmlParser.getNodeByName("dex").getTextContent());
 			break;
 		}

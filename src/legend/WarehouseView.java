@@ -145,11 +145,6 @@ public class WarehouseView extends JFrame implements ActionListener {
 		}
 	}
 	
-	public void reactFromDialog() {
-		xmlParser = new XmlParser("runSuite\\LegendHero.xml");
-		label[itemPosition].setText(xmlParser.getNodeValues("item").get(itemPosition).split("~")[1].split("  ")[0]);
-	}
-	
 	public static void main(String[] args) {
 		WarehouseView test = new WarehouseView("");
 		test.setVisible(true);

@@ -64,7 +64,7 @@ public class RegisterView extends JFrame implements ActionListener {
 
 	public void actionPerformed(ActionEvent actionevent) {
 		if (actionevent.getSource() == button) {
-			if (tText.getText().length() >= 3) {
+			if (tText.getText().length() >= 2) {
 				xmlParser.getNodeByName("name").setTextContent(tText.getText());
 				xmlParser.getNodeByName("career").setTextContent(careerGroup.getSelectedButtonText());
 				initialCharData(genderGroup.getSelectedButtonText(), careerGroup.getSelectedButtonText());
@@ -72,14 +72,14 @@ public class RegisterView extends JFrame implements ActionListener {
 				this.dispose();
 				new LegendView("");
 			} else {
-				label.setText("Name cannot be less than 3 letters!");
+				label.setText("Name cannot be less than 2 letters!");
 			}
 		}
 	}
 	
 	private void initialRadioButtons() {
-		genderButton[0] = new MyRadioButton(StringTranslate.Male);
-		genderButton[1] = new MyRadioButton(StringTranslate.Female);
+		genderButton[0] = new MyRadioButton(LegendConstant.Male);
+		genderButton[1] = new MyRadioButton(LegendConstant.Female);
 		for (int i = 0; i < 2; i++) {
 			genderButton[i].setPreferredSize(new Dimension(50, 22));
 			genderPanel.add(genderButton[i]);
@@ -87,9 +87,9 @@ public class RegisterView extends JFrame implements ActionListener {
 		}
 		genderButton[0].setSelected(true);
 		
-		careerButton[0] = new MyRadioButton(StringTranslate.Warrior);
-		careerButton[1] = new MyRadioButton(StringTranslate.Taoist);
-		careerButton[2] = new MyRadioButton(StringTranslate.Mage);
+		careerButton[0] = new MyRadioButton(LegendConstant.Warrior);
+		careerButton[1] = new MyRadioButton(LegendConstant.Taoist);
+		careerButton[2] = new MyRadioButton(LegendConstant.Mage);
 		for (int i = 0; i < 3; i++) {
 			careerButton[i].setPreferredSize(new Dimension(50, 22));
 			careerPanel.add(careerButton[i]);
@@ -100,11 +100,10 @@ public class RegisterView extends JFrame implements ActionListener {
 	
 	private void initialCharData(String gender, String career) {
 		xmlParser.getNodeByName("gender").setTextContent(gender);
-		xmlParser.getNodeByName("level").setTextContent("40");
+		xmlParser.getNodeByName("level").setTextContent("1");
 		xmlParser.getNodeByName("exp").setTextContent("0");
 		xmlParser.getNodeByName("dex").setTextContent("15");
-		xmlParser.getNodeByName("weapon").setTextContent("");
-		xmlParser.getNodeByName("armor").setTextContent("");
+		xmlParser.getNodeByName("weapon").setTextContent(LegendConstant.StartWeapon);
 		xmlParser.getNodeByName("helmet").setTextContent("");
 		xmlParser.getNodeByName("amulet").setTextContent("");
 		xmlParser.getNodeByName("medal").setTextContent("");
@@ -119,35 +118,43 @@ public class RegisterView extends JFrame implements ActionListener {
 			xmlParser.getNodeByName("item", i).setTextContent("");
 		}
 		switch (career) {
-		case StringTranslate.Warrior:
-			xmlParser.getNodeByName("dc").setTextContent("7-8");
+		case LegendConstant.Warrior:
+			xmlParser.getNodeByName("dc").setTextContent("0-0");
 			xmlParser.getNodeByName("sc").setTextContent("0-0");
 			xmlParser.getNodeByName("mc").setTextContent("0-0");
-			xmlParser.getNodeByName("ac").setTextContent("4-5");
+			xmlParser.getNodeByName("ac").setTextContent("0-0");
 			xmlParser.getNodeByName("mac").setTextContent("0-0");
-			xmlParser.getNodeByName("hp").setTextContent("674");
-			xmlParser.getNodeByName("mp").setTextContent("123");
+			xmlParser.getNodeByName("hp").setTextContent("19");
+			xmlParser.getNodeByName("mp").setTextContent("5");
 			xmlParser.getNodeByName("hit").setTextContent("17");
 			break;
-		case StringTranslate.Taoist:
-			xmlParser.getNodeByName("dc").setTextContent("4-5");
-			xmlParser.getNodeByName("sc").setTextContent("4-5");
+		case LegendConstant.Taoist:
+			xmlParser.getNodeByName("dc").setTextContent("0-0");
+			xmlParser.getNodeByName("sc").setTextContent("0-0");
 			xmlParser.getNodeByName("mc").setTextContent("0-0");
 			xmlParser.getNodeByName("ac").setTextContent("0-0");
-			xmlParser.getNodeByName("mac").setTextContent("4-5");
-			xmlParser.getNodeByName("hp").setTextContent("381");
-			xmlParser.getNodeByName("mp").setTextContent("402");
+			xmlParser.getNodeByName("mac").setTextContent("0-0");
+			xmlParser.getNodeByName("hp").setTextContent("18");
+			xmlParser.getNodeByName("mp").setTextContent("20");
 			xmlParser.getNodeByName("hit").setTextContent("15");
 			break;
-		case StringTranslate.Mage:
-			xmlParser.getNodeByName("dc").setTextContent("4-5");
+		case LegendConstant.Mage:
+			xmlParser.getNodeByName("dc").setTextContent("0-0");
 			xmlParser.getNodeByName("sc").setTextContent("0-0");
-			xmlParser.getNodeByName("mc").setTextContent("4-5");
+			xmlParser.getNodeByName("mc").setTextContent("0-0");
 			xmlParser.getNodeByName("ac").setTextContent("0-0");
 			xmlParser.getNodeByName("mac").setTextContent("0-0");
-			xmlParser.getNodeByName("hp").setTextContent("193");
-			xmlParser.getNodeByName("mp").setTextContent("841");
+			xmlParser.getNodeByName("hp").setTextContent("16");
+			xmlParser.getNodeByName("mp").setTextContent("77");
 			xmlParser.getNodeByName("hit").setTextContent("11");
+			break;
+		}
+		switch (gender) {
+		case LegendConstant.Male:
+			xmlParser.getNodeByName("armor").setTextContent(LegendConstant.StartMaleArmor);
+			break;
+		case LegendConstant.Female:
+			xmlParser.getNodeByName("armor").setTextContent(LegendConstant.StartFemaleArmor);
 			break;
 		}
 	}

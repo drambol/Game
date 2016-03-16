@@ -1,35 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?><Global>
 	<Char1>
-		<name>血妖花</name>
-		<gender>女</gender>
-		<career>战士</career>
-		<level>40</level>
-		<exp>0</exp>
-		<dc>7-8</dc>
-		<sc>0-0</sc>
+		<name>胖勇勇</name>
+		<gender>男</gender>
+		<career>道士</career>
+		<level>26</level>
+		<exp>14731</exp>
+		<dc>3-3</dc>
+		<sc>3-3</sc>
 		<mc>0-0</mc>
-		<ac>4-5</ac>
-		<mac>0-0</mac>
-		<hp>674</hp>
-		<mp>123</mp>
-		<hit>17</hit>
+		<ac>0-0</ac>
+		<mac>3-3</mac>
+		<hp>201</hp>
+		<mp>289</mp>
+		<hit>15</hit>
 		<dex>15</dex>
-		<weapon>w20~炼狱  攻击: 0-25  重量: 60  持久: 28  需等级26</weapon>
-		<armor>c8~重盔甲(女)  防御: 4-7  魔御: 2-6  攻击: 0-1  道术: 0-1  魔法: 0-2  重量: 23  持久: 25  需等级22</armor>
-		<helmet>h6~记忆头盔  防御: 3-3  重量: 7  持久: 8  需等级26</helmet>
-		<amulet>s19~记忆项链  攻击: 2-4  重量: 1  持久: 8  需等级26</amulet>
+		<weapon>w14~降魔  攻击: 6-11  道术: 1-2  准确 +1  重量: 20  持久: 17  需等级20</weapon>
+		<armor>c9~灵魂道袍(男)  防御: 3-6  魔御: 3-3  道术: 0-2  重量: 15  持久: 22  需等级22</armor>
+		<helmet>h4~道士头盔  防御: 1-2  魔御: 2-3  重量: 3  持久: 8  需等级24</helmet>
+		<amulet>a20~祈祷项链  道术: 0-4  重量: 1  持久: 5  需等级15</amulet>
 		<medal/>
-		<leftBracelet>i12~死神手套  攻击: 1-2  重量: 1  持久: 8  需等级22</leftBracelet>
-		<rightBracelet>i18~幽灵手套  防御: 0-4  重量: 5  持久: 8  需等级25</rightBracelet>
-		<leftRing>r10~骷髅戒指  攻击: 0-3  魔法: 0-1  重量: 1  持久: 5  需攻击30</leftRing>
-		<rightRing>r40~麻痹戒指  攻击: 0-1  重量: 1  持久: 5  需等级16</rightRing>
+		<leftBracelet>i8~道士手镯  道术: 0-1  重量: 1  持久: 7  需等级20</leftBracelet>
+		<rightBracelet>i8~道士手镯  道术: 0-1  重量: 1  持久: 7  需等级20</rightBracelet>
+		<leftRing>t11~道德戒指  道术: 1-2  重量: 1  持久: 5  需等级23</leftRing>
+		<rightRing>r8~珍珠戒指  道术: 0-2  重量: 1  持久: 8  需等级20</rightRing>
 		<belt/>
 		<boots/>
 		<gem/>
 	</Char1>
 	<WareHouse>
-		<item>r25~圣战戒指  魔御: 0-1  攻击: 0-7  重量: 2  持久: 7  需攻击40</item>
-		<item/>
+		<item>r6~生铁戒指  防御: 0-2  道术: 0-4  魔法: 0-3  重量: 1  持久: 6  需魔法9</item>
+		<item>r9~蛇眼戒指  攻击: 0-1  道术: 0-2  魔法: 0-3  重量: 1  持久: 6  需等级20</item>
 		<item/>
 		<item/>
 		<item/>
