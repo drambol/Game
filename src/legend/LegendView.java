@@ -37,6 +37,7 @@ public class LegendView extends JFrame implements ActionListener {
 	private JPanel radioPanel[] = new JPanel[5];
 	private MyButton buttonKill = new MyButton("Kill Monster");
 	private MyButton buttonWH = new MyButton("Warehouse");
+	private MyButton buttonSave = new MyButton("Save Char");
 	private MyButton buttonEquip[] = new MyButton[10];
 	private MyButton buttonStore[] = new MyButton[10];
 	private Box box0 = Box.createVerticalBox();
@@ -62,6 +63,7 @@ public class LegendView extends JFrame implements ActionListener {
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		buttonKill.addActionListener(this);
 		buttonWH.addActionListener(this);
+		buttonSave.addActionListener(this);
 		for (int i = 0; i < 12; i++) {
 			lbEquipment[i*2] = new MyLabel("");
 			lbEquipment[i*2+1] = new MyLabel("");
@@ -100,6 +102,7 @@ public class LegendView extends JFrame implements ActionListener {
 		panel[10] = new JPanel();
 		panel[10].add(buttonKill);
 		panel[10].add(buttonWH);
+		panel[10].add(buttonSave);
 		pHeader.add(labelCharInfo, BorderLayout.CENTER);
 		pHeader.add(labelDelete, BorderLayout.CENTER);
 		box0.add(pHeader, BorderLayout.AFTER_LAST_LINE);
@@ -225,6 +228,19 @@ public class LegendView extends JFrame implements ActionListener {
 			buttonStore[store].removeActionListener(this);
 			return;
 		}
+		if (actionevent.getSource() == buttonSave) {
+			String charName = xmlParser.getNodeByName("name").getTextContent();
+			File targetFile = new File(System.getProperty("user.dir") + "\\src\\runSuite\\save\\" + charName + ".xml");
+			if (targetFile.exists()) {
+				targetFile.delete();
+			}
+			File sourceFile = new File(System.getProperty("user.dir") + "\\src\\runSuite\\LegendHero.xml");
+			sourceFile.renameTo(targetFile);
+			xmlParser.save();
+			WindowStore.legendViewTL.set(this);
+			new WarningView(this, "Your character is successfully saved!");
+			return;
+		}
 	}
 	
 	public void reactFromDialog(boolean flag, String str, int i, String detail) {
@@ -344,10 +360,13 @@ public class LegendView extends JFrame implements ActionListener {
 		labelDelete.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 				xmlParser = new XmlParser("runSuite\\LegendHero.xml");
+				String deleteChar = xmlParser.getNodeByName("name").getTextContent();
 				xmlParser.getNodeByName("name").setTextContent("");
 				xmlParser.save();
 				dispose();
-				new RegisterView("");
+				File file = new File(System.getProperty("user.dir") + "\\src\\runSuite\\save\\" + deleteChar + ".xml");
+				file.delete();
+				SelectCharView.main(null);
 			}
 		});
 	}
@@ -451,7 +470,30 @@ public class LegendView extends JFrame implements ActionListener {
 				new WarningView(jf, warning);
 			}
 			break;
+		case "g":
+			if (meetRequirement(itemDetail)) {
+				tempWarehouse = xmlParser.getNodeByName("gem").getTextContent();
+				xmlParser.getNodeByName("gem").setTextContent(itemDetail);
+				xmlParser.save();
+				launchCharProperty();
+				replaceItem(fromMonster);
+			} else {
+				new WarningView(jf, warning);
+			}
+			break;
+		case "x":
+			if (meetRequirement(itemDetail)) {
+				tempWarehouse = xmlParser.getNodeByName("medal").getTextContent();
+				xmlParser.getNodeByName("medal").setTextContent(itemDetail);
+				xmlParser.save();
+				launchCharProperty();
+				replaceItem(fromMonster);
+			} else {
+				new WarningView(jf, warning);
+			}
+			break;
 		}
+		
 		return tempWarehouse;
 	}
 	

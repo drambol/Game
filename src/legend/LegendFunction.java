@@ -82,24 +82,31 @@ public class LegendFunction {
 			exp = 12000;
 			break;
 		case LegendConstant.Monster19:
-			exp = 12000;
+			exp = 20000;
 			break;
 		case LegendConstant.Monster20:
-			exp = 20000;
+			exp = 30000;
 			break;
 		}
 	}
 	
 	public void addExp() {
+		xmlParser = new XmlParser("runSuite\\LegendHero.xml");
+		int n = 1;
+		if ("x2".equals(xmlParser.getNodeByName("medal").getTextContent().split("~")[0])) {
+			n = 2;
+		} else if ("x3".equals(xmlParser.getNodeByName("medal").getTextContent().split("~")[0])) {
+			n = 3;
+		}
 		reqExp = (int) (Math.pow(1.25, charLevel - 1) * 100);
-		if (currExp + exp >= reqExp) {
+		if (exp * n + currExp >= reqExp) {
 			charLevel = charLevel + 1;
-			currExp = currExp + exp - reqExp;
+			currExp = exp * n + currExp - reqExp;
 			xmlParser.getNodeByName("level").setTextContent(String.valueOf(charLevel));
 			levelUp = true;
 			attributeGrow();
 		} else {
-			currExp = currExp + exp;
+			currExp = exp * n + currExp;
 		}
 		xmlParser.getNodeByName("exp").setTextContent(String.valueOf(currExp));
 		xmlParser.save();
@@ -129,42 +136,42 @@ public class LegendFunction {
 			hpGrow = (int) (0.6 * charLevel + 5);
 			mpGrow = (int) (0.1 * charLevel + 3);
 			if (charLevel%5 == 0) {
-				dcMax = dcMax + 1;
 				if (dcMin < dcMax) {
 					dcMin = dcMin + 1;
 				}
+				dcMax = dcMax + 1;
 			}
 			if (charLevel%7 == 0) {
-				acMax = acMax + 1;
 				if (acMin < acMax) {
 					acMin = acMin + 1;
 				}
+				acMax = acMax + 1;
 			}
 			break;
 		case LegendConstant.Taoist:
 			hpGrow = (int) (charLevel/3 + 3);
 			mpGrow = (int) (charLevel/2 + 4);
 			if (charLevel%7 == 0) {
-				scMax = scMax + 1;
-				dcMax = dcMax + 1;
-				macMax = macMax + 1;
 				if (scMin < scMax) {
 					scMin = scMin + 1;
 					dcMin = dcMin + 1;
 					macMin = macMin + 1;
 				}
+				scMax = scMax + 1;
+				dcMax = dcMax + 1;
+				macMax = macMax + 1;
 			}
 			break;
 		case LegendConstant.Mage:
 			hpGrow = (int) (charLevel/6 + 2);
 			mpGrow = (int) (0.8 * charLevel + 7);
 			if (charLevel%7 == 0) {
-				mcMax = mcMax + 1;
-				dcMax = dcMax + 1;
 				if (mcMin < mcMax) {
 					mcMin = mcMin + 1;
 					dcMin = dcMin + 1;
 				}
+				mcMax = mcMax + 1;
+				dcMax = dcMax + 1;
 			}
 			break;
 		}

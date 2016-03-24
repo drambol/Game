@@ -95,7 +95,7 @@ public class PropertyView extends JFrame implements ActionListener {
 		gemProperty = xmlParser.getNodeByName("gem").getTextContent();
 		if (headerInfo.length() > 2) {
 			String charLevel = xmlParser.getNodeByName("level").getTextContent();
-			headerInfo = headerInfo.substring(0, headerInfo.length() - 2) + charLevel + ")";
+			headerInfo = headerInfo.split("Lv")[0] + "Lv " + charLevel + ")";
 			headerLabel.setText(headerInfo);
 		}
 		label[0].setText(LegendConstant.Attack);

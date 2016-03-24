@@ -177,6 +177,15 @@ public class Algorithm {
 		return false;
 	}
 	
+	public static boolean thousandPercent(int chance) {
+		Random rand = new Random();
+		int p = Math.abs(rand.nextInt() % 1000);
+		if (p < chance) {
+			return true;
+		}
+		return false;
+	}
+	
 	public static int getDrawNum() {
 		int drawNum = getRandomInt(1, 60000)%100;
 		return drawNum;

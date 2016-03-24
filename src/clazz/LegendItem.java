@@ -81,7 +81,7 @@ public class LegendItem {
 				attackSpeed = Integer.parseInt(realAttackSpeed);
 			}
 			if (!realPoisonAvoid.isEmpty()) {
-				poisonAvoid = Integer.parseInt(realPoisonAvoid);
+				poisonAvoid = Integer.parseInt(realPoisonAvoid.substring(0, 1));
 			}
 			if (!realMagicAvoid.isEmpty()) {
 				magicAvoid = Integer.parseInt(realMagicAvoid.substring(0, 1));
@@ -230,6 +230,8 @@ public class LegendItem {
 			case "i":
 			case "h":
 			case "c":
+			case "b":
+			case "o":
 				for (int i = 0; i < p; i++) {
 					int ran = Algorithm.getRandomInt(1, 100);
 					if (ran <= 20) {

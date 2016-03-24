@@ -27,8 +27,8 @@ public class Legend {
 			if (count < 10) {
 				String code = nodeList.item(i).getNodeName();
 				if (!code.equals("#text") && !code.substring(0, 1).contentEquals("m")) {
-					double probability = Double.parseDouble(nodeList.item(i).getTextContent());
-					if (Algorithm.getDraw(probability)) {
+					int probability = Integer.parseInt(nodeList.item(i).getTextContent());
+					if (Algorithm.thousandPercent(probability)) {
 						LegendItem legendItem = new LegendItem(getItemByCode(code));
 						legendItems[count] = legendItem.printItem();
 						itemCode[count] = legendItem.code;
