@@ -1,4 +1,4 @@
-package legend;
+package clazz;
 
 import java.io.File;
 import java.io.IOException;
@@ -6,14 +6,15 @@ import java.io.IOException;
 import jxl.Sheet;
 import jxl.Workbook;
 import jxl.read.biff.BiffException;
+import legend.LegendConstant;
 
 public class Monsters {
 	
 	File file = new File(System.getProperty("user.dir") + "\\test-data\\Legend.xls");
-	int reqAttack;
-	int reqDA;
-	int reqMA;
-	int reqLevel;
+	public int reqAttack;
+	public int reqDA;
+	public int reqMA;
+	public int reqLevel;
 	
 	public Monsters(String monsterName) {
 		int rowCount = 0;

@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?><Global>
 	<Char1>
-		<name>啪嗒寳</name>
-		<gender>女</gender>
-		<career>法师</career>
-		<level>11</level>
-		<exp>877</exp>
-		<dc>0-1</dc>
+		<name/>
+		<gender>男</gender>
+		<career>战士</career>
+		<level>3</level>
+		<exp>175</exp>
+		<dc>0-0</dc>
 		<sc>0-0</sc>
-		<mc>0-1</mc>
+		<mc>0-0</mc>
 		<ac>0-0</ac>
 		<mac>0-0</mac>
-		<hp>42</hp>
-		<mp>195</mp>
-		<hit>11</hit>
+		<hp>31</hp>
+		<mp>11</mp>
+		<hit>17</hit>
 		<dex>15</dex>
-		<weapon>w3~乌木剑  攻击: 4-8  魔法: 0-1  重量: 8  持久: 9  需等级1</weapon>
-		<armor>c2~布衣(女)  防御: 2-2  魔御: 0-1  重量: 5  持久: 5  需等级1</armor>
+		<weapon>w1~木剑  攻击: 2-5  重量: 7  持久: 4  需等级1</weapon>
+		<armor>c1~布衣(男)  防御: 2-2  魔御: 0-1  重量: 5  持久: 5  需等级1</armor>
 		<helmet/>
 		<amulet/>
 		<medal/>
@@ -28,8 +28,8 @@
 		<gem/>
 	</Char1>
 	<WareHouse>
-		<item>w11~海魂  攻击: 3-11  魔法: 1-2  重量: 12  持久: 12  需等级15</item>
-		<item>r6~生铁戒指  防御: 0-2  魔法: 0-1  重量: 1  持久: 5  需魔法9</item>
+		<item/>
+		<item/>
 		<item/>
 		<item/>
 		<item/>

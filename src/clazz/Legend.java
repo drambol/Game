@@ -1,11 +1,10 @@
-package legend;
+package clazz;
 
 import java.io.File;
 import java.io.IOException;
 
 import org.w3c.dom.NodeList;
 
-import clazz.LegendItem;
 import jxl.Sheet;
 import jxl.Workbook;
 import jxl.read.biff.BiffException;
@@ -14,8 +13,8 @@ import utility.file.XmlParser;
 
 public class Legend {
 	
-	String[] legendItems;
-	String[] itemCode;
+	public String[] legendItems;
+	public String[] itemCode;
 	
 	public String[] getItemFromMonster(String monsterCode) {
 		legendItems = new String[10];

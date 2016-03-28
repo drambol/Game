@@ -1,5 +1,6 @@
 package legend;
 
+import clazz.Monsters;
 import utility.file.XmlParser;
 
 public class LegendFunction {

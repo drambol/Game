@@ -22,11 +22,13 @@ public class WarningView extends JDialog implements ActionListener {
 	private JPanel messagePane = new JPanel();
 	private JPanel buttonPane = new JPanel();
 	private JButton button = new JButton("OK");
+	private boolean quitFlag;
 	public final LegendView legendView = WindowStore.legendViewTL.get();
 	public final WarehouseView warehouseView = WindowStore.warehouseViewTL.get();
 	
-	public WarningView(JFrame parent, String message) {
+	public WarningView(JFrame parent, String message, boolean quitFlag) {
 		super(parent, message, true);
+		this.quitFlag = quitFlag;
 		this.addWindowListener(new CloseHandler());
 		messagePane.add(new JLabel(message));
 		getContentPane().add(messagePane);
@@ -49,13 +51,17 @@ public class WarningView extends JDialog implements ActionListener {
 		if (actionevent.getSource() == button) {
 			setVisible(false);
 			dispose();
-			if (legendView.fromMonster) {
-				legendView.setEnabled(true);
-				legendView.requestFocus();
+			if (quitFlag) {
+				System.exit(0);
 			} else {
-				warehouseView.setEnabled(true);
-				legendView.requestFocus();
-				warehouseView.requestFocus();
+				if (legendView.fromMonster) {
+					legendView.setEnabled(true);
+					legendView.requestFocus();
+				} else {
+					warehouseView.setEnabled(true);
+					legendView.requestFocus();
+					warehouseView.requestFocus();
+				}
 			}
 		}
 	}
