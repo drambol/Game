@@ -213,7 +213,7 @@ public class LegendItem {
 					}
 				}
 				break;
-			case "t":
+			case "R":
 				for (int i = 0; i < p; i++) {
 					int ran = Algorithm.getRandomInt(1, 100);
 					if (ran <= 28) {
@@ -263,7 +263,7 @@ public class LegendItem {
 					}
 				}
 				break;
-			case "s":
+			case "A":
 				for (int i = 0; i < p; i++) {
 					int ran = Algorithm.getRandomInt(1, 100);
 					if (ran <= 25) {

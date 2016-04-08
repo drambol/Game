@@ -35,13 +35,14 @@ import utility.file.XmlParser;
 public class LegendView extends JFrame implements ActionListener {
 	
 	private static final long serialVersionUID = 1L;
-	private MyLabel lbEquipment[] = new MyLabel[24];
+	public MyLabel lbEquipment[] = new MyLabel[24];
 	private JPanel jpEquipment[] = new JPanel[6];
 	private MyLabel label[] = new MyLabel[10];
 	private JPanel panel[] = new JPanel[11];
 	private JPanel radioPanel[] = new JPanel[5];
 	private MyButton buttonKill = new MyButton("Kill Monster");
 	private MyButton buttonWH = new MyButton("Warehouse");
+	private MyButton buttonShop = new MyButton("Shop");
 	private MyButton buttonSave = new MyButton("Save Char");
 	private MyButton buttonEquip[] = new MyButton[10];
 	private MyButton buttonStore[] = new MyButton[10];
@@ -70,6 +71,7 @@ public class LegendView extends JFrame implements ActionListener {
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		buttonKill.addActionListener(this);
 		buttonWH.addActionListener(this);
+		buttonShop.addActionListener(this);
 		buttonSave.addActionListener(this);
 		for (int i = 0; i < 12; i++) {
 			lbEquipment[i*2] = new MyLabel("");
@@ -109,6 +111,7 @@ public class LegendView extends JFrame implements ActionListener {
 		panel[10] = new JPanel();
 		panel[10].add(buttonKill);
 		panel[10].add(buttonWH);
+		panel[10].add(buttonShop);
 		panel[10].add(buttonSave);
 		pHeader.add(labelCharInfo, BorderLayout.CENTER);
 		pHeader.add(labelDelete, BorderLayout.CENTER);
@@ -191,13 +194,18 @@ public class LegendView extends JFrame implements ActionListener {
 				}
 			} else {
 				WindowStore.legendViewTL.set(this);
-				new WarningView(this, "Not eligible to kill this monster!", false);
+				new WarningView(this, "Not eligible to kill this monster!", 1);
 			}
 			return;
 		}
 		if (actionevent.getSource() == buttonWH) {
 			freezeWindow();
 			new WarehouseView("");
+			return;
+		}
+		if (actionevent.getSource() == buttonShop) {
+			freezeWindow();
+			new ShopView("");
 			return;
 		}
 		for (int i = 0; i < 10; i++) {
@@ -236,7 +244,6 @@ public class LegendView extends JFrame implements ActionListener {
 			return;
 		}
 		if (actionevent.getSource() == buttonSave) {
-//			String charName = xmlParser.getNodeByName("name").getTextContent();
 			File targetFile = new File(System.getProperty("user.dir") + "\\src\\runSuite\\save\\" + charName + ".xml");
 			if (targetFile.exists()) {
 				targetFile.delete();
@@ -245,7 +252,7 @@ public class LegendView extends JFrame implements ActionListener {
 			sourceFile.renameTo(targetFile);
 			xmlParser.save();
 			WindowStore.legendViewTL.set(this);
-			new WarningView(this, "Your character is successfully saved!", false);
+			new WarningView(this, "Your character is successfully saved!", 1);
 			return;
 		}
 	}
@@ -311,7 +318,7 @@ public class LegendView extends JFrame implements ActionListener {
 				sourceFile.renameTo(targetFile);
 				xmlParser.save();
 				WindowStore.legendViewTL.set(this);
-				new WarningView(this, "Your character is successfully saved!", true);
+				new WarningView(this, "Your character is successfully saved!", 0);
 			} else {
 				System.exit(0);
 			}
@@ -407,6 +414,14 @@ public class LegendView extends JFrame implements ActionListener {
 				new ConfirmView(LegendView.this, "Are you sure to delete this char?", 1);
 			}
 		});
+		lbEquipment[1].addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				if (!lbEquipment[1].getText().isEmpty()) {
+					freezeWindow();
+					new WeaponUpgradeView("");
+				}
+			}
+		});
 	}
 	
 	private String equipItem(String itemDetail) {
@@ -423,7 +438,7 @@ public class LegendView extends JFrame implements ActionListener {
 				launchCharProperty();
 				replaceItem(fromMonster);
 			} else {
-				new WarningView(jf, warning, false);
+				new WarningView(jf, warning, 1);
 			}
 			break;
 		case "r":
@@ -432,7 +447,7 @@ public class LegendView extends JFrame implements ActionListener {
 			if (meetRequirement(itemDetail)) {
 				new DialogView(jf, "Ring", 15, itemDetail);
 			} else {
-				new WarningView(jf, warning, false);
+				new WarningView(jf, warning, 1);
 			}
 			break;
 		case "i":
@@ -440,7 +455,7 @@ public class LegendView extends JFrame implements ActionListener {
 			if (meetRequirement(itemDetail)) {
 				new DialogView(jf, "Bracelet", 11, itemDetail);
 			} else {
-				new WarningView(jf, warning, false);
+				new WarningView(jf, warning, 1);
 			}
 			break;
 		case "a":
@@ -452,7 +467,7 @@ public class LegendView extends JFrame implements ActionListener {
 				launchCharProperty();
 				replaceItem(fromMonster);
 			} else {
-				new WarningView(jf, warning, false);
+				new WarningView(jf, warning, 1);
 			}
 			break;
 		case "h":
@@ -463,7 +478,7 @@ public class LegendView extends JFrame implements ActionListener {
 				launchCharProperty();
 				replaceItem(fromMonster);
 			} else {
-				new WarningView(jf, warning, false);
+				new WarningView(jf, warning, 1);
 			}
 			
 			break;
@@ -480,10 +495,10 @@ public class LegendView extends JFrame implements ActionListener {
 					replaceItem(fromMonster);
 				} else {
 					freezeWindow();
-					new WarningView(jf, "Gender Not Correct!", false);
+					new WarningView(jf, "Gender Not Correct!", 1);
 				}
 			} else {
-				new WarningView(jf, warning, false);
+				new WarningView(jf, warning, 1);
 			}
 			break;
 		case "b":
@@ -494,7 +509,7 @@ public class LegendView extends JFrame implements ActionListener {
 				launchCharProperty();
 				replaceItem(fromMonster);
 			} else {
-				new WarningView(jf, warning, false);
+				new WarningView(jf, warning, 1);
 			}
 			break;
 		case "o":
@@ -505,7 +520,7 @@ public class LegendView extends JFrame implements ActionListener {
 				launchCharProperty();
 				replaceItem(fromMonster);
 			} else {
-				new WarningView(jf, warning, false);
+				new WarningView(jf, warning, 1);
 			}
 			break;
 		case "g":
@@ -516,7 +531,7 @@ public class LegendView extends JFrame implements ActionListener {
 				launchCharProperty();
 				replaceItem(fromMonster);
 			} else {
-				new WarningView(jf, warning, false);
+				new WarningView(jf, warning, 1);
 			}
 			break;
 		case "x":
@@ -527,7 +542,7 @@ public class LegendView extends JFrame implements ActionListener {
 				launchCharProperty();
 				replaceItem(fromMonster);
 			} else {
-				new WarningView(jf, warning, false);
+				new WarningView(jf, warning, 1);
 			}
 			break;
 		}

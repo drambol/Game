@@ -1,5 +1,6 @@
 package controls;
 
+import java.awt.Dimension;
 import java.awt.Font;
 
 import javax.swing.JLabel;
@@ -15,8 +16,9 @@ public class MyLabel extends JLabel {
 		this.setFont(new Font(IConstants.FONT, Font.PLAIN, 12));
 	}
 	
-	public MyLabel(String labelName, int i) {
-		super(labelName, i);
+	public MyLabel(String labelName, int width) {
+		super(labelName);
+		this.setPreferredSize(new Dimension(width, 22));
 		this.setFont(new Font(IConstants.FONT, Font.PLAIN, 12));
 	}
 	

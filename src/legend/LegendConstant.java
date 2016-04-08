@@ -31,6 +31,7 @@ public interface LegendConstant {
 	public static final String Warrior = "战士";
 	public static final String Taoist = "道士";
 	public static final String Mage = "法师";
+	public static final String Weight = "重量";
 	
 	public static final String StartWeapon = "w1~木剑  攻击: 2-5  重量: 7  持久: 4  需等级1";
 	public static final String StartMaleArmor = "c1~布衣(男)  防御: 2-2  魔御: 0-1  重量: 5  持久: 5  需等级1";
@@ -56,5 +57,25 @@ public interface LegendConstant {
 	public static final String Monster18 = "魔龙教主";
 	public static final String Monster19 = "暗之魔龙教主";
 	public static final String Monster20 = "火龙神";
+	
+	public static final String Medal1 = "双倍经验勋章";
+	public static final String Medal2 = "三倍经验勋章";
+	public static final String Medal3 = "初级暴率勋章";
+	public static final String Medal4 = "中级暴率勋章";
+	public static final String Medal5 = "高级暴率勋章";
+	
+	public static final String NoOre = "不添加黑铁矿";
+	public static final String Ore1 = "普通黑铁矿";
+	public static final String Ore2 = "精品黑铁矿";
+	public static final String NoCharm = "不用幸运符";
+	public static final String Charm1 = "初级幸运符";
+	public static final String Charm2 = "中级幸运符";
+	public static final String Charm3 = "高级幸运符";
 
+	public static final String CurrencyUnit = "万";
+	public static final String RemainingGold = "剩余金币: ";
+	
+	public static final String UpgradeType = "武器升级属性：";
+	public static final String SelectOre = "选择升级矿石：";
+	public static final String SelectCharm = "可选择幸运符：";
 }

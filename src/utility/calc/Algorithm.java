@@ -167,6 +167,16 @@ public class Algorithm {
 		return false;
 	}
 	
+	public static boolean getDraw(int chance) {
+		if (chance <= 0 || chance >= 100) {
+			return true;
+		}
+		int randomKey = getRandomInt(1, 60000)%100;
+		if (randomKey < chance)
+			return true;
+		return false;
+	}
+	
 	public static boolean getDraw(double chance) {
 		if (chance <= 0 || chance >= 100) {
 			return true;
@@ -177,7 +187,7 @@ public class Algorithm {
 		return false;
 	}
 	
-	public static boolean thousandPercent(int chance) {
+	public static boolean thousandPercent(float chance) {
 		Random rand = new Random();
 		int p = Math.abs(rand.nextInt() % 1000);
 		if (p < chance) {

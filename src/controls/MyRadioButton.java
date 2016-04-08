@@ -16,5 +16,11 @@ public class MyRadioButton extends JRadioButton {
 		this.setPreferredSize(new Dimension(120, 20));
 		this.setFont(new Font(IConstants.FONT, Font.PLAIN, 12));
 	}
+	
+	public MyRadioButton(String buttonName, int width) {
+		super(buttonName);
+		this.setPreferredSize(new Dimension(width, 20));
+		this.setFont(new Font(IConstants.FONT, Font.PLAIN, 12));
+	}
 
 }

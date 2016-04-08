@@ -114,6 +114,12 @@ public class RegisterView extends JFrame implements ActionListener {
 		xmlParser.getNodeByName("belt").setTextContent("");
 		xmlParser.getNodeByName("boots").setTextContent("");
 		xmlParser.getNodeByName("gem").setTextContent("");
+		xmlParser.getNodeByName("money").setTextContent("0");
+		xmlParser.getNodeByName("ore1").setTextContent("0");
+		xmlParser.getNodeByName("ore2").setTextContent("0");
+		xmlParser.getNodeByName("charm1").setTextContent("0");
+		xmlParser.getNodeByName("charm2").setTextContent("0");
+		xmlParser.getNodeByName("charm3").setTextContent("0");
 		for (int i = 0; i < 99; i++) {
 			xmlParser.getNodeByName("item", i).setTextContent("");
 		}
