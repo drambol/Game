@@ -35,7 +35,7 @@ public class Legend {
 						itemCode[count] = legendItem.code;
 						count = count + 1;
 					}
-				} else if (code.substring(0, 1).contentEquals("m")) {
+				} else if (code.substring(0, 3).contentEquals("mon")) {
 					int a = Integer.parseInt(nodeList.item(i).getTextContent().split("-")[0]);
 					int b = Integer.parseInt(nodeList.item(i).getTextContent().split("-")[1]);
 					LegendItem legendItem = new LegendItem(getItemByCode(code));
@@ -45,6 +45,15 @@ public class Legend {
 					count = count + 1;
 					if (code.equals("money")) {
 						addMoney(itemCount);
+					}
+				} else if (code.substring(0, 2).contentEquals("mg")) {
+					int probability = Integer.parseInt(nodeList.item(i).getTextContent());
+					if (Algorithm.thousandPercent(probability * increase)) {
+						LegendItem legendItem = new LegendItem(getItemByCode(code));
+						legendItems[count] = "*" + legendItem.printMedical(1);
+						itemCode[count] = legendItem.code;
+						count = count + 1;
+						addMoney(code);
 					}
 				}
 			}
@@ -92,6 +101,22 @@ public class Legend {
 		heroXml.getNodeByName("money").setTextContent(String.valueOf(money));
 		heroXml.save();
 		heroXml = null;
+	}
+	
+	private void addMoney(String str) {
+		int amount = 0;
+		switch (str) {
+		case "mg1":
+			amount = 1000000;
+			break;
+		case "mg2":
+			amount = 5000000;
+			break;
+		case "mg3":
+			amount = 10000000;
+			break;
+		}
+		addMoney(amount);
 	}
 
 }

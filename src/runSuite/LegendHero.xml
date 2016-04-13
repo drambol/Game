@@ -1,47 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?><Global>
 	<Char1>
-		<name>啪嗒寳</name>
+		<name>大圆</name>
 		<gender>女</gender>
-		<career>法师</career>
-		<level>52</level>
-		<exp>7652360</exp>
-		<dc>6-7</dc>
+		<career>战士</career>
+		<level>49</level>
+		<exp>1542700</exp>
+		<dc>8-9</dc>
 		<sc>0-0</sc>
-		<mc>6-7</mc>
-		<ac>0-0</ac>
+		<mc>0-0</mc>
+		<ac>6-7</ac>
 		<mac>0-0</mac>
-		<hp>326</hp>
-		<mp>1515</mp>
-		<hit>11</hit>
+		<hp>974</hp>
+		<mp>249</mp>
+		<hit>17</hit>
 		<dex>15</dex>
-		<weapon>w34~骨玉权杖  攻击: 6-12  魔法: 2-7  重量: 20  持久: 18  需等级35</weapon>
-		<upgradeCount>0</upgradeCount>
-		<armor>c30~烈焰魔衣(女)  防御: 5-12  魔御: 4-9  攻击: 0-1  魔法: 3-6  重量: 20  持久: 40  需等级42</armor>
-		<helmet>h10~法神头盔  防御: 4-4  魔御: 1-3  道术: 0-1  魔法: 0-2  重量: 2  持久: 8  需魔法28</helmet>
-		<amulet>a29~烈焰项链  攻击: 0-1  魔法: 1-11  准确 +4  重量: 1  持久: 5  需魔法30</amulet>
-		<medal>x6~高级暴率勋章  攻击: 3-3  道术: 3-3  魔法: 3-3  重量: 1  持久: 10  需等级1</medal>
-		<leftBracelet>i33~圣魔手镯  防御: 0-2  魔御: 0-2  魔法: 1-5  重量: 1  持久: 6  需魔法32</leftBracelet>
-		<rightBracelet>i33~圣魔手镯  防御: 0-2  魔御: 0-2  魔法: 1-5  重量: 1  持久: 9  需魔法32</rightBracelet>
-		<leftRing>r33~圣魔戒指  魔御: 0-1  攻击: 0-1  魔法: 2-8  重量: 1  持久: 6  需魔法32</leftRing>
-		<rightRing>r30~烈焰魔戒  防御: 0-1  攻击: 0-2  魔法: 1-8  重量: 1  持久: 5  需魔法30</rightRing>
-		<belt>b7~烈焰腰带  防御: 2-3  魔御: 0-1  魔法: 1-0  重量: 1  持久: 5  需魔法30</belt>
-		<boots>o3~紫绸靴  防御: 0-3  魔法: 0-1  重量: 1  持久: 8  需等级30</boots>
-		<gem>g15~紫宝石+4  攻击: 7-7  道术: 7-7  魔法: 7-7  重量: 1  持久: 10  需等级50</gem>
-		<money>10358912</money>
+		<weapon>w26~裁决之杖+7  攻击: 0-37  重量: 80  持久: 32  需等级30</weapon>
+		<upgradeCount>7</upgradeCount>
+		<armor>c26~雷霆战甲(女)  防御: 5-12  魔御: 4-8  攻击: 1-3  重量: 60  持久: 60  需等级42</armor>
+		<helmet>h4~道士头盔  防御: 1-4  魔御: 2-3  攻击: 0-3  道术: 0-1  魔法: 0-1  重量: 3  持久: 8  需等级24</helmet>
+		<amulet>a24~圣战项链  攻击: 3-8  重量: 2  持久: 7  需攻击40</amulet>
+		<medal>x3~三倍经验勋章  攻击: 3-3  道术: 3-3  魔法: 3-3  重量: 1  持久: 30  需等级1</medal>
+		<leftBracelet>i28~雷霆护腕  防御: 0-2  魔御: 0-2  攻击: 1-4  重量: 1  持久: 7  需攻击45</leftBracelet>
+		<rightBracelet>i28~雷霆护腕  防御: 0-2  魔御: 0-2  攻击: 1-4  重量: 1  持久: 8  需攻击45</rightBracelet>
+		<leftRing>r28~雷霆战戒  攻击: 0-8  重量: 1  持久: 7  需攻击45</leftRing>
+		<rightRing>r25~圣战戒指  魔御: 0-1  攻击: 0-7  魔法: 0-1  重量: 2  持久: 7  需攻击40</rightRing>
+		<belt>b1~兽皮腰带  防御: 0-1  魔法: 0-1  重量: 1  持久: 6  需等级15</belt>
+		<boots>o2~鹿皮靴  防御: 0-2  魔法: 0-2  重量: 1  持久: 8  需等级22</boots>
+		<gem>g4~红宝石+3  防御: 4-4  魔御: 4-4  攻击: 4-4  道术: 4-4  魔法: 4-4  重量: 1  持久: 10  需等级45</gem>
+		<money>20146803</money>
 	</Char1>
 	<WareHouse>
-		<item>r42~护身戒指  防御: 0-1  重量: 1  持久: 5  需等级16</item>
-		<item>x4~初级暴率勋章  重量: 1  持久: 10  需等级1</item>
-		<item>r37~神力戒指  攻击: 0-1  重量: 1  持久: 5  需等级12</item>
-		<item>r32~真魂戒指  魔御: 0-1  攻击: 0-3  道术: 2-11  魔法: 0-2  重量: 1  持久: 8  需道术30</item>
-		<item>h7~黑铁头盔  防御: 4-7  魔御: 2-3  道术: 0-4  魔法: 0-1  重量: 20  持久: 12  需攻击46</item>
-		<item>r39~火焰戒指  魔法: 1-2  重量: 1  持久: 5  需等级16</item>
-		<item>r41~复活戒指  防御: 0-1  魔御: 0-1  重量: 1  持久: 5  需等级16</item>
-		<item>c30~凰天魔衣  防御: 8-12  魔御: 8-8  攻击: 2-2  道术: 3-5  魔法: 3-5  重量: 23  持久: 54  需等级45</item>
-		<item>x3~双倍经验勋章  攻击: 2-2  道术: 2-2  魔法: 2-2  重量: 1  持久: 20  需等级1</item>
-		<item>x3~三倍经验勋章  攻击: 3-3  道术: 3-3  魔法: 3-3  重量: 1  持久: 30  需等级1</item>
-		<item>w34~嗜魂法杖  攻击: 6-13  道术: 0-1  魔法: 2-8  重量: 26  持久: 12  需等级35</item>
-		<item>w34~嗜魂法杖  攻击: 6-13  魔法: 2-8  重量: 26  持久: 10  需等级35</item>
+		<item>x2~双倍经验勋章  攻击: 2-2  道术: 2-2  魔法: 2-2  重量: 1  持久: 20  需等级1</item>
+		<item>r35~传送戒指  攻击: 0-1  重量: 1  持久: 8  需等级12</item>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
 		<item/>
 		<item/>
 		<item/>
@@ -131,10 +131,10 @@
 		<item/>
 	</WareHouse>
 	<Miscellanous>
-		<ore1>0</ore1>
-		<ore2>22</ore2>
-		<charm1>3</charm1>
-		<charm2>0</charm2>
-		<charm3>0</charm3>
+		<ore1>56</ore1>
+		<ore2>46</ore2>
+		<charm1>16</charm1>
+		<charm2>9</charm2>
+		<charm3>1</charm3>
 	</Miscellanous>
 </Global>

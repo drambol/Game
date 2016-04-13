@@ -52,7 +52,7 @@ public class WeaponUpgradeView extends JFrame implements ActionListener {
 		label[1] = new MyLabel(weaponProperty, 480);
 		label[0].setHorizontalAlignment(SwingConstants.LEFT);
 		label[1].setHorizontalAlignment(SwingConstants.LEFT);
-		weaponName = xmlParser.getNodeByName("weapon").getTextContent().split("~")[1].split("  ")[0] + "+";
+		weaponName = xmlParser.getNodeByName("weapon").getTextContent().split("~")[1].split("  ")[0];
 		upgradeCount = xmlParser.getNodeByName("upgradeCount").getTextContent();
 		weaponProperty = xmlParser.getNodeByName("weapon").getTextContent().substring(xmlParser.getNodeByName("weapon").getTextContent().indexOf("  "));
 		initRadioButton();
@@ -114,25 +114,25 @@ public class WeaponUpgradeView extends JFrame implements ActionListener {
 			if (!upgradeCount.equals("7")) {
 				switch (upgradeCount) {
 				case "0":
-					successFactor = successFactor + 70;
+					successFactor = successFactor + 95;
 					break;
 				case "1":
-					successFactor = successFactor + 60;
+					successFactor = successFactor + 85;
 					break;
 				case "2":
-					successFactor = successFactor + 50;
+					successFactor = successFactor + 75;
 					break;
 				case "3":
-					successFactor = successFactor + 40;
+					successFactor = successFactor + 65;
 					break;
 				case "4":
-					successFactor = successFactor + 30;
+					successFactor = successFactor + 55;
 					break;
 				case "5":
-					successFactor = successFactor + 20;
+					successFactor = successFactor + 45;
 					break;
 				case "6":
-					successFactor = successFactor + 10;
+					successFactor = successFactor + 35;
 					break;
 				}
 			} else {
@@ -179,6 +179,7 @@ public class WeaponUpgradeView extends JFrame implements ActionListener {
 				}
 			} else if (radioButton[8].isSelected()) {
 				if (charm2 >= 1) {
+					successFactor = successFactor + 10;
 					charm2 = charm2 - 1;
 					gold = Integer.parseInt(xmlParser.getNodeByName("money").getTextContent()) - 10000;
 					xmlParser.getNodeByName("money").setTextContent(String.valueOf(gold));
@@ -190,6 +191,7 @@ public class WeaponUpgradeView extends JFrame implements ActionListener {
 				}
 			} else if (radioButton[9].isSelected()) {
 				if (charm3 >= 1) {
+					successFactor = successFactor + 15;
 					charm3 = charm3 - 1;
 					gold = Integer.parseInt(xmlParser.getNodeByName("money").getTextContent()) - 10000;
 					xmlParser.getNodeByName("money").setTextContent(String.valueOf(gold));
@@ -232,7 +234,7 @@ public class WeaponUpgradeView extends JFrame implements ActionListener {
 		radioButton[2].setText(LegendConstant.MagicAttack);
 		radioButton[3].setText(LegendConstant.NoOre);
 		radioButton[6].setText(LegendConstant.NoCharm);
-		label[0].setText(weaponName + upgradeCount);
+		label[0].setText(weaponName);
 		label[1].setText(weaponProperty.substring(weaponProperty.indexOf("  ")));
 		refreshRadioButton();
 		buttonGroup1.add(radioButton[0]);
@@ -272,6 +274,12 @@ public class WeaponUpgradeView extends JFrame implements ActionListener {
 	private void upgradeWeapon() {
 		xmlParser = new XmlParser("runSuite\\LegendHero.xml");
 		String weaponProperty = xmlParser.getNodeByName("weapon").getTextContent();
+		if (!"0".equals(upgradeCount)) {
+			int count = Integer.parseInt(upgradeCount) + 1;
+			weaponProperty = weaponProperty.replaceFirst("[+]" + upgradeCount, "+" + count);
+		} else {
+			weaponProperty = weaponProperty.replaceFirst(weaponProperty.split("  ")[0], weaponProperty.split("  ")[0] + "+1");
+		}
 		int p = (Algorithm.getDraw(10)) ? 2 : 1;
 		String minAttack = "";
 		String maxAttack = "";
@@ -312,7 +320,7 @@ public class WeaponUpgradeView extends JFrame implements ActionListener {
 		upgradeCount = String.valueOf(Integer.parseInt(upgradeCount) + 1);
 		xmlParser.getNodeByName("upgradeCount").setTextContent(upgradeCount);
 		xmlParser.save();
-		label[0].setText(weaponName + upgradeCount);
+		label[0].setText(weaponProperty.split("~")[1].split("  ")[0]);
 		label[1].setText(weaponProperty.substring(weaponProperty.indexOf("  ")));
 		refreshRadioButton();
 		new WarningView(this, "Weapon Upgrade Success!", 3);

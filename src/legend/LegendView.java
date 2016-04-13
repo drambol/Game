@@ -433,6 +433,11 @@ public class LegendView extends JFrame implements ActionListener {
 		case "w":
 			if (meetRequirement(itemDetail)) {
 				tempWarehouse = xmlParser.getNodeByName("weapon").getTextContent();
+				if (itemDetail.split("  ")[0].contains("+")) {
+					xmlParser.getNodeByName("upgradeCount").setTextContent(itemDetail.split("  ")[0].split("[+]")[1]);
+				} else {
+					xmlParser.getNodeByName("upgradeCount").setTextContent("0");
+				}
 				xmlParser.getNodeByName("weapon").setTextContent(itemDetail);
 				xmlParser.save();
 				launchCharProperty();
@@ -442,7 +447,7 @@ public class LegendView extends JFrame implements ActionListener {
 			}
 			break;
 		case "r":
-		case "t":
+		case "R":
 			freezeWindow();
 			if (meetRequirement(itemDetail)) {
 				new DialogView(jf, "Ring", 15, itemDetail);
@@ -459,7 +464,7 @@ public class LegendView extends JFrame implements ActionListener {
 			}
 			break;
 		case "a":
-		case "s":
+		case "A":
 			if (meetRequirement(itemDetail)) {
 				tempWarehouse = xmlParser.getNodeByName("amulet").getTextContent();
 				xmlParser.getNodeByName("amulet").setTextContent(itemDetail);
