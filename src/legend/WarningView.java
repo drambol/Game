@@ -72,6 +72,7 @@ public class WarningView extends JDialog implements ActionListener {
 				legendView.requestFocus();
 				legendView.freezeWindow();
 				shopView.requestFocus();
+				break;
 			}
 		}
 	}

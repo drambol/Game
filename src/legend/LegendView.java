@@ -38,11 +38,12 @@ public class LegendView extends JFrame implements ActionListener {
 	public MyLabel lbEquipment[] = new MyLabel[24];
 	private JPanel jpEquipment[] = new JPanel[6];
 	private MyLabel label[] = new MyLabel[10];
-	private JPanel panel[] = new JPanel[11];
+	private JPanel panel[] = new JPanel[12];
 	private JPanel radioPanel[] = new JPanel[5];
 	private MyButton buttonKill = new MyButton("Kill Monster");
 	private MyButton buttonWH = new MyButton("Warehouse");
 	private MyButton buttonShop = new MyButton("Shop");
+	private MyButton buttonUW = new MyButton("Weapon++");
 	private MyButton buttonSave = new MyButton("Save Char");
 	private MyButton buttonEquip[] = new MyButton[10];
 	private MyButton buttonStore[] = new MyButton[10];
@@ -69,6 +70,7 @@ public class LegendView extends JFrame implements ActionListener {
 	public LegendView(String s) {
 		super(s);
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+		buttonUW.addActionListener(this);
 		buttonKill.addActionListener(this);
 		buttonWH.addActionListener(this);
 		buttonShop.addActionListener(this);
@@ -109,10 +111,12 @@ public class LegendView extends JFrame implements ActionListener {
 		launchCharProperty();
 		launchCharInfo();
 		panel[10] = new JPanel();
-		panel[10].add(buttonKill);
+		panel[10].add(buttonUW);
 		panel[10].add(buttonWH);
 		panel[10].add(buttonShop);
-		panel[10].add(buttonSave);
+		panel[11] = new JPanel();
+		panel[11].add(buttonKill);
+		panel[11].add(buttonSave);
 		pHeader.add(labelCharInfo, BorderLayout.CENTER);
 		pHeader.add(labelDelete, BorderLayout.CENTER);
 		box0.add(pHeader, BorderLayout.AFTER_LAST_LINE);
@@ -136,6 +140,7 @@ public class LegendView extends JFrame implements ActionListener {
 			box1.add(radioPanel[i]);
 		}
 		box1.add(panel[10]);
+		box1.add(panel[11]);
 		boxH.add(box0);
 		boxH.add(box1);
 		add(boxH);
@@ -195,6 +200,17 @@ public class LegendView extends JFrame implements ActionListener {
 			} else {
 				WindowStore.legendViewTL.set(this);
 				new WarningView(this, "Not eligible to kill this monster!", 1);
+			}
+			return;
+		}
+		if (actionevent.getSource() == buttonUW) {
+			if (!lbEquipment[1].getText().isEmpty()) {
+				freezeWindow();
+				new WeaponUpgradeView("");
+			} else {
+				WindowStore.legendViewTL.set(this);
+				fromMonster = true;
+				new WarningView(this, "You must equip a weapon before using this function!", 1);
 			}
 			return;
 		}
@@ -414,14 +430,14 @@ public class LegendView extends JFrame implements ActionListener {
 				new ConfirmView(LegendView.this, "Are you sure to delete this char?", 1);
 			}
 		});
-		lbEquipment[1].addMouseListener(new MouseAdapter() {
-			public void mouseClicked(MouseEvent e) {
-				if (!lbEquipment[1].getText().isEmpty()) {
-					freezeWindow();
-					new WeaponUpgradeView("");
-				}
-			}
-		});
+//		lbEquipment[1].addMouseListener(new MouseAdapter() {
+//			public void mouseClicked(MouseEvent e) {
+//				if (!lbEquipment[1].getText().isEmpty()) {
+//					freezeWindow();
+//					new WeaponUpgradeView("");
+//				}
+//			}
+//		});
 	}
 	
 	private String equipItem(String itemDetail) {
