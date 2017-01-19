@@ -1,8 +1,11 @@
 package controls;
 
 import java.awt.Dimension;
+import java.awt.Font;
 
 import javax.swing.JButton;
+
+import runSuite.IConstants;
 
 public class MyButton extends JButton {
 	
@@ -11,6 +14,7 @@ public class MyButton extends JButton {
 	public MyButton(String buttonName) {
 		super(buttonName);
 		this.setPreferredSize(new Dimension(108, 22));
+		this.setFont(new Font("Arial", Font.PLAIN, 12));
 	}
 	
 	public MyButton(String buttonName, int width) {

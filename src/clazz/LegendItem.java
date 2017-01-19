@@ -130,8 +130,10 @@ public class LegendItem {
 		if (luck != 0) {
 			str = str + "  幸运 +" + luck;
 		}
-		if (attackSpeed != 0) {
+		if (attackSpeed > 0) {
 			str = str + "  攻击速度 +" + attackSpeed;
+		} else if (attackSpeed == -1) {
+			str = str + "  攻击速度 -1";
 		}
 		if (poisonAvoid != 0) {
 			int value = poisonAvoid * 10;
@@ -167,19 +169,25 @@ public class LegendItem {
 		int chance = Algorithm.getRandomInt(1, 1000);
 		boolean excellence = false;
 		int p = 0;
-		if (chance <= 2) {
-			p = 7;
-		} else if (chance <= 5) {
-			p = 6;
+		if (chance == 1) {
+			p = 10;
+		} else if (chance <= 3) {
+			p = 9;
+		} else if (chance <= 6) {
+			p = 8;
 		} else if (chance <= 10) {
+			p = 7;
+		} else if (chance <= 15) {
+			p = 6;
+		} else if (chance <= 25) {
 			p = 5;
-		} else if (chance <= 20) {
-			p = 4;
 		} else if (chance <= 40) {
+			p = 4;
+		} else if (chance <= 60) {
 			p = 3;
-		} else if (chance <= 80) {
+		} else if (chance <= 100) {
 			p = 2;
-		} else if (chance <= 160) {
+		} else if (chance <= 200) {
 			p = 1;
 		}
 		if (p > 0) {
@@ -188,13 +196,13 @@ public class LegendItem {
 			case "w":
 				for (int i = 0; i < p; i++) {
 					int ran = Algorithm.getRandomInt(1, 100);
-					if (ran <= 30) {
+					if (ran <= 29) {
 						attack[1] = attack[1] + 1;
-					} else if (ran <= 60) {
+					} else if (ran <= 58) {
 						sprint[1] = sprint[1] + 1;
-					} else if (ran <= 90) {
+					} else if (ran <= 87) {
 						magic[1] = magic[1] + 1;
-					} else if (ran <= 97) {
+					} else if (ran <= 96) {
 						accurate = accurate + 1;
 					} else {
 						attackSpeed = attackSpeed + 1;
@@ -232,6 +240,7 @@ public class LegendItem {
 			case "c":
 			case "b":
 			case "o":
+			case "g":
 				for (int i = 0; i < p; i++) {
 					int ran = Algorithm.getRandomInt(1, 100);
 					if (ran <= 20) {
@@ -310,6 +319,9 @@ public class LegendItem {
 			case "i":
 			case "a":
 			case "h":
+			case "b":
+			case "o":
+			case "g":
 				durability = durability + p;
 				break;
 			}

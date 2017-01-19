@@ -166,41 +166,51 @@ public class LegendView extends JFrame implements ActionListener {
 		int equip = -1;
 		int store = -1;
 		if (actionevent.getSource() == buttonKill) {
+//			enableAllButtons(false);
 			LegendFunction lengendFunction = new LegendFunction(buttonGroup.getSelectedButtonText());
+			propertyView.loadPorpertyFromXML();
 			if (lengendFunction.eligibleChallenge(propertyView)) {
-				for(int i = 0; i < 10; i++) {
-					label[i].setText("");
-					buttonEquip[i].setText("");
-					buttonStore[i].setText("");
-					buttonEquip[i].removeActionListener(this);
-					buttonStore[i].removeActionListener(this);
-				}
-				lengendFunction.addExp();
-				if (lengendFunction.levelUp) {
-					reactForLevelUp();
-				}
-				String[] str = legend.getItemFromMonster(buttonGroup.getSelectedButtonText());
-				for(int i = 0; i < 10; i++) {
-					if (str[i] != null && !str[i].substring(0, 1).equals("*")) {
-						label[i].setText(str[i].split("~")[1]);
-						buttonEquip[i].setText("Equip It");
-						buttonStore[i].setText("Store It");
-						buttonEquip[i].addActionListener(this);
-						buttonStore[i].addActionListener(this);
-					} else if (str[i] != null && str[i].substring(0, 1).equals("*")) {
-						label[i].setText(str[i].substring(1));
-					} else {
+				if (lengendFunction.survival(propertyView)) {
+					for(int i = 0; i < 10; i++) {
 						label[i].setText("");
 						buttonEquip[i].setText("");
 						buttonStore[i].setText("");
 						buttonEquip[i].removeActionListener(this);
 						buttonStore[i].removeActionListener(this);
 					}
+					lengendFunction.addExp();
+					if (lengendFunction.levelUp) {
+						reactForLevelUp();
+					}
+					String[] str = legend.getItemFromMonster(buttonGroup.getSelectedButtonText());
+					for(int i = 0; i < 10; i++) {
+						if (str[i] != null && !str[i].substring(0, 1).equals("*")) {
+							label[i].setText(str[i].split("~")[1]);
+							buttonEquip[i].setText("Equip It");
+							buttonStore[i].setText("Store It");
+							buttonEquip[i].addActionListener(this);
+							buttonStore[i].addActionListener(this);
+						} else if (str[i] != null && str[i].substring(0, 1).equals("*")) {
+							label[i].setText(str[i].substring(1));
+						} else {
+							label[i].setText("");
+							buttonEquip[i].setText("");
+							buttonStore[i].setText("");
+							buttonEquip[i].removeActionListener(this);
+							buttonStore[i].removeActionListener(this);
+						}
+					}
+				} else {
+					lengendFunction.deathEvent();
+					launchCharProperty();
+					WindowStore.legendViewTL.set(this);
+					new WarningView(this, "Challenge Failed, you have died with experience lost!", 1);
 				}
 			} else {
 				WindowStore.legendViewTL.set(this);
 				new WarningView(this, "Not eligible to kill this monster!", 1);
 			}
+//			enableAllButtons(true);
 			return;
 		}
 		if (actionevent.getSource() == buttonUW) {
@@ -260,7 +270,7 @@ public class LegendView extends JFrame implements ActionListener {
 			return;
 		}
 		if (actionevent.getSource() == buttonSave) {
-			File targetFile = new File(System.getProperty("user.dir") + "\\src\\runSuite\\save\\" + charName + ".xml");
+			File targetFile = new File(System.getProperty("user.dir") + "\\src\\runSuite\\legendSave\\" + charName + ".xml");
 			if (targetFile.exists()) {
 				targetFile.delete();
 			}
@@ -314,7 +324,7 @@ public class LegendView extends JFrame implements ActionListener {
 				xmlParser.getNodeByName("name").setTextContent("");
 				xmlParser.save();
 				dispose();
-				File file = new File(System.getProperty("user.dir") + "\\src\\runSuite\\save\\" + deleteChar + ".xml");
+				File file = new File(System.getProperty("user.dir") + "\\src\\runSuite\\legendSave\\" + deleteChar + ".xml");
 				file.delete();
 				SelectCharView.main(null);
 			} else {
@@ -326,7 +336,7 @@ public class LegendView extends JFrame implements ActionListener {
 			if (confirmFlag) {
 				xmlParser = new XmlParser("runSuite\\LegendHero.xml");
 				String charName = xmlParser.getNodeByName("name").getTextContent();
-				File targetFile = new File(System.getProperty("user.dir") + "\\src\\runSuite\\save\\" + charName + ".xml");
+				File targetFile = new File(System.getProperty("user.dir") + "\\src\\runSuite\\legendSave\\" + charName + ".xml");
 				if (targetFile.exists()) {
 					targetFile.delete();
 				}
@@ -402,7 +412,15 @@ public class LegendView extends JFrame implements ActionListener {
 	
 	private void showDetail(final MyLabel label, final String str) {
 		if (!str.isEmpty()) {
-			label.setText(str.split("~")[1].split("  ")[0]);
+			if (label == lbEquipment[1] && str.split("  ")[0].contains("+7")) {
+				label.setText(str.split("~")[1].split("  ")[0] + LegendConstant.CannotDropped);
+//			} else if (label == lbEquipment[1] && xmlParser.getNodeByName("upgradeCount").getTextContent().equals("N/A")) {
+//				label.setText(str.split("~")[1].split("  ")[0] + LegendConstant.Destroyed);
+			} else {
+				label.setText(str.split("~")[1].split("  ")[0]);
+			}
+		} else {
+			label.setText("");
 		}
 		label.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
@@ -430,14 +448,6 @@ public class LegendView extends JFrame implements ActionListener {
 				new ConfirmView(LegendView.this, "Are you sure to delete this char?", 1);
 			}
 		});
-//		lbEquipment[1].addMouseListener(new MouseAdapter() {
-//			public void mouseClicked(MouseEvent e) {
-//				if (!lbEquipment[1].getText().isEmpty()) {
-//					freezeWindow();
-//					new WeaponUpgradeView("");
-//				}
-//			}
-//		});
 	}
 	
 	private String equipItem(String itemDetail) {
@@ -451,6 +461,8 @@ public class LegendView extends JFrame implements ActionListener {
 				tempWarehouse = xmlParser.getNodeByName("weapon").getTextContent();
 				if (itemDetail.split("  ")[0].contains("+")) {
 					xmlParser.getNodeByName("upgradeCount").setTextContent(itemDetail.split("  ")[0].split("[+]")[1]);
+				} else if (itemDetail.split("  ")[0].contains(LegendConstant.Destroyed)) {
+					xmlParser.getNodeByName("upgradeCount").setTextContent("N/A");
 				} else {
 					xmlParser.getNodeByName("upgradeCount").setTextContent("0");
 				}
@@ -576,6 +588,7 @@ public class LegendView extends JFrame implements ActionListener {
 			if (!tempWarehouse.isEmpty()) {
 				label[tempPosition].setText(tempWarehouse.split("~")[1]);
 				legend.legendItems[tempPosition] = tempWarehouse;
+				legend.itemCode[tempPosition] = tempWarehouse.split("~")[0];
 			} else {
 				label[tempPosition].setText("");
 				buttonEquip[tempPosition].setText("");
@@ -602,15 +615,15 @@ public class LegendView extends JFrame implements ActionListener {
 			requiredValue = Integer.parseInt(itemDetail.split(LegendConstant.RequireLevel)[1]);
 			break;
 		case LegendConstant.RequireAttack:
-			actualValue = propertyView.attack;
+			actualValue = propertyView.maxAttack;
 			requiredValue = Integer.parseInt(itemDetail.split(LegendConstant.RequireAttack)[1]);
 			break;
 		case LegendConstant.RequireDao:
-			actualValue = propertyView.daoAttack;
+			actualValue = propertyView.maxDaoAttack;
 			requiredValue = Integer.parseInt(itemDetail.split(LegendConstant.RequireDao)[1]);
 			break;
 		case LegendConstant.RequireMagic:
-			actualValue = propertyView.magicAttack;
+			actualValue = propertyView.maxMagicAttack;
 			requiredValue = Integer.parseInt(itemDetail.split(LegendConstant.RequireMagic)[1]);
 			break;
 		}
@@ -636,6 +649,14 @@ public class LegendView extends JFrame implements ActionListener {
 			e.printStackTrace();
 		}
 	}
+	
+//	private void enableAllButtons(boolean bool) {
+//		buttonUW.setEnabled(bool);
+//		buttonShop.setEnabled(bool);
+//		buttonKill.setEnabled(bool);
+//		buttonWH.setEnabled(bool);
+//		buttonSave.setEnabled(bool);
+//	}
 	
 	private static class CloseHandler extends WindowAdapter {
 		LegendView view;

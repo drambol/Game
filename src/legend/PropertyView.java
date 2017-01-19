@@ -40,9 +40,22 @@ public class PropertyView extends JFrame implements ActionListener {
 	private String beltProperty;
 	private String bootsProperty;
 	private String gemProperty;
-	public int attack;
-	public int daoAttack;
-	public int magicAttack;
+	public int maxAttack;
+	public int maxDaoAttack;
+	public int maxMagicAttack;
+	public int minAttack;
+	public int minDaoAttack;
+	public int minMagicAttack;
+	public int maxDefence;
+	public int maxMagicDefence;
+	public int minDefence;
+	public int minMagicDefence;
+	public int accuracy;
+	public int dodge;
+	public int luck;
+	public int attackSpeed;
+	public int poisonAvoid;
+	public int magicAvoid;
 	public int level = 0;
 	
 	public PropertyView(String s, boolean visibility) {
@@ -113,13 +126,49 @@ public class PropertyView extends JFrame implements ActionListener {
 		label[12].setText("MP");
 		label[13].setText(xmlParser.getNodeByName("mp").getTextContent());
 		label[14].setText(LegendConstant.Hit);
-		label[15].setText("" + getOther(LegendConstant.Hit));
+		label[15].setText("" + getHitDexterity(LegendConstant.Hit));
 		label[16].setText(LegendConstant.Dexterity);
-		label[17].setText("" + getOther(LegendConstant.Dexterity));
-		attack = Integer.parseInt(calculate(LegendConstant.Attack).split("-")[1]);
-		daoAttack = Integer.parseInt(calculate(LegendConstant.DaoAttack).split("-")[1]);
-		magicAttack = Integer.parseInt(calculate(LegendConstant.MagicAttack).split("-")[1]);
+		label[17].setText("" + getHitDexterity(LegendConstant.Dexterity));
+		maxAttack = Integer.parseInt(calculate(LegendConstant.Attack).split("-")[1]);
+		maxDaoAttack = Integer.parseInt(calculate(LegendConstant.DaoAttack).split("-")[1]);
+		maxMagicAttack = Integer.parseInt(calculate(LegendConstant.MagicAttack).split("-")[1]);
+		minAttack = Integer.parseInt(calculate(LegendConstant.Attack).split("-")[0]);
+		minDaoAttack = Integer.parseInt(calculate(LegendConstant.DaoAttack).split("-")[0]);
+		minMagicAttack = Integer.parseInt(calculate(LegendConstant.MagicAttack).split("-")[0]);
 		level = Integer.parseInt(xmlParser.getNodeByName("level").getTextContent());
+		maxDefence = Integer.parseInt(calculate(LegendConstant.Defence).split("-")[1]);
+		minDefence = Integer.parseInt(calculate(LegendConstant.Defence).split("-")[0]);
+		maxMagicDefence = Integer.parseInt(calculate(LegendConstant.MagicDefence).split("-")[1]);
+		minMagicDefence = Integer.parseInt(calculate(LegendConstant.MagicDefence).split("-")[0]);
+		accuracy = getHitDexterity(LegendConstant.Hit);
+		dodge = getHitDexterity(LegendConstant.Dexterity);
+		luck = getLuck();
+		attackSpeed = getAttackSpeed();
+		poisonAvoid = getPoisonAvoid();
+		magicAvoid = getMagicAvoid();
+		if (luck > 0) {
+			minAttack = (int) ((maxAttack - minAttack) * luck / 20d + minAttack);
+			minDaoAttack = (int) ((maxDaoAttack - minDaoAttack) * luck / 20d + minDaoAttack);
+			minMagicAttack = (int) ((maxMagicAttack - minMagicAttack) * luck / 20d + minMagicAttack);
+			minDefence = (int) ((maxDefence - minDefence) * luck / 20d + minDefence);
+			minMagicDefence = (int) ((maxMagicDefence - minMagicDefence) * luck / 20d + minMagicDefence);
+		}
+		if (attackSpeed != 0) {
+			maxAttack = (int) (maxAttack * (1 + attackSpeed / 20d));
+			minAttack = (int) (minAttack * (1 + attackSpeed / 20d));
+		}
+		if (poisonAvoid > 0) {
+			maxDefence = (int) (maxDefence * (1 + poisonAvoid / 10d));
+			minDefence = (int) (minDefence * (1 + poisonAvoid / 10d));
+			maxMagicDefence = (int) (maxMagicDefence * (1 + poisonAvoid / 10d));
+			minMagicDefence = (int) (minMagicDefence * (1 + poisonAvoid / 10d));
+		}
+		if (magicAvoid > 0) {
+			maxDefence = (int) (maxDefence * (1 + magicAvoid / 10d));
+			minDefence = (int) (minDefence * (1 + magicAvoid / 10d));
+			maxMagicDefence = (int) (maxMagicDefence * (1 + magicAvoid / 10d));
+			minMagicDefence = (int) (minMagicDefence * (1 + magicAvoid / 10d));
+		}
 	}
 	
 	private String calculate(String str) {
@@ -249,7 +298,7 @@ public class PropertyView extends JFrame implements ActionListener {
 		return max;
 	}
 	
-	private int getOther(String str) {
+	private int getHitDexterity(String str) {
 		xmlParser = new XmlParser("runSuite\\LegendHero.xml");
 		String string = str + " +";
 		int result = 0;
@@ -264,17 +313,8 @@ public class PropertyView extends JFrame implements ActionListener {
 		if (weaponProperty.contains(string)) {
 			result = result + Integer.parseInt(weaponProperty.split(string)[1].split("  ")[0]);
 		}
-		if (armorProperty.contains(string)) {
-			result = result + Integer.parseInt(armorProperty.split(string)[1].split("  ")[0]);
-		}
-		if (helmetProperty.contains(string)) {
-			result = result + Integer.parseInt(helmetProperty.split(string)[1].split("  ")[0]);
-		}
 		if (amuletProperty.contains(string)) {
 			result = result + Integer.parseInt(amuletProperty.split(string)[1].split("  ")[0]);
-		}
-		if (medalProperty.contains(string)) {
-			result = result + Integer.parseInt(medalProperty.split(string)[1].split("  ")[0]);
 		}
 		if (leftBraceletProperty.contains(string)) {
 			result = result + Integer.parseInt(leftBraceletProperty.split(string)[1].split("  ")[0]);
@@ -282,20 +322,78 @@ public class PropertyView extends JFrame implements ActionListener {
 		if (rightBraceletProperty.contains(string)) {
 			result = result + Integer.parseInt(rightBraceletProperty.split(string)[1].split("  ")[0]);
 		}
-		if (leftRingProperty.contains(string)) {
-			result = result + Integer.parseInt(leftRingProperty.split(string)[1].split("  ")[0]);
+		return result;
+	}
+	
+	private int getLuck() {
+		xmlParser = new XmlParser("runSuite\\LegendHero.xml");
+		String str = LegendConstant.Luck + " +";
+		int result = 0;
+		if (weaponProperty.contains(str)) {
+			result = result + Integer.parseInt(weaponProperty.split(str)[1].split("  ")[0]);
 		}
-		if (rightRingProperty.contains(string)) {
-			result = result + Integer.parseInt(rightRingProperty.split(string)[1].split("  ")[0]);
+		if (amuletProperty.contains(str)) {
+			result = result + Integer.parseInt(amuletProperty.split(str)[1].split("  ")[0]);
 		}
-		if (beltProperty.contains(string)) {
-			result = result + Integer.parseInt(beltProperty.split(string)[1].split("  ")[0]);
+		result = result > 9 ? 9 : result;
+		return result;
+	}
+	
+	private int getAttackSpeed() {
+		xmlParser = new XmlParser("runSuite\\LegendHero.xml");
+		String str = LegendConstant.AttackSpeed + " ";
+		int result = 0;
+		if (weaponProperty.contains(str)) {
+			if (weaponProperty.split(str)[1].substring(0, 1).equals("+")) {
+				result = result + Integer.parseInt(weaponProperty.split(str)[1].split("  ")[0].substring(1));
+			} else {
+				result = result - Integer.parseInt(weaponProperty.split(str)[1].split("  ")[0].substring(1));
+			}
 		}
-		if (bootsProperty.contains(string)) {
-			result = result + Integer.parseInt(bootsProperty.split(string)[1].split("  ")[0]);
+		if (amuletProperty.contains(str)) {
+			result = result + Integer.parseInt(amuletProperty.split(str)[1].split("  ")[0]);
 		}
-		if (gemProperty.contains(string)) {
-			result = result + Integer.parseInt(gemProperty.split(string)[1].split("  ")[0]);
+		if (leftRingProperty.contains(str)) {
+			result = result + Integer.parseInt(leftRingProperty.split(str)[1].split("  ")[0]);
+		}
+		if (rightRingProperty.contains(str)) {
+			result = result + Integer.parseInt(rightRingProperty.split(str)[1].split("  ")[0]);
+		}
+		result = result > 4 ? 4 : result;
+		return result;
+	}
+	
+	private int getPoisonAvoid() {
+		xmlParser = new XmlParser("runSuite\\LegendHero.xml");
+		String str = LegendConstant.PoisonAvoid;
+		int result = 0;
+		if (amuletProperty.contains(str)) {
+			result = result + Integer.parseInt(amuletProperty.split(str)[1].substring(2, 3));
+		}
+		if (leftRingProperty.contains(str)) {
+			result = result + Integer.parseInt(leftRingProperty.split(str)[1].substring(2, 3));
+		}
+		if (rightRingProperty.contains(str)) {
+			result = result + Integer.parseInt(rightRingProperty.split(str)[1].substring(2, 3));
+		}
+		if (gemProperty.contains(str)) {
+			result = result + Integer.parseInt(gemProperty.split(str)[1].substring(2, 3));
+		}
+		return result;
+	}
+	
+	private int getMagicAvoid() {
+		xmlParser = new XmlParser("runSuite\\LegendHero.xml");
+		String str = LegendConstant.MagicAvoid;
+		int result = 0;
+		if (amuletProperty.contains(str)) {
+			result = result + Integer.parseInt(amuletProperty.split(str)[1].substring(2, 3));
+		}
+		if (leftRingProperty.contains(str)) {
+			result = result + Integer.parseInt(leftRingProperty.split(str)[1].substring(2, 3));
+		}
+		if (rightRingProperty.contains(str)) {
+			result = result + Integer.parseInt(rightRingProperty.split(str)[1].substring(2, 3));
 		}
 		return result;
 	}

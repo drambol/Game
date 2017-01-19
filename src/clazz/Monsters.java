@@ -11,10 +11,15 @@ import legend.LegendConstant;
 public class Monsters {
 	
 	File file = new File(System.getProperty("user.dir") + "\\test-data\\Legend.xls");
+	public double safetyFactor;
 	public int reqAttack;
 	public int reqDA;
 	public int reqMA;
 	public int reqLevel;
+	public int attack = 0;
+	public int magicAttack = 0;
+	public int accuracy;
+	public int dodge;
 	
 	public Monsters(String monsterName) {
 		int rowCount = 0;
@@ -83,10 +88,17 @@ public class Monsters {
 				rowCount = 20;
 				break;
 			}
-			reqLevel = Integer.parseInt(sheet.getCell(1, rowCount).getContents());
-			reqAttack = Integer.parseInt(sheet.getCell(2, rowCount).getContents());
-			reqDA = Integer.parseInt(sheet.getCell(3, rowCount).getContents());
-			reqMA = Integer.parseInt(sheet.getCell(4, rowCount).getContents());
+			safetyFactor = Double.parseDouble(sheet.getCell(1, rowCount).getContents());
+			reqLevel = Integer.parseInt(sheet.getCell(2, rowCount).getContents());
+			reqAttack = Integer.parseInt(sheet.getCell(3, rowCount).getContents());
+			reqDA = Integer.parseInt(sheet.getCell(4, rowCount).getContents());
+			reqMA = Integer.parseInt(sheet.getCell(5, rowCount).getContents());
+			if (!sheet.getCell(6, rowCount).getContents().isEmpty())
+				attack = Integer.parseInt(sheet.getCell(6, rowCount).getContents());
+			if (!sheet.getCell(7, rowCount).getContents().isEmpty())
+				magicAttack = Integer.parseInt(sheet.getCell(7, rowCount).getContents());
+			accuracy = Integer.parseInt(sheet.getCell(8, rowCount).getContents());
+			dodge = Integer.parseInt(sheet.getCell(9, rowCount).getContents());
 			book.close();
 		} catch (BiffException e) {
 			e.printStackTrace();

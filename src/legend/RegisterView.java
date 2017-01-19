@@ -64,7 +64,7 @@ public class RegisterView extends JFrame implements ActionListener {
 
 	public void actionPerformed(ActionEvent actionevent) {
 		if (actionevent.getSource() == button) {
-			if (tText.getText().length() >= 2) {
+			if (tText.getText().length() >= 1) {
 				xmlParser.getNodeByName("name").setTextContent(tText.getText());
 				xmlParser.getNodeByName("career").setTextContent(careerGroup.getSelectedButtonText());
 				initialCharData(genderGroup.getSelectedButtonText(), careerGroup.getSelectedButtonText());
@@ -106,7 +106,6 @@ public class RegisterView extends JFrame implements ActionListener {
 		xmlParser.getNodeByName("weapon").setTextContent(LegendConstant.StartWeapon);
 		xmlParser.getNodeByName("helmet").setTextContent("");
 		xmlParser.getNodeByName("amulet").setTextContent("");
-		xmlParser.getNodeByName("medal").setTextContent("");
 		xmlParser.getNodeByName("leftBracelet").setTextContent("");
 		xmlParser.getNodeByName("rightBracelet").setTextContent("");
 		xmlParser.getNodeByName("leftRing").setTextContent("");
@@ -115,11 +114,18 @@ public class RegisterView extends JFrame implements ActionListener {
 		xmlParser.getNodeByName("boots").setTextContent("");
 		xmlParser.getNodeByName("gem").setTextContent("");
 		xmlParser.getNodeByName("money").setTextContent("0");
+		xmlParser.getNodeByName("bless").setTextContent("0");
 		xmlParser.getNodeByName("ore1").setTextContent("0");
 		xmlParser.getNodeByName("ore2").setTextContent("0");
 		xmlParser.getNodeByName("charm1").setTextContent("0");
 		xmlParser.getNodeByName("charm2").setTextContent("0");
 		xmlParser.getNodeByName("charm3").setTextContent("0");
+		String name = xmlParser.getNodeByName("name").getTextContent();
+		String medal = "";
+		if (name.contains("天意")) {
+			medal = "x11~天意勇魂  防御: 2-3  魔御: 2-3  攻击: 2-3  重量: 1  持久: 10  需等级1";
+		}
+		xmlParser.getNodeByName("medal").setTextContent(medal);
 		for (int i = 0; i < 99; i++) {
 			xmlParser.getNodeByName("item", i).setTextContent("");
 		}
@@ -152,7 +158,7 @@ public class RegisterView extends JFrame implements ActionListener {
 			xmlParser.getNodeByName("mac").setTextContent("0-0");
 			xmlParser.getNodeByName("hp").setTextContent("16");
 			xmlParser.getNodeByName("mp").setTextContent("77");
-			xmlParser.getNodeByName("hit").setTextContent("11");
+			xmlParser.getNodeByName("hit").setTextContent("13");
 			break;
 		}
 		switch (gender) {

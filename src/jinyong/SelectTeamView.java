@@ -1,4 +1,4 @@
-package legend;
+package jinyong;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -18,23 +18,23 @@ import controls.MyButton;
 import runSuite.IConstants;
 import utility.file.XmlParser;
 
-public class SelectCharView extends JFrame implements ActionListener {
+public class SelectTeamView extends JFrame implements ActionListener {
 	
 	private static final long serialVersionUID = 6L;
 	private JScrollPane sp;
 	private JPanel panel = new JPanel();
-	private JButton createChar = new JButton("Create New Char");
+	private JButton createChar = new JButton("Create New Team");
 	private MyButton button[] = new MyButton[99];
 	private Box box0 = Box.createVerticalBox();
 	private Box box1 = Box.createVerticalBox();
 	private Box boxH = Box.createVerticalBox();
-	private File folder = new File(System.getProperty("user.dir") + "\\src\\runSuite\\legendSave\\");
+	private File folder = new File(System.getProperty("user.dir") + "\\src\\runSuite\\JinyongSave\\");
 	private File file[] = folder.listFiles();
-	private File activeFile = new File(System.getProperty("user.dir") + "\\src\\runSuite\\LegendHero.xml");
+	private File activeFile = new File(System.getProperty("user.dir") + "\\src\\runSuite\\JinyongHero.xml");
 	private File targetFile;
 	private XmlParser xmlParser;
 	
-	public SelectCharView(String s) {
+	public SelectTeamView(String s) {
 		super(s);
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		setResizable(false);
@@ -79,7 +79,7 @@ public class SelectCharView extends JFrame implements ActionListener {
 	}
 	
 	public static void main(String[] args) {
-		File root = new File(System.getProperty("user.dir") + "\\src\\runSuite\\legendSave\\");
+		File root = new File(System.getProperty("user.dir") + "\\src\\runSuite\\JinyongSave\\");
 		File rootFiles[] = root.listFiles();
 		boolean validRecord = false;
 		for (int i = 0; i < rootFiles.length; i++) {
@@ -89,22 +89,23 @@ public class SelectCharView extends JFrame implements ActionListener {
 			}
 		}
 		if (validRecord) {
-			new SelectCharView("");
-		} else {
-			new RegisterView("");
+			new SelectTeamView("");
 		}
 	}
 
+	@Override
 	public void actionPerformed(ActionEvent actionevent) {
+		// TODO Auto-generated method stub
 		if (actionevent.getSource() == createChar) {
 			setVisible(false);
-			new RegisterView("");
+			HeroRank heroRank = new HeroRank("");
+			heroRank.newGame();
 			return;
 		}
 		for (int i = 0; i < 99; i++) {
 			if (actionevent.getSource() == button[i]) {
-				targetFile = new File(System.getProperty("user.dir") + "\\src\\runSuite\\legendSave\\" + file[i].getName());
-				xmlParser = new XmlParser("runSuite\\legendSave\\" + file[i].getName());
+				targetFile = new File(System.getProperty("user.dir") + "\\src\\runSuite\\JinyongSave\\" + file[i].getName());
+				xmlParser = new XmlParser("runSuite\\JinyongSave\\" + file[i].getName());
 				if (activeFile.exists()) {
 					activeFile.delete();
 					file[i].renameTo(activeFile);
@@ -112,7 +113,7 @@ public class SelectCharView extends JFrame implements ActionListener {
 				xmlParser.save();
 				changeName();
 				setVisible(false);
-				new LegendView("");
+				new HeroRank("");
 				return;
 			}
 		}

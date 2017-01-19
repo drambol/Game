@@ -57,7 +57,7 @@ public class ShopView extends JFrame implements ActionListener {
 			labelPrice[i].setPreferredSize(new Dimension(55, 22));
 			labelMinor[i].setPreferredSize(new Dimension(10, 20));
 			labelPlus[i].setPreferredSize(new Dimension(15, 20));
-			text[i].setPreferredSize(new Dimension(20, 20));
+			text[i].setPreferredSize(new Dimension(28, 20));
 			buttonBuy[i].setPreferredSize(new Dimension(60, 22));
 			buttonBuy[i].setText("Buy");
 			buttonBuy[i].addActionListener(this);
@@ -67,7 +67,11 @@ public class ShopView extends JFrame implements ActionListener {
 			labelMinor[i].setText("-");
 			minorQuantity(labelMinor[i], i);
 			panel[i].add(text[i]);
-			text[i].setText("0");
+			if (i <= 4) {
+				text[i].setText("1");
+			} else {
+				text[i].setText("10");
+			}
 			text[i].setHorizontalAlignment(JTextField.CENTER);
 			text[i].setEnabled(false);
 			panel[i].add(labelPlus[i]);
@@ -192,7 +196,7 @@ public class ShopView extends JFrame implements ActionListener {
 					}
 				} else {
 					if (quantity >= 1) {
-						quantity = quantity - 1;
+						quantity = quantity - 10;
 						text[count].setText("" + quantity);
 					}
 				}
@@ -209,8 +213,8 @@ public class ShopView extends JFrame implements ActionListener {
 						text[count].setText("1");
 					}
 				} else {
-					if (quantity <= 9) {
-						quantity = quantity + 1;
+					if (quantity <= 90) {
+						quantity = quantity + 10;
 						text[count].setText("" + quantity);
 					}
 				}

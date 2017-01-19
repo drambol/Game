@@ -1,5 +1,7 @@
 package base;
 
+import jinyong.HeroRank;
+import jinyong.JuXianZhuang;
 import legend.LegendView;
 import legend.MessageView;
 import legend.ShopView;
@@ -15,5 +17,8 @@ public class WindowStore {
 	public static final ThreadLocal<WarehouseView> warehouseViewTL = new ThreadLocal<WarehouseView>();
 	public static final ThreadLocal<ShopView> shopViewTL = new ThreadLocal<ShopView>();
 	public static final ThreadLocal<WeaponUpgradeView> weaponUpgradeViewTL = new ThreadLocal<WeaponUpgradeView>();
+	
+	public static final ThreadLocal<HeroRank> heroRankTL = new ThreadLocal<HeroRank>();
+	public static final ThreadLocal<JuXianZhuang> juXianZhuangTL = new ThreadLocal<JuXianZhuang>();
 	
 }

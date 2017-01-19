@@ -30,7 +30,7 @@ public class WeaponUpgradeView extends JFrame implements ActionListener {
 	private JPanel charmPanel = new JPanel();
 	private JPanel buttonPanel = new JPanel();
 	private MyLabel label[] = new MyLabel[5];
-	private MyRadioButton radioButton[] = new MyRadioButton[10];
+	private MyRadioButton radioButton[] = new MyRadioButton[11];
 	private MyButtonGroup buttonGroup1 = new MyButtonGroup();
 	private MyButtonGroup buttonGroup2 = new MyButtonGroup();
 	private MyButtonGroup buttonGroup3 = new MyButtonGroup();
@@ -40,6 +40,7 @@ public class WeaponUpgradeView extends JFrame implements ActionListener {
 	private String weaponName;
 	private String weaponProperty;
 	private String upgradeCount;
+	private int weaponLuck = 0;
 	
 	public WeaponUpgradeView(String s) {
 		super(s);
@@ -66,23 +67,24 @@ public class WeaponUpgradeView extends JFrame implements ActionListener {
 		typePanel.add(radioButton[0]);
 		typePanel.add(radioButton[1]);
 		typePanel.add(radioButton[2]);
+		typePanel.add(radioButton[3]);
 		label[3] = new MyLabel(LegendConstant.SelectOre, 90);
 		orePanel.add(label[3]);
-		orePanel.add(radioButton[3]);
 		orePanel.add(radioButton[4]);
 		orePanel.add(radioButton[5]);
+		orePanel.add(radioButton[6]);
 		label[4] = new MyLabel(LegendConstant.SelectCharm, 90);
 		charmPanel.add(label[4]);
-		charmPanel.add(radioButton[6]);
 		charmPanel.add(radioButton[7]);
 		charmPanel.add(radioButton[8]);
 		charmPanel.add(radioButton[9]);
+		charmPanel.add(radioButton[10]);
 		button.addActionListener(this);
 		buttonPanel.add(button, BorderLayout.CENTER);
 		box0.add(weaponPanel);
 		box0.add(typePanel);
-		box0.add(orePanel);
 		box0.add(charmPanel);
+		box0.add(orePanel);
 		box0.add(buttonPanel);
 		add(box0);
 		
@@ -90,6 +92,23 @@ public class WeaponUpgradeView extends JFrame implements ActionListener {
 		setLocation(screenSize.width/2 - this.getSize().width/2, screenSize.height/2 - this.getSize().height/2);
 		setTitle("Weapon Upgrade");
 		setVisible(true);
+		
+		for (int i = 0; i < 3; i++) {
+			radioButton[i].addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg) {
+					for (int i = 4; i < 11; i++) {
+						radioButton[i].setEnabled(true);
+					}
+				}
+			});
+		}
+		radioButton[3].addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg) {
+				for (int i = 4; i < 11; i++) {
+					radioButton[i].setEnabled(false);
+				}
+			}
+		});
 	}
 	
 	public static void main(String[] args) {
@@ -100,6 +119,7 @@ public class WeaponUpgradeView extends JFrame implements ActionListener {
 		int successFactor = 0;
 		xmlParser = new XmlParser("runSuite\\LegendHero.xml");
 		upgradeCount = xmlParser.getNodeByName("upgradeCount").getTextContent();
+		int bless = Integer.parseInt(xmlParser.getNodeByName("bless").getTextContent());
 		int ore1 = Integer.parseInt(xmlParser.getNodeByName("ore1").getTextContent());
 		int ore2 = Integer.parseInt(xmlParser.getNodeByName("ore2").getTextContent());
 		int charm1 = Integer.parseInt(xmlParser.getNodeByName("charm1").getTextContent());
@@ -107,11 +127,29 @@ public class WeaponUpgradeView extends JFrame implements ActionListener {
 		int charm3 = Integer.parseInt(xmlParser.getNodeByName("charm3").getTextContent());
 		int gold = Integer.parseInt(xmlParser.getNodeByName("money").getTextContent());
 		if (actionevent.getSource() == button) {
+			if (radioButton[3].isSelected()) {
+				if (bless > 0) {
+					if (xmlParser.getNodeByName("weapon").getTextContent().contains(LegendConstant.Luck)) {
+						String str = LegendConstant.Luck;
+						weaponLuck = Integer.parseInt(xmlParser.getNodeByName("weapon").getTextContent().split(str)[1].substring(2, 3));
+					} else {
+						weaponLuck = 0;
+					}
+					blessWeapon(weaponLuck);
+					bless = bless - 1;
+					xmlParser.getNodeByName("bless").setTextContent(String.valueOf(bless));
+					xmlParser.save();
+					refreshRadioButton();
+				} else {
+					new WarningView(this, "Material not enough!", 3);
+				}
+				return;
+			}
 			if (gold < 10000) {
 				new WarningView(this, "Not enough gold!", 3);
 				return;
 			}
-			if (!upgradeCount.equals("7")) {
+			if (!upgradeCount.equals("7") && !upgradeCount.equals("N/A")) {
 				switch (upgradeCount) {
 				case "0":
 					successFactor = successFactor + 95;
@@ -136,10 +174,10 @@ public class WeaponUpgradeView extends JFrame implements ActionListener {
 					break;
 				}
 			} else {
-				new WarningView(this, "Your weapon met the maximun limitation from upgrade!", 3);
+				new WarningView(this, "Your weapon cannot be enhanced!", 3);
 				return;
 			}
-			if (radioButton[4].isSelected()) {
+			if (radioButton[5].isSelected()) {
 				if (ore1 >= 2) {
 					ore1 = ore1 - 2;
 					gold = Integer.parseInt(xmlParser.getNodeByName("money").getTextContent()) - 10000;
@@ -150,7 +188,7 @@ public class WeaponUpgradeView extends JFrame implements ActionListener {
 					new WarningView(this, "Material not enough!", 3);
 					return;
 				}
-			} else if (radioButton[5].isSelected()) {
+			} else if (radioButton[6].isSelected()) {
 				if (ore2 >= 2) {
 					successFactor = successFactor + 5;
 					ore2 = ore2 - 2;
@@ -165,7 +203,7 @@ public class WeaponUpgradeView extends JFrame implements ActionListener {
 			} else {
 				successFactor = successFactor - 5;
 			}
-			if (radioButton[7].isSelected()) {
+			if (radioButton[8].isSelected()) {
 				if (charm1 >= 1) {
 					successFactor = successFactor + 5;
 					charm1 = charm1 - 1;
@@ -177,7 +215,7 @@ public class WeaponUpgradeView extends JFrame implements ActionListener {
 					new WarningView(this, "Material not enough!", 3);
 					return;
 				}
-			} else if (radioButton[8].isSelected()) {
+			} else if (radioButton[9].isSelected()) {
 				if (charm2 >= 1) {
 					successFactor = successFactor + 10;
 					charm2 = charm2 - 1;
@@ -189,7 +227,7 @@ public class WeaponUpgradeView extends JFrame implements ActionListener {
 					new WarningView(this, "Material not enough!", 3);
 					return;
 				}
-			} else if (radioButton[9].isSelected()) {
+			} else if (radioButton[10].isSelected()) {
 				if (charm3 >= 1) {
 					successFactor = successFactor + 15;
 					charm3 = charm3 - 1;
@@ -205,14 +243,14 @@ public class WeaponUpgradeView extends JFrame implements ActionListener {
 			if (Algorithm.getDraw(successFactor)) {
 				upgradeWeapon();
 			} else {
-				xmlParser.getNodeByName("weapon").setTextContent("");
-				xmlParser.getNodeByName("upgradeCount").setTextContent("0");
+				String weaponProperty = xmlParser.getNodeByName("weapon").getTextContent();
+				String replaceString = weaponProperty.split("  ")[0];
+				String newString = weaponProperty.split("  ")[0] + LegendConstant.Destroyed;
+				weaponProperty = upgradeCount.equals("0") ? weaponProperty.replaceFirst(replaceString, newString) : weaponProperty.replaceFirst("[+]" + upgradeCount, LegendConstant.Destroyed);
+				xmlParser.getNodeByName("upgradeCount").setTextContent("N/A");
+				xmlParser.getNodeByName("weapon").setTextContent(weaponProperty);
 				xmlParser.save();
-				label[0].setText("");
-				label[1].setText("");
-				button.removeActionListener(this);
-				LegendView legendView = WindowStore.legendViewTL.get();
-				legendView.lbEquipment[1].setText("");
+				label[0].setText(weaponProperty.split("~")[1].split("  ")[0]);
 				refreshRadioButton();
 				new WarningView(this, "Weapon upgrade fail, you weapon is broken!", 3);
 			}
@@ -220,55 +258,60 @@ public class WeaponUpgradeView extends JFrame implements ActionListener {
 	}
 	
 	private void initRadioButton() {
-		for (int i = 0; i < 3; i++) {
+		for (int i = 0; i < 4; i++) {
+			radioButton[i] = new MyRadioButton("", 120);
+		}
+		for (int i = 4; i < 7; i++) {
 			radioButton[i] = new MyRadioButton("", 162);
 		}
-		for (int i = 3; i < 6; i++) {
-			radioButton[i] = new MyRadioButton("", 162);
-		}
-		for (int i = 6; i < 10; i++) {
+		for (int i = 7; i < 11; i++) {
 			radioButton[i] = new MyRadioButton("", 120);
 		}
 		radioButton[0].setText(LegendConstant.Attack);
 		radioButton[1].setText(LegendConstant.DaoAttack);
 		radioButton[2].setText(LegendConstant.MagicAttack);
-		radioButton[3].setText(LegendConstant.NoOre);
-		radioButton[6].setText(LegendConstant.NoCharm);
+		radioButton[3].setText(LegendConstant.BlessOil);
+		radioButton[4].setText(LegendConstant.NoOre);
+		radioButton[7].setText(LegendConstant.NoCharm);
 		label[0].setText(weaponName);
 		label[1].setText(weaponProperty.substring(weaponProperty.indexOf("  ")));
 		refreshRadioButton();
 		buttonGroup1.add(radioButton[0]);
 		buttonGroup1.add(radioButton[1]);
 		buttonGroup1.add(radioButton[2]);
-		buttonGroup2.add(radioButton[3]);
+		buttonGroup1.add(radioButton[3]);
 		buttonGroup2.add(radioButton[4]);
 		buttonGroup2.add(radioButton[5]);
-		buttonGroup3.add(radioButton[6]);
+		buttonGroup2.add(radioButton[6]);
 		buttonGroup3.add(radioButton[7]);
 		buttonGroup3.add(radioButton[8]);
 		buttonGroup3.add(radioButton[9]);
+		buttonGroup3.add(radioButton[10]);
 		radioButton[0].setSelected(true);
-		radioButton[3].setSelected(true);
-		radioButton[6].setSelected(true);
+		radioButton[4].setSelected(true);
+		radioButton[7].setSelected(true);
 	}
 	
 	private void refreshRadioButton() {
 		xmlParser = new XmlParser("runSuite\\LegendHero.xml");
-		radioButton[4].setText(LegendConstant.Ore1 + "(" + xmlParser.getNodeByName("ore1").getTextContent() + ")");
-		radioButton[5].setText(LegendConstant.Ore2 + "(" + xmlParser.getNodeByName("ore2").getTextContent() + ")");
-		radioButton[7].setText(LegendConstant.Charm1 + "(" + xmlParser.getNodeByName("charm1").getTextContent() + ")");
-		radioButton[8].setText(LegendConstant.Charm2 + "(" + xmlParser.getNodeByName("charm2").getTextContent() + ")");
-		radioButton[9].setText(LegendConstant.Charm3 + "(" + xmlParser.getNodeByName("charm3").getTextContent() + ")");
+		radioButton[3].setText(LegendConstant.BlessOil + "(" + xmlParser.getNodeByName("bless").getTextContent() + ")");
+		radioButton[5].setText(LegendConstant.Ore1 + "(" + xmlParser.getNodeByName("ore1").getTextContent() + ")");
+		radioButton[6].setText(LegendConstant.Ore2 + "(" + xmlParser.getNodeByName("ore2").getTextContent() + ")");
+		radioButton[8].setText(LegendConstant.Charm1 + "(" + xmlParser.getNodeByName("charm1").getTextContent() + ")");
+		radioButton[9].setText(LegendConstant.Charm2 + "(" + xmlParser.getNodeByName("charm2").getTextContent() + ")");
+		radioButton[10].setText(LegendConstant.Charm3 + "(" + xmlParser.getNodeByName("charm3").getTextContent() + ")");
+		if (Integer.parseInt(xmlParser.getNodeByName("bless").getTextContent()) < 1)
+			radioButton[3].setEnabled(false);
 		if (Integer.parseInt(xmlParser.getNodeByName("ore1").getTextContent()) < 2)
-			radioButton[4].setEnabled(false);
-		if (Integer.parseInt(xmlParser.getNodeByName("ore2").getTextContent()) < 2)
 			radioButton[5].setEnabled(false);
+		if (Integer.parseInt(xmlParser.getNodeByName("ore2").getTextContent()) < 2)
+			radioButton[6].setEnabled(false);
 		if (Integer.parseInt(xmlParser.getNodeByName("charm1").getTextContent()) < 1)
-			radioButton[7].setEnabled(false);
-		if (Integer.parseInt(xmlParser.getNodeByName("charm2").getTextContent()) < 1)
 			radioButton[8].setEnabled(false);
-		if (Integer.parseInt(xmlParser.getNodeByName("charm3").getTextContent()) < 1)
+		if (Integer.parseInt(xmlParser.getNodeByName("charm2").getTextContent()) < 1)
 			radioButton[9].setEnabled(false);
+		if (Integer.parseInt(xmlParser.getNodeByName("charm3").getTextContent()) < 1)
+			radioButton[10].setEnabled(false);
 	}
 	
 	private void upgradeWeapon() {
@@ -281,6 +324,9 @@ public class WeaponUpgradeView extends JFrame implements ActionListener {
 			weaponProperty = weaponProperty.replaceFirst(weaponProperty.split("  ")[0], weaponProperty.split("  ")[0] + "+1");
 		}
 		int p = (Algorithm.getDraw(10)) ? 2 : 1;
+		if (upgradeCount.equals("6")) {
+			p = 2;
+		}
 		String minAttack = "";
 		String maxAttack = "";
 		String newAttack = "";
@@ -324,6 +370,102 @@ public class WeaponUpgradeView extends JFrame implements ActionListener {
 		label[1].setText(weaponProperty.substring(weaponProperty.indexOf("  ")));
 		refreshRadioButton();
 		new WarningView(this, "Weapon Upgrade Success!", 3);
+	}
+	
+	public void blessWeapon(int luck) {
+		String weaponProperty = xmlParser.getNodeByName("weapon").getTextContent();
+		String newLuckString = "";
+		String oldLuckString = LegendConstant.Luck + " +" + luck;
+		int goodChance = 100;
+		int normalChance = 100;
+		double chance = Algorithm.getRandomDouble(0, 100);
+		switch (luck) {
+		case 0:
+			goodChance = 100;
+			normalChance = 100;
+			break;
+		case 1:
+			goodChance = 70;
+			normalChance = 95;
+			break;
+		case 2:
+			goodChance = 40;
+			normalChance = 94;
+			break;
+		case 3:
+			goodChance = 10;
+			normalChance = 93;
+			break;
+		case 4:
+			goodChance = 9;
+			normalChance = 92;
+			break;
+		case 5:
+			goodChance = 8;
+			normalChance = 91;
+			break;
+		case 6:
+			goodChance = 7;
+			normalChance = 90;
+			break;
+		default:
+			goodChance = 0;
+			normalChance = 100;
+			break;
+		}
+		if (luck == 0) {
+			newLuckString = LegendConstant.Luck + " +1  " + LegendConstant.Weight;
+			weaponProperty = weaponProperty.replace(LegendConstant.Weight, newLuckString);
+			System.out.println("Your weapon is blessed!");
+		} else {
+			if (chance < goodChance) {
+				luck = luck + 1;
+				newLuckString = LegendConstant.Luck + " +" + luck;
+				weaponProperty = weaponProperty.replace(oldLuckString, newLuckString);
+				System.out.println("Your weapon is blessed!");
+			} else if (chance < normalChance) {
+				System.out.println("Your weapon is not blessed!");
+			} else {
+				luck = luck - 1;
+				if (luck > 0) {
+					newLuckString = LegendConstant.Luck + " +" + luck;
+					weaponProperty = weaponProperty.replace(oldLuckString, newLuckString);
+				} else {
+					weaponProperty = weaponProperty.replace(oldLuckString + "  ", "");
+				}
+				System.out.println("Your weapon is cursed!");
+			}
+		}
+		xmlParser.getNodeByName("weapon").setTextContent(weaponProperty);
+		xmlParser.save();
+		label[0].setText(weaponProperty.split("~")[1].split("  ")[0]);
+		label[1].setText(weaponProperty.substring(weaponProperty.indexOf("  ")));
+		refreshRadioButton();
+	}
+	
+	/**
+	 * This function is to be implemented in future.
+	 */
+	public void blessWeaponSuper() {
+		String weaponProperty = xmlParser.getNodeByName("weapon").getTextContent();
+		String str = LegendConstant.Luck;
+		String newLuckString;
+		String oldLuckString;
+		if (weaponProperty.contains(str)) {
+			weaponLuck = Integer.parseInt(xmlParser.getNodeByName("weapon").getTextContent().split(str)[1].substring(2, 3));
+			oldLuckString = LegendConstant.Luck + " +" + weaponLuck;
+			weaponLuck = weaponLuck + 1;
+			newLuckString = LegendConstant.Luck + " +" + weaponLuck;
+			weaponProperty = weaponProperty.replace(oldLuckString, newLuckString);
+		} else {
+			newLuckString = LegendConstant.Luck + " +1  " + LegendConstant.Weight;
+			weaponProperty = weaponProperty.replace(LegendConstant.Weight, newLuckString);
+		}
+		xmlParser.getNodeByName("weapon").setTextContent(weaponProperty);
+		xmlParser.save();
+		label[0].setText(weaponProperty.split("~")[1].split("  ")[0]);
+		label[1].setText(weaponProperty.substring(weaponProperty.indexOf("  ")));
+		refreshRadioButton();
 	}
 	
 	private static class CloseHandler extends WindowAdapter {

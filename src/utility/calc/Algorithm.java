@@ -72,6 +72,7 @@ public class Algorithm {
 	
 	@SuppressWarnings("null")
 	public static double getRandomDouble(int min, int max) {
+		DateTime.sleep(getRandomSleepTime());
 		if (min > max) {
 			return (Integer) null;
 		} else if (max > 327) {

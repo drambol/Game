@@ -1,6 +1,9 @@
 package legend;
 
+import java.text.DecimalFormat;
+
 import clazz.Monsters;
+import utility.calc.Algorithm;
 import utility.file.XmlParser;
 
 public class LegendFunction {
@@ -22,6 +25,11 @@ public class LegendFunction {
 	private String mac = "";
 	public boolean levelUp = false;
 	String monsterName;
+	private int extraAttack;
+	private int extraDaoAttack;
+	private int extraMagicAttack;
+	private int extraDefence;
+	private int extraMagicDefence;
 	
 	public LegendFunction(String monster) {
 		this.monsterName = monster;
@@ -47,13 +55,13 @@ public class LegendFunction {
 			exp = 1600;
 			break;
 		case LegendConstant.Monster07:
-			exp = 2000;
+			exp = 3000;
 			break;
 		case LegendConstant.Monster08:
 			exp = 2500;
 			break;
 		case LegendConstant.Monster09:
-			exp = 3600;
+			exp = 7200;
 			break;
 		case LegendConstant.Monster10:
 			exp = 5000;
@@ -65,19 +73,19 @@ public class LegendFunction {
 			exp = 5000;
 			break;
 		case LegendConstant.Monster13:
-			exp = 3600;
+			exp = 7200;
 			break;
 		case LegendConstant.Monster14:
-			exp = 3000;
+			exp = 9000;
 			break;
 		case LegendConstant.Monster15:
 			exp = 5000;
 			break;
 		case LegendConstant.Monster16:
-			exp = 8000;
+			exp = 10000;
 			break;
 		case LegendConstant.Monster17:
-			exp = 10000;
+			exp = 20000;
 			break;
 		case LegendConstant.Monster18:
 			exp = 12000;
@@ -94,10 +102,15 @@ public class LegendFunction {
 	public void addExp() {
 		xmlParser = new XmlParser("runSuite\\LegendHero.xml");
 		int n = 1;
-		if ("x2".equals(xmlParser.getNodeByName("medal").getTextContent().split("~")[0])) {
+		String str = xmlParser.getNodeByName("medal").getTextContent().split("~")[0];
+		switch (str) {
+		case "x2":
 			n = 2;
-		} else if ("x3".equals(xmlParser.getNodeByName("medal").getTextContent().split("~")[0])) {
+			break;
+		case "x3":
+		case "x11":
 			n = 3;
+			break;
 		}
 		reqExp = (int) (Math.pow(1.25, charLevel - 1) * 100);
 		if (exp * n + currExp >= reqExp) {
@@ -187,20 +200,177 @@ public class LegendFunction {
 	}
 
 	public boolean eligibleChallenge(PropertyView propertyView) {
+		getSpecialRing();
 		xmlParser = new XmlParser("runSuite\\LegendHero.xml");
 		Monsters monster = new Monsters(monsterName);
-		propertyView.loadPorpertyFromXML();
 		if (Integer.parseInt(xmlParser.getNodeByName("level").getTextContent()) < monster.reqLevel) {
 			return false;
 		}
 		switch (xmlParser.getNodeByName("career").getTextContent()) {
 		case LegendConstant.Warrior:
-			return propertyView.attack >= monster.reqAttack ? true : false;
+			return propertyView.maxAttack + extraAttack >= monster.reqAttack ? true : false;
 		case LegendConstant.Taoist:
-			return propertyView.daoAttack >= monster.reqDA ? true : false;
+			return propertyView.maxDaoAttack + extraDaoAttack >= monster.reqDA ? true : false;
 		case LegendConstant.Mage:
-			return propertyView.magicAttack >= monster.reqMA ? true : false;
+			return propertyView.maxMagicAttack + extraMagicAttack >= monster.reqMA ? true : false;
 		}
 		return false;
+	}
+	
+	public boolean survival(PropertyView propertyView) {
+		getSpecialRing();
+		xmlParser = new XmlParser("runSuite\\LegendHero.xml");
+		Monsters monster = new Monsters(monsterName);
+		double attackIndex = 0;
+		double defenceIndex = 0;
+		double safetyIndex;
+		double deathIndex;
+		int monsterAttack = monster.attack;
+		int charDefence = 0;
+//		System.out.println(extraAttack);
+//		System.out.println(extraDaoAttack);
+//		System.out.println(extraMagicAttack);
+//		System.out.println(extraDefence);
+//		System.out.println(extraMagicDefence);
+		DecimalFormat df = new DecimalFormat("######0.00");
+		switch (xmlParser.getNodeByName("career").getTextContent()) {
+		case LegendConstant.Warrior:
+			attackIndex = propertyView.minAttack + propertyView.maxAttack + extraAttack - monster.reqAttack;
+			break;
+		case LegendConstant.Taoist:
+			attackIndex = (propertyView.minDaoAttack + propertyView.maxDaoAttack + extraDaoAttack) * 1.1 - monster.reqDA;
+			charDefence = 5;
+			break;
+		case LegendConstant.Mage:
+			attackIndex = (propertyView.minMagicAttack + propertyView.maxMagicAttack + extraMagicAttack) * 1.2 - monster.reqMA;
+			charDefence = 10;
+			break;
+		}
+		if (propertyView.accuracy - monster.dodge <= -4) {
+			attackIndex = (double) (attackIndex * 0.8);
+		} else if (propertyView.accuracy - monster.dodge == -3) {
+			attackIndex = (double) (attackIndex * 0.85);
+		} else if (propertyView.accuracy - monster.dodge == -2) {
+			attackIndex = (double) (attackIndex * 0.9);
+		} else if (propertyView.accuracy - monster.dodge == -1) {
+			attackIndex = (double) (attackIndex * 0.95);
+		}else if (propertyView.accuracy - monster.dodge == 1) {
+			attackIndex = (double) (attackIndex * 1.05);
+		} else if (propertyView.accuracy - monster.dodge == 2) {
+			attackIndex = (double) (attackIndex * 1.1);
+		} else if (propertyView.accuracy - monster.dodge == 3) {
+			attackIndex = (double) (attackIndex * 1.15);
+		} else if (propertyView.accuracy - monster.dodge >= 4) {
+			attackIndex = (double) (attackIndex * 1.2);
+		}
+		if (monsterAttack == 0) {
+			monsterAttack = monster.magicAttack;
+			charDefence = charDefence + propertyView.minMagicDefence + propertyView.maxMagicDefence + extraMagicDefence;
+		} else {
+			charDefence = charDefence + propertyView.minDefence + propertyView.maxDefence + extraDefence;
+		}
+		defenceIndex = charDefence - monsterAttack + (propertyView.dodge - monster.accuracy + 5) * 2;
+		safetyIndex = attackIndex + defenceIndex >= 0 ? attackIndex + defenceIndex : 0;
+		safetyIndex = safetyIndex * monster.safetyFactor;
+		safetyIndex = 30 + safetyIndex * 0.7;
+		if (safetyIndex < 100) {
+			deathIndex = Algorithm.getRandomDouble(0, 100);
+			System.out.println(safetyIndex >= deathIndex ? df.format(safetyIndex) + " safe" : df.format(safetyIndex) + " dead");
+			return safetyIndex >= deathIndex ? true : false;
+		}
+		return true;
+	}
+	
+	public void deathEvent() {
+		xmlParser = new XmlParser("runSuite\\LegendHero.xml");
+		int exp = Integer.parseInt(xmlParser.getNodeByName("exp").getTextContent());
+		exp = (int) (exp * 0.8);
+		xmlParser.getNodeByName("exp").setTextContent(String.valueOf(exp));
+		int randomNumber = 0;
+		for (int i = 0; i < 3; i++) {
+			randomNumber = Algorithm.getRandomInt(0, 255);
+			switch (randomNumber) {
+			case 1:
+				if (!xmlParser.getNodeByName("upgradeCount").getTextContent().equals("7"))
+					xmlParser.getNodeByName("weapon").setTextContent("");
+				break;
+			case 2:
+				xmlParser.getNodeByName("armor").setTextContent("");
+				break;
+			case 3:
+				xmlParser.getNodeByName("helmet").setTextContent("");
+				break;
+			case 4:
+				xmlParser.getNodeByName("amulet").setTextContent("");
+				break;
+			case 5:
+				if (!xmlParser.getNodeByName("medal").getTextContent().contains("x1"))
+					xmlParser.getNodeByName("medal").setTextContent("");
+				break;
+			case 6:
+				xmlParser.getNodeByName("leftBracelet").setTextContent("");
+				break;
+			case 7:
+				xmlParser.getNodeByName("rightBracelet").setTextContent("");
+				break;
+			case 8:
+				xmlParser.getNodeByName("leftRing").setTextContent("");
+				break;
+			case 9:
+				xmlParser.getNodeByName("rightRing").setTextContent("");
+				break;
+			case 10:
+				xmlParser.getNodeByName("belt").setTextContent("");
+				break;
+			case 11:
+				xmlParser.getNodeByName("boots").setTextContent("");
+				break;
+			case 12:
+				xmlParser.getNodeByName("gem").setTextContent("");
+				break;
+			}
+		}
+		xmlParser.save();
+	}
+	
+	public void getSpecialRing() {
+		extraAttack = 0;
+		extraDaoAttack = 0;
+		extraMagicAttack = 0;
+		extraDefence = 0;
+		extraMagicDefence = 0;
+		String leftRing = xmlParser.getNodeByName("leftRing").getTextContent();
+		String rightRing = xmlParser.getNodeByName("rightRing").getTextContent();
+		String ring = leftRing + rightRing;
+		if (ring.contains("r36")) {
+			extraDefence = extraDefence + 10;
+			extraMagicDefence = extraMagicDefence + 10;
+		}
+		if (ring.contains("r37")) {
+			extraAttack = extraAttack + 10;
+			extraDaoAttack = extraDaoAttack + 10;
+			extraMagicAttack = extraMagicAttack + 10;
+		}
+		if (ring.contains("r38")) {
+			extraDaoAttack = extraDaoAttack + 8;
+			extraDefence = extraDefence + 8;
+			extraMagicDefence = extraMagicDefence + 8;
+		}
+		if (ring.contains("r39")) {
+			extraMagicAttack = extraMagicAttack + 12;
+		}
+		if (ring.contains("r40")) {
+			extraAttack = extraAttack + 15;
+		}
+		if (ring.contains("r41")) {
+			extraDefence = extraDefence + 12;
+			extraMagicDefence = extraMagicDefence + 12;
+		}
+		if (ring.contains("r42")) {
+			if (xmlParser.getNodeByName("career").getTextContent().equals(LegendConstant.Mage)) {
+				extraDefence = extraDefence + 13;
+				extraMagicDefence = extraMagicDefence + 13;
+			}
+		}
 	}
 }

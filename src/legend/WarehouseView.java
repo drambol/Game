@@ -134,6 +134,7 @@ public class WarehouseView extends JFrame implements ActionListener {
 	private void refreshWarehouse() {
 		xmlParser = new XmlParser("runSuite\\LegendHero.xml");
 		int itemCount = xmlParser.getNodeValues("item").size();
+		cleanWarehouse(xmlParser);
 		for (int i = 0; i < itemCount; i++) {
 			if (!xmlParser.getNodeValues("item").get(i).isEmpty()) {
 				label[i].setText(xmlParser.getNodeValues("item").get(i).split("~")[1].split("  ")[0]);
@@ -141,6 +142,29 @@ public class WarehouseView extends JFrame implements ActionListener {
 				buttonDiscard[i].setText("Discard");
 				buttonEquip[i].addActionListener(this);
 				buttonDiscard[i].addActionListener(this);
+			}
+		}
+	}
+	
+	private void cleanWarehouse(XmlParser xmlParser) {
+		int itemCount = xmlParser.getNodeValues("item").size();
+		boolean flag = true;
+		int start = 0;
+		for (int i = start; i < itemCount; i++) {
+			if (!flag)
+				return;
+			if (xmlParser.getNodeValues("item").get(i).isEmpty()) {
+				start = i + 1;
+				for (int j = start; j < itemCount; j ++) {
+					flag = false;
+					if (!xmlParser.getNodeValues("item").get(j).isEmpty()) {
+						xmlParser.getNodeByName("item", i).setTextContent(xmlParser.getNodeByName("item", j).getTextContent());
+						xmlParser.getNodeByName("item", j).setTextContent("");
+						xmlParser.save();
+						flag = true;
+						break;
+					}
+				}
 			}
 		}
 	}

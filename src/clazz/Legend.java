@@ -55,6 +55,19 @@ public class Legend {
 						count = count + 1;
 						addMoney(code);
 					}
+				} else if (code.contentEquals("misc1")) {
+					int probability = Integer.parseInt(nodeList.item(i).getTextContent());
+					if (Algorithm.thousandPercent(probability * increase)) {
+						LegendItem legendItem = new LegendItem(getItemByCode(code));
+						legendItems[count] = "*" + legendItem.printMedical(1);
+						itemCode[count] = legendItem.code;
+						count = count + 1;
+						XmlParser heroXml = new XmlParser("runSuite\\LegendHero.xml");
+						int oilCount = Integer.parseInt(heroXml.getNodeByName("bless").getTextContent()) + 1;
+						heroXml.getNodeByName("bless").setTextContent(String.valueOf(oilCount));
+						heroXml.save();
+						heroXml = null;
+					}
 				}
 			}
 		}
@@ -86,11 +99,12 @@ public class Legend {
 		String increase = heroXml.getNodeByName("medal").getTextContent().split("~")[0];
 		switch (increase) {
 		case "x4":
-			return 1.3f;
-		case "x5":
 			return 1.5f;
-		case "x6":
+		case "x5":
 			return 2f;
+		case "x6":
+		case "x11":
+			return 3f;
 		}
 		return 1f;
 	}
