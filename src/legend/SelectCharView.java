@@ -1,6 +1,7 @@
 package legend;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Toolkit;
@@ -45,21 +46,24 @@ public class SelectCharView extends JFrame implements ActionListener {
 		int line = remainder == 0 ? count / 3 : count / 3 + 1;
 		for (int i = 0; i < line; i++) {
 			JPanel jp = new JPanel();
-			button[i*3] = new MyButton(file[i*3].getName().split("\\.")[0]);
+			button[i*3] = new MyButton(file[i*3].getName().split("\\.")[0], 120);
 			button[i*3].setFont(new Font(IConstants.FONT1, Font.BOLD, 14));
 			jp.add(button[i*3]);
+			button[i*3].setForeground(Color.BLUE);
 			button[i*3].addActionListener(this);
-			button[i*3+1] = new MyButton("");
+			button[i*3+1] = new MyButton("", 120);
 			button[i*3+1].setFont(new Font(IConstants.FONT1, Font.BOLD, 14));
 			jp.add(button[i*3+1]);
 			if (remainder != 1 || line - i > 1) {
+				button[i*3+1].setForeground(Color.BLUE);
 				button[i*3+1].setText(file[i*3+1].getName().split("\\.")[0]);
 				button[i*3+1].addActionListener(this);
 			}
-			button[i*3+2] = new MyButton("");
+			button[i*3+2] = new MyButton("", 120);
 			button[i*3+2].setFont(new Font(IConstants.FONT1, Font.BOLD, 14));
 			jp.add(button[i*3+2]);
 			if (remainder == 0 || line - i > 1) {
+				button[i*3+2].setForeground(Color.BLUE);
 				button[i*3+2].setText(file[i*3+2].getName().split("\\.")[0]);
 				button[i*3+2].addActionListener(this);
 			}

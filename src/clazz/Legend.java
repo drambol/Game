@@ -91,18 +91,17 @@ public class Legend {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		return 1;
+		return 1;//Return default value if code not found.
 	}
 	
 	private float parseIncrease() {
 		XmlParser heroXml = new XmlParser("runSuite\\LegendHero.xml");
 		String increase = heroXml.getNodeByName("medal").getTextContent().split("~")[0];
 		switch (increase) {
-		case "x4":
-			return 1.5f;
-		case "x5":
+		case "x02":
 			return 2f;
-		case "x6":
+		case "x03":
+		case "x10":
 		case "x11":
 			return 3f;
 		}
@@ -111,7 +110,7 @@ public class Legend {
 	
 	private void addMoney(int amount) {
 		XmlParser heroXml = new XmlParser("runSuite\\LegendHero.xml");
-		int money = Integer.parseInt(heroXml.getNodeByName("money").getTextContent()) + amount;
+		long money = Long.parseLong(heroXml.getNodeByName("money").getTextContent()) + amount;
 		heroXml.getNodeByName("money").setTextContent(String.valueOf(money));
 		heroXml.save();
 		heroXml = null;

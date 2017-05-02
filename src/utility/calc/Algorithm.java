@@ -169,6 +169,7 @@ public class Algorithm {
 	}
 	
 	public static boolean getDraw(int chance) {
+//		System.out.println(chance);
 		if (chance <= 0 || chance >= 100) {
 			return true;
 		}

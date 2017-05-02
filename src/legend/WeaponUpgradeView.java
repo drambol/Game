@@ -30,7 +30,7 @@ public class WeaponUpgradeView extends JFrame implements ActionListener {
 	private JPanel charmPanel = new JPanel();
 	private JPanel buttonPanel = new JPanel();
 	private MyLabel label[] = new MyLabel[5];
-	private MyRadioButton radioButton[] = new MyRadioButton[11];
+	private MyRadioButton radioButton[] = new MyRadioButton[12];
 	private MyButtonGroup buttonGroup1 = new MyButtonGroup();
 	private MyButtonGroup buttonGroup2 = new MyButtonGroup();
 	private MyButtonGroup buttonGroup3 = new MyButtonGroup();
@@ -49,8 +49,8 @@ public class WeaponUpgradeView extends JFrame implements ActionListener {
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		setResizable(false);
 		
-		label[0] = new MyLabel(weaponName + upgradeCount, 90);
-		label[1] = new MyLabel(weaponProperty, 480);
+		label[0] = new MyLabel(weaponName + upgradeCount, 80);
+		label[1] = new MyLabel(weaponProperty, 500);
 		label[0].setHorizontalAlignment(SwingConstants.LEFT);
 		label[1].setHorizontalAlignment(SwingConstants.LEFT);
 		weaponName = xmlParser.getNodeByName("weapon").getTextContent().split("~")[1].split("  ")[0];
@@ -63,22 +63,32 @@ public class WeaponUpgradeView extends JFrame implements ActionListener {
 		weaponPanel.add(label[0]);
 		weaponPanel.add(label[1]);
 		label[2] = new MyLabel(LegendConstant.UpgradeType, 90);
+		for (int i = 0; i < 5; i++) {
+			radioButton[i].setPreferredSize(new Dimension(95, 22));
+		}
 		typePanel.add(label[2]);
 		typePanel.add(radioButton[0]);
 		typePanel.add(radioButton[1]);
 		typePanel.add(radioButton[2]);
 		typePanel.add(radioButton[3]);
+		typePanel.add(radioButton[4]);
 		label[3] = new MyLabel(LegendConstant.SelectOre, 90);
-		orePanel.add(label[3]);
-		orePanel.add(radioButton[4]);
-		orePanel.add(radioButton[5]);
-		orePanel.add(radioButton[6]);
-		label[4] = new MyLabel(LegendConstant.SelectCharm, 90);
-		charmPanel.add(label[4]);
+		for (int i = 5; i < 9; i++) {
+			radioButton[i].setPreferredSize(new Dimension(120, 22));
+		}
+		charmPanel.add(label[3]);
+		charmPanel.add(radioButton[5]);
+		charmPanel.add(radioButton[6]);
 		charmPanel.add(radioButton[7]);
 		charmPanel.add(radioButton[8]);
-		charmPanel.add(radioButton[9]);
-		charmPanel.add(radioButton[10]);
+		label[4] = new MyLabel(LegendConstant.SelectCharm, 90);
+		for (int i = 9; i < 12; i++) {
+			radioButton[i].setPreferredSize(new Dimension(162, 22));
+		}
+		orePanel.add(label[4]);
+		orePanel.add(radioButton[9]);
+		orePanel.add(radioButton[10]);
+		orePanel.add(radioButton[11]);
 		button.addActionListener(this);
 		buttonPanel.add(button, BorderLayout.CENTER);
 		box0.add(weaponPanel);
@@ -96,15 +106,20 @@ public class WeaponUpgradeView extends JFrame implements ActionListener {
 		for (int i = 0; i < 3; i++) {
 			radioButton[i].addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg) {
-					for (int i = 4; i < 11; i++) {
-						radioButton[i].setEnabled(true);
-					}
+					refreshRadioButton(false);
 				}
 			});
 		}
 		radioButton[3].addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg) {
-				for (int i = 4; i < 11; i++) {
+				for (int i = 5; i < 12; i++) {
+					radioButton[i].setEnabled(false);
+				}
+			}
+		});
+		radioButton[4].addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg) {
+				for (int i = 5; i < 12; i++) {
 					radioButton[i].setEnabled(false);
 				}
 			}
@@ -120,12 +135,13 @@ public class WeaponUpgradeView extends JFrame implements ActionListener {
 		xmlParser = new XmlParser("runSuite\\LegendHero.xml");
 		upgradeCount = xmlParser.getNodeByName("upgradeCount").getTextContent();
 		int bless = Integer.parseInt(xmlParser.getNodeByName("bless").getTextContent());
-		int ore1 = Integer.parseInt(xmlParser.getNodeByName("ore1").getTextContent());
-		int ore2 = Integer.parseInt(xmlParser.getNodeByName("ore2").getTextContent());
+		int superOil = Integer.parseInt(xmlParser.getNodeByName("superOil").getTextContent());
 		int charm1 = Integer.parseInt(xmlParser.getNodeByName("charm1").getTextContent());
 		int charm2 = Integer.parseInt(xmlParser.getNodeByName("charm2").getTextContent());
 		int charm3 = Integer.parseInt(xmlParser.getNodeByName("charm3").getTextContent());
-		int gold = Integer.parseInt(xmlParser.getNodeByName("money").getTextContent());
+		int ore1 = Integer.parseInt(xmlParser.getNodeByName("ore1").getTextContent());
+		int ore2 = Integer.parseInt(xmlParser.getNodeByName("ore2").getTextContent());
+		long gold = Long.parseLong(xmlParser.getNodeByName("money").getTextContent());
 		if (actionevent.getSource() == button) {
 			if (radioButton[3].isSelected()) {
 				if (bless > 0) {
@@ -139,7 +155,18 @@ public class WeaponUpgradeView extends JFrame implements ActionListener {
 					bless = bless - 1;
 					xmlParser.getNodeByName("bless").setTextContent(String.valueOf(bless));
 					xmlParser.save();
-					refreshRadioButton();
+					refreshRadioButton(true);
+				} else {
+					new WarningView(this, "Material not enough!", 3);
+				}
+				return;
+			} else if (radioButton[4].isSelected()) {
+				if (superOil > 0) {
+					blessWeaponSuper();
+					superOil = superOil - 1;
+					xmlParser.getNodeByName("superOil").setTextContent(String.valueOf(superOil));
+					xmlParser.save();
+					refreshRadioButton(true);
 				} else {
 					new WarningView(this, "Material not enough!", 3);
 				}
@@ -177,10 +204,47 @@ public class WeaponUpgradeView extends JFrame implements ActionListener {
 				new WarningView(this, "Your weapon cannot be enhanced!", 3);
 				return;
 			}
-			if (radioButton[5].isSelected()) {
+			if (radioButton[6].isSelected()) {
+				if (charm1 >= 1) {
+					successFactor = successFactor + 5;
+					charm1 = charm1 - 1;
+					gold = Long.parseLong(xmlParser.getNodeByName("money").getTextContent()) - 10000;
+					xmlParser.getNodeByName("money").setTextContent(String.valueOf(gold));
+					xmlParser.getNodeByName("charm1").setTextContent(String.valueOf(charm1));
+					xmlParser.save();
+				} else {
+					new WarningView(this, "Material not enough!", 3);
+					return;
+				}
+			} else if (radioButton[7].isSelected()) {
+				if (charm2 >= 1) {
+					successFactor = successFactor + 10;
+					charm2 = charm2 - 1;
+					gold = Long.parseLong(xmlParser.getNodeByName("money").getTextContent()) - 10000;
+					xmlParser.getNodeByName("money").setTextContent(String.valueOf(gold));
+					xmlParser.getNodeByName("charm2").setTextContent(String.valueOf(charm2));
+					xmlParser.save();
+				} else {
+					new WarningView(this, "Material not enough!", 3);
+					return;
+				}
+			} else if (radioButton[8].isSelected()) {
+				if (charm3 >= 1) {
+					successFactor = successFactor + 15;
+					charm3 = charm3 - 1;
+					gold = Long.parseLong(xmlParser.getNodeByName("money").getTextContent()) - 10000;
+					xmlParser.getNodeByName("money").setTextContent(String.valueOf(gold));
+					xmlParser.getNodeByName("charm3").setTextContent(String.valueOf(charm3));
+					xmlParser.save();
+				} else {
+					new WarningView(this, "Material not enough!", 3);
+					return;
+				}
+			}
+			if (radioButton[10].isSelected()) {
 				if (ore1 >= 2) {
 					ore1 = ore1 - 2;
-					gold = Integer.parseInt(xmlParser.getNodeByName("money").getTextContent()) - 10000;
+					gold = Long.parseLong(xmlParser.getNodeByName("money").getTextContent()) - 10000;
 					xmlParser.getNodeByName("money").setTextContent(String.valueOf(gold));
 					xmlParser.getNodeByName("ore1").setTextContent(String.valueOf(ore1));
 					xmlParser.save();
@@ -188,11 +252,11 @@ public class WeaponUpgradeView extends JFrame implements ActionListener {
 					new WarningView(this, "Material not enough!", 3);
 					return;
 				}
-			} else if (radioButton[6].isSelected()) {
+			} else if (radioButton[11].isSelected()) {
 				if (ore2 >= 2) {
 					successFactor = successFactor + 5;
 					ore2 = ore2 - 2;
-					gold = Integer.parseInt(xmlParser.getNodeByName("money").getTextContent()) - 10000;
+					gold = Long.parseLong(xmlParser.getNodeByName("money").getTextContent()) - 10000;
 					xmlParser.getNodeByName("money").setTextContent(String.valueOf(gold));
 					xmlParser.getNodeByName("ore2").setTextContent(String.valueOf(ore2));
 					xmlParser.save();
@@ -203,115 +267,91 @@ public class WeaponUpgradeView extends JFrame implements ActionListener {
 			} else {
 				successFactor = successFactor - 5;
 			}
-			if (radioButton[8].isSelected()) {
-				if (charm1 >= 1) {
-					successFactor = successFactor + 5;
-					charm1 = charm1 - 1;
-					gold = Integer.parseInt(xmlParser.getNodeByName("money").getTextContent()) - 10000;
-					xmlParser.getNodeByName("money").setTextContent(String.valueOf(gold));
-					xmlParser.getNodeByName("charm1").setTextContent(String.valueOf(charm1));
-					xmlParser.save();
-				} else {
-					new WarningView(this, "Material not enough!", 3);
-					return;
-				}
-			} else if (radioButton[9].isSelected()) {
-				if (charm2 >= 1) {
-					successFactor = successFactor + 10;
-					charm2 = charm2 - 1;
-					gold = Integer.parseInt(xmlParser.getNodeByName("money").getTextContent()) - 10000;
-					xmlParser.getNodeByName("money").setTextContent(String.valueOf(gold));
-					xmlParser.getNodeByName("charm2").setTextContent(String.valueOf(charm2));
-					xmlParser.save();
-				} else {
-					new WarningView(this, "Material not enough!", 3);
-					return;
-				}
-			} else if (radioButton[10].isSelected()) {
-				if (charm3 >= 1) {
-					successFactor = successFactor + 15;
-					charm3 = charm3 - 1;
-					gold = Integer.parseInt(xmlParser.getNodeByName("money").getTextContent()) - 10000;
-					xmlParser.getNodeByName("money").setTextContent(String.valueOf(gold));
-					xmlParser.getNodeByName("charm3").setTextContent(String.valueOf(charm3));
-					xmlParser.save();
-				} else {
-					new WarningView(this, "Material not enough!", 3);
-					return;
-				}
-			}
 			if (Algorithm.getDraw(successFactor)) {
 				upgradeWeapon();
 			} else {
 				String weaponProperty = xmlParser.getNodeByName("weapon").getTextContent();
-				String replaceString = weaponProperty.split("  ")[0];
-				String newString = weaponProperty.split("  ")[0] + LegendConstant.Destroyed;
-				weaponProperty = upgradeCount.equals("0") ? weaponProperty.replaceFirst(replaceString, newString) : weaponProperty.replaceFirst("[+]" + upgradeCount, LegendConstant.Destroyed);
+				String str1 = weaponProperty.split("~")[1].split("  ")[0];
+				String str2 = weaponProperty.split("~")[1].split("  ")[0] + LegendConstant.Destroyed;
+				weaponProperty = upgradeCount.equals("0") ? weaponProperty.replaceFirst(str1, str2) : weaponProperty.replaceFirst("[+]" + upgradeCount, LegendConstant.Destroyed);
 				xmlParser.getNodeByName("upgradeCount").setTextContent("N/A");
 				xmlParser.getNodeByName("weapon").setTextContent(weaponProperty);
 				xmlParser.save();
 				label[0].setText(weaponProperty.split("~")[1].split("  ")[0]);
-				refreshRadioButton();
+				refreshRadioButton(false);
 				new WarningView(this, "Weapon upgrade fail, you weapon is broken!", 3);
 			}
 		}
 	}
 	
 	private void initRadioButton() {
-		for (int i = 0; i < 4; i++) {
-			radioButton[i] = new MyRadioButton("", 120);
+		for (int i = 0; i < 5; i++) {
+			radioButton[i] = new MyRadioButton("", 100);
 		}
-		for (int i = 4; i < 7; i++) {
+		for (int i = 5; i < 8; i++) {
 			radioButton[i] = new MyRadioButton("", 162);
 		}
-		for (int i = 7; i < 11; i++) {
+		for (int i = 8; i < 12; i++) {
 			radioButton[i] = new MyRadioButton("", 120);
 		}
 		radioButton[0].setText(LegendConstant.Attack);
 		radioButton[1].setText(LegendConstant.DaoAttack);
 		radioButton[2].setText(LegendConstant.MagicAttack);
 		radioButton[3].setText(LegendConstant.BlessOil);
-		radioButton[4].setText(LegendConstant.NoOre);
-		radioButton[7].setText(LegendConstant.NoCharm);
+		radioButton[4].setText(LegendConstant.SuperOil);
+		radioButton[5].setText(LegendConstant.NoCharm);
+		radioButton[9].setText(LegendConstant.NoOre);
 		label[0].setText(weaponName);
 		label[1].setText(weaponProperty.substring(weaponProperty.indexOf("  ")));
-		refreshRadioButton();
+		refreshRadioButton(false);
 		buttonGroup1.add(radioButton[0]);
 		buttonGroup1.add(radioButton[1]);
 		buttonGroup1.add(radioButton[2]);
 		buttonGroup1.add(radioButton[3]);
-		buttonGroup2.add(radioButton[4]);
+		buttonGroup1.add(radioButton[4]);
 		buttonGroup2.add(radioButton[5]);
 		buttonGroup2.add(radioButton[6]);
-		buttonGroup3.add(radioButton[7]);
-		buttonGroup3.add(radioButton[8]);
+		buttonGroup2.add(radioButton[7]);
+		buttonGroup2.add(radioButton[8]);
 		buttonGroup3.add(radioButton[9]);
 		buttonGroup3.add(radioButton[10]);
+		buttonGroup3.add(radioButton[11]);
 		radioButton[0].setSelected(true);
-		radioButton[4].setSelected(true);
-		radioButton[7].setSelected(true);
+		radioButton[5].setSelected(true);
+		radioButton[9].setSelected(true);
 	}
 	
-	private void refreshRadioButton() {
+	private void refreshRadioButton(boolean disableOthers) {
 		xmlParser = new XmlParser("runSuite\\LegendHero.xml");
 		radioButton[3].setText(LegendConstant.BlessOil + "(" + xmlParser.getNodeByName("bless").getTextContent() + ")");
-		radioButton[5].setText(LegendConstant.Ore1 + "(" + xmlParser.getNodeByName("ore1").getTextContent() + ")");
-		radioButton[6].setText(LegendConstant.Ore2 + "(" + xmlParser.getNodeByName("ore2").getTextContent() + ")");
-		radioButton[8].setText(LegendConstant.Charm1 + "(" + xmlParser.getNodeByName("charm1").getTextContent() + ")");
-		radioButton[9].setText(LegendConstant.Charm2 + "(" + xmlParser.getNodeByName("charm2").getTextContent() + ")");
-		radioButton[10].setText(LegendConstant.Charm3 + "(" + xmlParser.getNodeByName("charm3").getTextContent() + ")");
+		radioButton[4].setText(LegendConstant.SuperOil + "(" + xmlParser.getNodeByName("superOil").getTextContent() + ")");
+		radioButton[6].setText(LegendConstant.Charm1 + "(" + xmlParser.getNodeByName("charm1").getTextContent() + ")");
+		radioButton[7].setText(LegendConstant.Charm2 + "(" + xmlParser.getNodeByName("charm2").getTextContent() + ")");
+		radioButton[8].setText(LegendConstant.Charm3 + "(" + xmlParser.getNodeByName("charm3").getTextContent() + ")");
+		radioButton[10].setText(LegendConstant.Ore1 + "(" + xmlParser.getNodeByName("ore1").getTextContent() + ")");
+		radioButton[11].setText(LegendConstant.Ore2 + "(" + xmlParser.getNodeByName("ore2").getTextContent() + ")");
+		for (int i = 5; i < 12; i++) {
+			radioButton[i].setEnabled(true);
+		}
 		if (Integer.parseInt(xmlParser.getNodeByName("bless").getTextContent()) < 1)
 			radioButton[3].setEnabled(false);
-		if (Integer.parseInt(xmlParser.getNodeByName("ore1").getTextContent()) < 2)
-			radioButton[5].setEnabled(false);
-		if (Integer.parseInt(xmlParser.getNodeByName("ore2").getTextContent()) < 2)
+		if (Integer.parseInt(xmlParser.getNodeByName("superOil").getTextContent()) < 1)
+			radioButton[4].setEnabled(false);
+		if (Integer.parseInt(xmlParser.getNodeByName("charm1").getTextContent()) < 2)
 			radioButton[6].setEnabled(false);
-		if (Integer.parseInt(xmlParser.getNodeByName("charm1").getTextContent()) < 1)
-			radioButton[8].setEnabled(false);
-		if (Integer.parseInt(xmlParser.getNodeByName("charm2").getTextContent()) < 1)
-			radioButton[9].setEnabled(false);
+		if (Integer.parseInt(xmlParser.getNodeByName("charm2").getTextContent()) < 2)
+			radioButton[7].setEnabled(false);
 		if (Integer.parseInt(xmlParser.getNodeByName("charm3").getTextContent()) < 1)
+			radioButton[8].setEnabled(false);
+		if (Integer.parseInt(xmlParser.getNodeByName("ore1").getTextContent()) < 1)
 			radioButton[10].setEnabled(false);
+		if (Integer.parseInt(xmlParser.getNodeByName("ore2").getTextContent()) < 1)
+			radioButton[11].setEnabled(false);
+		if (disableOthers) {
+			for (int i = 5; i < 12; i++) {
+				radioButton[i].setEnabled(false);
+			}
+		}
 	}
 	
 	private void upgradeWeapon() {
@@ -321,7 +361,9 @@ public class WeaponUpgradeView extends JFrame implements ActionListener {
 			int count = Integer.parseInt(upgradeCount) + 1;
 			weaponProperty = weaponProperty.replaceFirst("[+]" + upgradeCount, "+" + count);
 		} else {
-			weaponProperty = weaponProperty.replaceFirst(weaponProperty.split("  ")[0], weaponProperty.split("  ")[0] + "+1");
+			String str1 = weaponProperty.split("~")[1].split("  ")[0];
+			String str2 = weaponProperty.split("~")[1].split("  ")[0] + "+1";
+			weaponProperty = weaponProperty.replaceFirst(str1, str2);
 		}
 		int p = (Algorithm.getDraw(10)) ? 2 : 1;
 		if (upgradeCount.equals("6")) {
@@ -368,7 +410,7 @@ public class WeaponUpgradeView extends JFrame implements ActionListener {
 		xmlParser.save();
 		label[0].setText(weaponProperty.split("~")[1].split("  ")[0]);
 		label[1].setText(weaponProperty.substring(weaponProperty.indexOf("  ")));
-		refreshRadioButton();
+		refreshRadioButton(false);
 		new WarningView(this, "Weapon Upgrade Success!", 3);
 	}
 	
@@ -440,7 +482,7 @@ public class WeaponUpgradeView extends JFrame implements ActionListener {
 		xmlParser.save();
 		label[0].setText(weaponProperty.split("~")[1].split("  ")[0]);
 		label[1].setText(weaponProperty.substring(weaponProperty.indexOf("  ")));
-		refreshRadioButton();
+		refreshRadioButton(false);
 	}
 	
 	/**
@@ -453,10 +495,15 @@ public class WeaponUpgradeView extends JFrame implements ActionListener {
 		String oldLuckString;
 		if (weaponProperty.contains(str)) {
 			weaponLuck = Integer.parseInt(xmlParser.getNodeByName("weapon").getTextContent().split(str)[1].substring(2, 3));
-			oldLuckString = LegendConstant.Luck + " +" + weaponLuck;
-			weaponLuck = weaponLuck + 1;
-			newLuckString = LegendConstant.Luck + " +" + weaponLuck;
-			weaponProperty = weaponProperty.replace(oldLuckString, newLuckString);
+			if (weaponLuck < 7) {
+				oldLuckString = LegendConstant.Luck + " +" + weaponLuck;
+				weaponLuck = weaponLuck + 1;
+				newLuckString = LegendConstant.Luck + " +" + weaponLuck;
+				weaponProperty = weaponProperty.replace(oldLuckString, newLuckString);
+				System.out.println("Your weapon is blessed!");
+			} else {
+				System.out.println("Your weapon is not blessed!");
+			}
 		} else {
 			newLuckString = LegendConstant.Luck + " +1  " + LegendConstant.Weight;
 			weaponProperty = weaponProperty.replace(LegendConstant.Weight, newLuckString);
@@ -465,7 +512,7 @@ public class WeaponUpgradeView extends JFrame implements ActionListener {
 		xmlParser.save();
 		label[0].setText(weaponProperty.split("~")[1].split("  ")[0]);
 		label[1].setText(weaponProperty.substring(weaponProperty.indexOf("  ")));
-		refreshRadioButton();
+		refreshRadioButton(false);
 	}
 	
 	private static class CloseHandler extends WindowAdapter {

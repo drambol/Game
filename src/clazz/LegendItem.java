@@ -190,6 +190,13 @@ public class LegendItem {
 		} else if (chance <= 200) {
 			p = 1;
 		}
+		//=====================
+		if (p >= 8) {
+			code = code + "|RED|";
+		} else if (p >= 5) {
+			code = code + "|BLUE|";
+		}
+		//=====================
 		if (p > 0) {
 			excellence = true;
 			switch (code.substring(0, 1)) {

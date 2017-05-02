@@ -185,15 +185,15 @@ public class LegendView extends JFrame implements ActionListener {
 					String[] str = legend.getItemFromMonster(buttonGroup.getSelectedButtonText());
 					for(int i = 0; i < 10; i++) {
 						if (str[i] != null && !str[i].substring(0, 1).equals("*")) {
-							label[i].setText(str[i].split("~")[1]);
+							label[i].setColoredText(str[i]);
 							buttonEquip[i].setText("Equip It");
 							buttonStore[i].setText("Store It");
 							buttonEquip[i].addActionListener(this);
 							buttonStore[i].addActionListener(this);
 						} else if (str[i] != null && str[i].substring(0, 1).equals("*")) {
-							label[i].setText(str[i].substring(1));
+							label[i].setDefaultText(str[i].substring(1));
 						} else {
-							label[i].setText("");
+							label[i].setDefaultText("");
 							buttonEquip[i].setText("");
 							buttonStore[i].setText("");
 							buttonEquip[i].removeActionListener(this);
@@ -285,11 +285,11 @@ public class LegendView extends JFrame implements ActionListener {
 	
 	public void reactFromDialog(boolean flag, String str, int i, String detail) {
 		if (flag) {
-			lbEquipment[i].setText(detail.split("~")[1].split(" ")[0]);
+			lbEquipment[i].setColoredText(detail.split(" ")[0]);
 			tempWarehouse = xmlParser.getNodeByName("left" + str).getTextContent();
 			xmlParser.getNodeByName("left" + str).setTextContent(detail);
 		} else {
-			lbEquipment[i+2].setText(detail.split("~")[1].split(" ")[0]);
+			lbEquipment[i+2].setColoredText(detail.split(" ")[0]);
 			tempWarehouse = xmlParser.getNodeByName("right" + str).getTextContent();
 			xmlParser.getNodeByName("right" + str).setTextContent(detail);
 		}
@@ -413,11 +413,9 @@ public class LegendView extends JFrame implements ActionListener {
 	private void showDetail(final MyLabel label, final String str) {
 		if (!str.isEmpty()) {
 			if (label == lbEquipment[1] && str.split("  ")[0].contains("+7")) {
-				label.setText(str.split("~")[1].split("  ")[0] + LegendConstant.CannotDropped);
-//			} else if (label == lbEquipment[1] && xmlParser.getNodeByName("upgradeCount").getTextContent().equals("N/A")) {
-//				label.setText(str.split("~")[1].split("  ")[0] + LegendConstant.Destroyed);
+				label.setColoredText(str.split("  ")[0] + LegendConstant.CannotDropped);
 			} else {
-				label.setText(str.split("~")[1].split("  ")[0]);
+				label.setColoredText(str.split("  ")[0]);
 			}
 		} else {
 			label.setText("");
@@ -519,7 +517,7 @@ public class LegendView extends JFrame implements ActionListener {
 			if (meetRequirement(itemDetail)) {
 				String gender = xmlParser.getNodeByName("gender").getTextContent();
 				int val = gender.equals(LegendConstant.Male) ? 1 : 0;
-				int code = Integer.parseInt(itemDetail.split("~")[0].substring(1));
+				int code = Integer.parseInt(itemDetail.split("~")[0].substring(1, 3));
 				if (code%2 == val) {
 					tempWarehouse = xmlParser.getNodeByName("armor").getTextContent();
 					xmlParser.getNodeByName("armor").setTextContent(itemDetail);
@@ -586,7 +584,7 @@ public class LegendView extends JFrame implements ActionListener {
 	private void replaceItem(boolean monster) {
 		if (monster) {
 			if (!tempWarehouse.isEmpty()) {
-				label[tempPosition].setText(tempWarehouse.split("~")[1]);
+				label[tempPosition].setColoredText(tempWarehouse);
 				legend.legendItems[tempPosition] = tempWarehouse;
 				legend.itemCode[tempPosition] = tempWarehouse.split("~")[0];
 			} else {

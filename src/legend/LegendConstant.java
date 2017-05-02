@@ -38,9 +38,9 @@ public interface LegendConstant {
 	public static final String PoisonAvoid = "毒物躲避";
 	public static final String MagicAvoid = "魔法躲避";
 	
-	public static final String StartWeapon = "w1~木剑  攻击: 2-5  重量: 7  持久: 4  需等级1";
-	public static final String StartMaleArmor = "c1~布衣(男)  防御: 2-2  魔御: 0-1  重量: 5  持久: 5  需等级1";
-	public static final String StartFemaleArmor = "c2~布衣(女)  防御: 2-2  魔御: 0-1  重量: 5  持久: 5  需等级1";
+	public static final String StartWeapon = "w01~木剑  攻击: 2-5  重量: 7  持久: 4  需等级1";
+	public static final String StartMaleArmor = "c01~布衣(男)  防御: 2-2  魔御: 0-1  重量: 5  持久: 5  需等级1";
+	public static final String StartFemaleArmor = "c02~布衣(女)  防御: 2-2  魔御: 0-1  重量: 5  持久: 5  需等级1";
 	
 	public static final String Monster01 = "巨型多角虫";
 	public static final String Monster02 = "骷髅精灵";
@@ -77,6 +77,7 @@ public interface LegendConstant {
 	public static final String Charm2 = "中级幸运符";
 	public static final String Charm3 = "高级幸运符";
 	public static final String BlessOil = "祝福油";
+	public static final String SuperOil = "超祝油";
 
 	public static final String CurrencyUnit = "万";
 	public static final String RemainingGold = "剩余金币: ";

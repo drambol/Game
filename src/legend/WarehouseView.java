@@ -18,6 +18,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
 import base.WindowStore;
+import controls.MyLabel;
 import utility.file.XmlParser;
 
 public class WarehouseView extends JFrame implements ActionListener {
@@ -25,9 +26,9 @@ public class WarehouseView extends JFrame implements ActionListener {
 	private static final long serialVersionUID = 2L;
 	private JScrollPane sp;
 	private JPanel detailPanel = new JPanel();
-	private JLabel detailLabel = new JLabel();
+	private MyLabel detailLabel = new MyLabel("");
 	private JPanel panel[] = new JPanel[99];
-	private JLabel label[] = new JLabel[99];
+	private MyLabel label[] = new MyLabel[99];
 	private JButton buttonEquip[] = new JButton[99];
 	private JButton buttonDiscard[] = new JButton[99];
 	private Box box0 = Box.createVerticalBox();
@@ -52,7 +53,7 @@ public class WarehouseView extends JFrame implements ActionListener {
 		for (int i = 0; i < 99; i++) {
 			panel[i] = new JPanel();
 			panel[i].setPreferredSize(new Dimension(380, 24));
-			label[i] = new JLabel();
+			label[i] = new MyLabel("");
 			label[i].setPreferredSize(new Dimension(200, 22));
 			showDetail(label[i], i);
 			buttonEquip[i] = new JButton();
@@ -89,7 +90,7 @@ public class WarehouseView extends JFrame implements ActionListener {
 			legendView.reactFromWarehouse(xmlParser.getNodeValues("item").get(equip));
 			xmlParser = new XmlParser("runSuite\\LegendHero.xml");
 			if (!xmlParser.getNodeValues("item").get(equip).isEmpty()) {
-				label[equip].setText(xmlParser.getNodeValues("item").get(equip).split("~")[1].split("  ")[0]);
+				label[equip].setColoredText(xmlParser.getNodeValues("item").get(equip).split("  ")[0]);
 			} else {
 				label[equip].setText("");
 				buttonEquip[equip].setText("");
@@ -123,7 +124,7 @@ public class WarehouseView extends JFrame implements ActionListener {
 		label.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 				if (!xmlParser.getNodeValues("item").get(i).isEmpty()) {
-					detailLabel.setText(xmlParser.getNodeValues("item").get(i).split("~")[1]);
+					detailLabel.setColoredText(xmlParser.getNodeValues("item").get(i));
 				} else {
 					detailLabel.setText("");
 				}
@@ -137,7 +138,7 @@ public class WarehouseView extends JFrame implements ActionListener {
 		cleanWarehouse(xmlParser);
 		for (int i = 0; i < itemCount; i++) {
 			if (!xmlParser.getNodeValues("item").get(i).isEmpty()) {
-				label[i].setText(xmlParser.getNodeValues("item").get(i).split("~")[1].split("  ")[0]);
+				label[i].setColoredText(xmlParser.getNodeValues("item").get(i).split("  ")[0]);
 				buttonEquip[i].setText("Equip");
 				buttonDiscard[i].setText("Discard");
 				buttonEquip[i].addActionListener(this);

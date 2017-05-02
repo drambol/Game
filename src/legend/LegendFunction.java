@@ -104,10 +104,11 @@ public class LegendFunction {
 		int n = 1;
 		String str = xmlParser.getNodeByName("medal").getTextContent().split("~")[0];
 		switch (str) {
-		case "x2":
+		case "x00":
 			n = 2;
 			break;
-		case "x3":
+		case "x01":
+		case "x10":
 		case "x11":
 			n = 3;
 			break;

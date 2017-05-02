@@ -82,9 +82,9 @@ public class ShopView extends JFrame implements ActionListener {
 		}
 		labelItem[0].setText(LegendConstant.Medal1);
 		labelItem[1].setText(LegendConstant.Medal2);
-		labelItem[2].setText(LegendConstant.Medal3);
-		labelItem[3].setText(LegendConstant.Medal4);
-		labelItem[4].setText(LegendConstant.Medal5);
+		labelItem[2].setText(LegendConstant.Medal4);
+		labelItem[3].setText(LegendConstant.Medal5);
+		labelItem[4].setText(LegendConstant.SuperOil);
 		labelItem[5].setText(LegendConstant.Ore1);
 		labelItem[6].setText(LegendConstant.Ore2);
 		labelItem[7].setText(LegendConstant.Charm1);
@@ -92,9 +92,9 @@ public class ShopView extends JFrame implements ActionListener {
 		labelItem[9].setText(LegendConstant.Charm3);
 		labelPrice[0].setText("100" + LegendConstant.CurrencyUnit);
 		labelPrice[1].setText("1000" + LegendConstant.CurrencyUnit);
-		labelPrice[2].setText("30" + LegendConstant.CurrencyUnit);
-		labelPrice[3].setText("200" + LegendConstant.CurrencyUnit);
-		labelPrice[4].setText("1000" + LegendConstant.CurrencyUnit);
+		labelPrice[2].setText("200" + LegendConstant.CurrencyUnit);
+		labelPrice[3].setText("1000" + LegendConstant.CurrencyUnit);
+		labelPrice[4].setText("10000" + LegendConstant.CurrencyUnit);
 		labelPrice[5].setText("10" + LegendConstant.CurrencyUnit);
 		labelPrice[6].setText("20" + LegendConstant.CurrencyUnit);
 		labelPrice[7].setText("100" + LegendConstant.CurrencyUnit);
@@ -125,7 +125,7 @@ public class ShopView extends JFrame implements ActionListener {
 		xmlParser = new XmlParser("runSuite\\LegendHero.xml");
 		int serial = -1;
 		long price = 0;
-		long money = Integer.parseInt(xmlParser.getNodeByName("money").getTextContent());
+		long money = Long.parseLong(xmlParser.getNodeByName("money").getTextContent());
 		WindowStore.shopViewTL.set(this);
 		freezeWindow();
 		for (int i = 0; i < 10; i++) {
@@ -141,12 +141,11 @@ public class ShopView extends JFrame implements ActionListener {
 				money = money - price * count * 10000;
 				xmlParser.getNodeByName("money").setTextContent("" + money);
 				moneyLabel.setText(LegendConstant.RemainingGold + money);
-				if (serial <= 4) {
-					int code = serial + 2;
+				if (serial <= 3) {
 					for (int i = 0; i < 99; i++) {
 						if (xmlParser.getNodeValues("item").get(i).isEmpty()) {
 							Legend legend = new Legend();
-							LegendItem legendItem = new LegendItem(legend.getItemByCode("x" + code));
+							LegendItem legendItem = new LegendItem(legend.getItemByCode("x0" + serial));
 							xmlParser.getNodeByName("item", i).setTextContent(legendItem.printItem());
 							break;
 						}
@@ -154,6 +153,10 @@ public class ShopView extends JFrame implements ActionListener {
 				} else {
 					int itemCount = 0;
 					switch (serial) {
+					case 4:
+						itemCount = Integer.parseInt(xmlParser.getNodeByName("superOil").getTextContent()) + count;
+						xmlParser.getNodeByName("superOil").setTextContent("" + itemCount);
+						break;
 					case 5:
 						itemCount = Integer.parseInt(xmlParser.getNodeByName("ore1").getTextContent()) + count;
 						xmlParser.getNodeByName("ore1").setTextContent("" + itemCount);
@@ -190,9 +193,14 @@ public class ShopView extends JFrame implements ActionListener {
 		label.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 				int quantity = Integer.parseInt(text[count].getText());
-				if (count <= 4) {
+				if (count <= 3) {
 					if (quantity == 1) {
 						text[count].setText("0");
+					}
+				} else if (count == 4) {
+					if (quantity >= 1) {
+						quantity = quantity - 1;
+						text[count].setText("" + quantity);
 					}
 				} else {
 					if (quantity >= 1) {
@@ -208,9 +216,14 @@ public class ShopView extends JFrame implements ActionListener {
 		label.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 				int quantity = Integer.parseInt(text[count].getText());
-				if (count <= 4) {
+				if (count <= 3) {
 					if (quantity == 0) {
 						text[count].setText("1");
+					}
+				} else if (count == 4) {
+					if (quantity <= 9) {
+						quantity = quantity + 1;
+						text[count].setText("" + quantity);
 					}
 				} else {
 					if (quantity <= 90) {

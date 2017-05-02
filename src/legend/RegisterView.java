@@ -122,7 +122,9 @@ public class RegisterView extends JFrame implements ActionListener {
 		xmlParser.getNodeByName("charm3").setTextContent("0");
 		String name = xmlParser.getNodeByName("name").getTextContent();
 		String medal = "";
-		if (name.contains("天意")) {
+		if (name.contains("陈可胖")) {
+			medal = "x10~凤舞九天  防御: 3-5  魔御: 3-5  攻击: 3-5  重量: 1  持久: 10  需等级1";
+		} else if (name.contains("天意")) {
 			medal = "x11~天意勇魂  防御: 2-3  魔御: 2-3  攻击: 2-3  重量: 1  持久: 10  需等级1";
 		}
 		xmlParser.getNodeByName("medal").setTextContent(medal);
