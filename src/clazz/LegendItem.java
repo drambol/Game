@@ -248,6 +248,7 @@ public class LegendItem {
 			case "b":
 			case "o":
 			case "g":
+			case "x":
 				for (int i = 0; i < p; i++) {
 					int ran = Algorithm.getRandomInt(1, 100);
 					if (ran <= 20) {

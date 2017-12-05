@@ -90,16 +90,16 @@ public class ShopView extends JFrame implements ActionListener {
 		labelItem[7].setText(LegendConstant.Charm1);
 		labelItem[8].setText(LegendConstant.Charm2);
 		labelItem[9].setText(LegendConstant.Charm3);
-		labelPrice[0].setText("100" + LegendConstant.CurrencyUnit);
-		labelPrice[1].setText("1000" + LegendConstant.CurrencyUnit);
-		labelPrice[2].setText("200" + LegendConstant.CurrencyUnit);
-		labelPrice[3].setText("1000" + LegendConstant.CurrencyUnit);
-		labelPrice[4].setText("10000" + LegendConstant.CurrencyUnit);
-		labelPrice[5].setText("10" + LegendConstant.CurrencyUnit);
-		labelPrice[6].setText("20" + LegendConstant.CurrencyUnit);
-		labelPrice[7].setText("100" + LegendConstant.CurrencyUnit);
-		labelPrice[8].setText("200" + LegendConstant.CurrencyUnit);
-		labelPrice[9].setText("400" + LegendConstant.CurrencyUnit);
+		labelPrice[0].setText("50" + LegendConstant.CurrencyUnit);
+		labelPrice[1].setText("500" + LegendConstant.CurrencyUnit);
+		labelPrice[2].setText("100" + LegendConstant.CurrencyUnit);
+		labelPrice[3].setText("500" + LegendConstant.CurrencyUnit);
+		labelPrice[4].setText("5000" + LegendConstant.CurrencyUnit);
+		labelPrice[5].setText("5" + LegendConstant.CurrencyUnit);
+		labelPrice[6].setText("10" + LegendConstant.CurrencyUnit);
+		labelPrice[7].setText("50" + LegendConstant.CurrencyUnit);
+		labelPrice[8].setText("100" + LegendConstant.CurrencyUnit);
+		labelPrice[9].setText("200" + LegendConstant.CurrencyUnit);
 		
 		moneyPanel.setPreferredSize(new Dimension(290, 28));
 		moneyLabel.setPreferredSize(new Dimension(284, 22));
