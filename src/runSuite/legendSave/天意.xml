@@ -3,32 +3,32 @@
 		<name>天意</name>
 		<career>战士</career>
 		<gender>男</gender>
-		<level>56</level>
-		<exp>16709154</exp>
+		<level>57</level>
+		<exp>11977037</exp>
 		<dc>10-11</dc>
 		<sc>0-0</sc>
 		<mc>0-0</mc>
 		<ac>7-8</ac>
 		<mac>0-0</mac>
-		<hp>1229</hp>
-		<mp>305</mp>
+		<hp>1268</hp>
+		<mp>313</mp>
 		<hit>17</hit>
 		<dex>15</dex>
 		<weapon>w36|BLUE|~开天[损]  攻击: 6-46  道术: 0-2  魔法: 0-1  准确 +2  攻击速度 +1  幸运 +7  重量: 73  持久: 35  需等级43</weapon>
 		<upgradeCount>N/A</upgradeCount>
-		<armor>c31~凤天魔甲  防御: 8-13  魔御: 8-8  攻击: 2-2  道术: 3-5  魔法: 3-5  重量: 23  持久: 50  需等级45</armor>
+		<armor>c31|BLUE|~凤天魔甲  防御: 8-13  魔御: 8-10  攻击: 2-3  道术: 3-5  魔法: 3-8  重量: 23  持久: 52  需等级45</armor>
 		<helmet>h11|BLUE|~圣龙盔  防御: 5-6  魔御: 2-4  攻击: 0-5  魔法: 0-2  重量: 3  持久: 10  需等级35</helmet>
 		<amulet>a30~战神项链  攻击: 3-9  道术: 0-1  魔法: 0-1  幸运 +1  重量: 3  持久: 8  需攻击54</amulet>
 		<medal>x11~天意勇魂  防御: 2-3  魔御: 2-3  攻击: 2-3  重量: 1  持久: 10  需等级1</medal>
 		<leftBracelet>i31|RED|~战神手镯  防御: 0-2  魔御: 0-3  攻击: 1-6  道术: 0-1  魔法: 0-2  重量: 2  持久: 9  需攻击54</leftBracelet>
 		<rightBracelet>i28|RED|~雷霆护腕  防御: 0-3  魔御: 0-3  攻击: 1-7  道术: 0-1  魔法: 0-2  重量: 1  持久: 7  需攻击45</rightBracelet>
-		<leftRing>r25|BLUE|~圣战戒指  魔御: 0-1  攻击: 0-10  道术: 0-1  魔法: 0-1  重量: 2  持久: 7  需攻击40</leftRing>
+		<leftRing>r31|BLUE|~战神戒指  魔御: 0-1  攻击: 0-11  道术: 0-1  魔法: 0-2  重量: 2  持久: 8  需攻击54</leftRing>
 		<rightRing>r40~麻痹戒指  攻击: 0-1  重量: 1  持久: 5  需等级16</rightRing>
 		<belt>b06|RED|~光芒腰带  防御: 2-3  魔御: 0-3  攻击: 0-2  道术: 1-2  魔法: 0-2  重量: 1  持久: 6  需道术28</belt>
 		<boots>o06|RED|~光芒道靴  防御: 1-4  魔御: 0-2  攻击: 0-2  道术: 1-0  魔法: 0-3  重量: 1  持久: 6  需道术28</boots>
 		<gem>g25|BLUE|~绿神石+4  防御: 0-1  魔御: 0-2  攻击: 0-1  道术: 0-1  毒物躲避 +50%  重量: 1  持久: 10  需等级50</gem>
-		<money>29442868</money>
-		<bless>398</bless>
+		<money>43180570</money>
+		<bless>454</bless>
 		<superOil>0</superOil>
 		<ore1>0</ore1>
 		<ore2>0</ore2>
@@ -38,8 +38,8 @@
 	</CurrentChar>
 	<WareHouse>
 		<item>x01|RED|~三倍经验勋章  攻击: 3-3  道术: 3-3  魔法: 3-3  重量: 1  持久: 30  需等级1</item>
-		<item/>
-		<item/>
+		<item>o06|RED|~光芒道靴  防御: 1-7  魔御: 0-2  攻击: 0-2  道术: 1-1  魔法: 0-1  重量: 1  持久: 9  需道术28</item>
+		<item>h12~天龙盔  防御: 5-6  魔御: 2-3  道术: 0-2  重量: 3  持久: 10  需等级35</item>
 		<item/>
 		<item/>
 		<item/>

@@ -3,48 +3,49 @@
 		<name>张夏天</name>
 		<career>道士</career>
 		<gender>男</gender>
-		<level>4</level>
-		<exp>219</exp>
-		<dc>0-0</dc>
-		<sc>0-0</sc>
+		<level>48</level>
+		<exp>159390</exp>
+		<dc>5-6</dc>
+		<sc>5-6</sc>
 		<mc>0-0</mc>
 		<ac>0-0</ac>
-		<mac>0-0</mac>
-		<hp>29</hp>
-		<mp>36</mp>
+		<mac>5-6</mac>
+		<hp>535</hp>
+		<mp>784</mp>
 		<hit>15</hit>
 		<dex>15</dex>
-		<weapon>w01~木剑  攻击: 2-5  重量: 7  持久: 4  需等级1</weapon>
-		<upgradeCount/>
-		<armor>c01~布衣(男)  防御: 2-2  魔御: 0-1  重量: 5  持久: 5  需等级1</armor>
-		<helmet/>
-		<amulet/>
-		<medal/>
-		<leftBracelet/>
-		<rightBracelet/>
-		<leftRing/>
-		<rightRing/>
-		<belt/>
-		<boots/>
-		<gem/>
-		<money>1374</money>
-		<bless>0</bless>
+		<weapon>w37~玄天+7  攻击: 8-31  道术: 5-20  准确 +2  幸运 +4  重量: 44  持久: 25  需等级43</weapon>
+		<upgradeCount>7</upgradeCount>
+		<armor>c31~凤天魔甲  防御: 8-12  魔御: 8-8  攻击: 2-2  道术: 3-5  魔法: 3-5  重量: 23  持久: 50  需等级45</armor>
+		<helmet>h04|RED|~道士头盔  防御: 1-2  魔御: 2-5  攻击: 0-2  道术: 0-4  重量: 3  持久: 8  需等级24</helmet>
+		<amulet>a28|BLUE|~光芒项链  攻击: 0-1  道术: 3-11  魔法: 0-1  准确 +3  重量: 1  持久: 10  需道术28</amulet>
+		<medal>x01~三倍经验勋章  魔御: 0-2  攻击: 3-4  道术: 3-3  魔法: 3-3  重量: 1  持久: 30  需等级1</medal>
+		<leftBracelet>i26|BLUE|~天尊手镯  防御: 1-3  魔御: 0-2  道术: 1-5  魔法: 0-2  重量: 1  持久: 8  需道术25</leftBracelet>
+		<rightBracelet>i11|RED|~金手镯  魔御: 2-9  攻击: 0-1  道术: 0-1  魔法: 0-1  重量: 1  持久: 10  需等级23</rightBracelet>
+		<leftRing>r38~防御戒指  道术: 1-2  重量: 1  持久: 5  需等级16</leftRing>
+		<rightRing>r15|RED|~降妖除魔戒指  魔御: 0-4  攻击: 1-3  道术: 1-6  魔法: 1-6  重量: 1  持久: 5  需等级25</rightRing>
+		<belt>b04~钢铁腰带  防御: 0-3  魔御: 0-1  道术: 0-1  魔法: 0-1  重量: 2  持久: 11  需等级35</belt>
+		<boots>o06|BLUE|~光芒道靴  防御: 1-5  魔御: 0-1  攻击: 0-1  道术: 1-0  魔法: 0-1  重量: 1  持久: 6  需道术28</boots>
+		<gem>g24~绿神石+3  毒物躲避 +40%  重量: 1  持久: 10  需等级45</gem>
+		<money>7873253</money>
+		<bless>9</bless>
+		<superOil>0</superOil>
 		<ore1>0</ore1>
-		<ore2>0</ore2>
+		<ore2>22</ore2>
 		<charm1>0</charm1>
-		<charm2>0</charm2>
+		<charm2>8</charm2>
 		<charm3>0</charm3>
 	</CurrentChar>
 	<WareHouse>
+		<item>i29~光芒护腕  防御: 1-3  道术: 2-4  重量: 1  持久: 6  需道术28</item>
+		<item>x03~高级暴率勋章  攻击: 3-3  道术: 3-3  魔法: 3-3  重量: 1  持久: 10  需等级1</item>
+		<item>h12~天龙盔  防御: 5-6  魔御: 2-3  道术: 0-2  重量: 3  持久: 10  需等级35</item>
+		<item>i26~天尊手镯  防御: 1-2  道术: 1-4  重量: 1  持久: 7  需道术25</item>
+		<item>r29~光芒道戒  防御: 0-2  道术: 1-8  重量: 1  持久: 6  需道术28</item>
 		<item/>
 		<item/>
-		<item/>
-		<item/>
-		<item/>
-		<item/>
-		<item/>
-		<item/>
-		<item/>
+		<item>w37~玄天  攻击: 8-31  道术: 5-12  准确 +2  重量: 44  持久: 27  需等级43</item>
+		<item>c31~凤天魔甲  防御: 8-12  魔御: 8-8  攻击: 2-2  道术: 3-5  魔法: 3-5  重量: 23  持久: 50  需等级45</item>
 		<item/>
 		<item/>
 		<item/>
