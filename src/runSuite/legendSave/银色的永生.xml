@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?><LegendHero>
+	<CurrentChar>
+		<name>银色的永生</name>
+		<career>法师</career>
+		<gender>男</gender>
+		<level>50</level>
+		<exp>830046</exp>
+		<dc>6-7</dc>
+		<sc>0-0</sc>
+		<mc>6-7</mc>
+		<ac>0-0</ac>
+		<mac>0-0</mac>
+		<hp>306</hp>
+		<mp>1420</mp>
+		<hit>13</hit>
+		<dex>15</dex>
+		<weapon>w38~镇天+7  攻击: 7-25  魔法: 5-20  准确 +2  敏捷 +2  幸运 +7  重量: 26  持久: 20  需等级43</weapon>
+		<upgradeCount>7</upgradeCount>
+		<armor>c29~烈焰魔衣(男)  防御: 5-12  魔御: 4-8  魔法: 3-5  重量: 20  持久: 40  需等级42</armor>
+		<helmet>h13~魔龙盔  防御: 5-6  魔御: 2-3  魔法: 0-2  重量: 3  持久: 11  需等级35</helmet>
+		<amulet>a29~烈焰项链  魔法: 1-9  准确 +3  重量: 1  持久: 7  需魔法30</amulet>
+		<medal>x03~高级暴率勋章  攻击: 3-4  道术: 3-3  魔法: 3-4  重量: 1  持久: 10  需等级1</medal>
+		<leftBracelet>i27~法神手镯  防御: 0-1  道术: 0-2  魔法: 0-5  重量: 1  持久: 7  需魔法28</leftBracelet>
+		<rightBracelet>i27|BLUE|~法神手镯  防御: 0-2  道术: 0-3  魔法: 0-5  重量: 1  持久: 7  需魔法28</rightBracelet>
+		<leftRing>r33~圣魔戒指  魔御: 0-1  魔法: 2-8  重量: 1  持久: 6  需魔法32</leftRing>
+		<rightRing>r39~火焰戒指  魔法: 1-2  重量: 1  持久: 5  需等级16</rightRing>
+		<belt>b07~烈焰腰带  防御: 2-2  魔御: 0-1  魔法: 1-0  重量: 1  持久: 5  需魔法30</belt>
+		<boots/>
+		<gem/>
+		<money>27456986</money>
+		<bless>25</bless>
+		<superOil>0</superOil>
+		<ore1>0</ore1>
+		<ore2>62</ore2>
+		<charm1>0</charm1>
+		<charm2>0</charm2>
+		<charm3>14</charm3>
+	</CurrentChar>
+	<WareHouse>
+		<item>r27~法神戒指  魔御: 0-1  道术: 0-1  魔法: 1-7  重量: 1  持久: 7  需魔法28</item>
+		<item>h04|RED|~道士头盔  防御: 1-5  魔御: 2-4  攻击: 0-3  魔法: 0-2  重量: 3  持久: 8  需等级24</item>
+		<item>o07|BLUE|~烈焰魔靴  防御: 0-5  道术: 0-2  魔法: 1-1  重量: 1  持久: 5  需魔法30</item>
+		<item/>
+		<item>w25~血饮+7  攻击: 3-14  魔法: 3-14  准确 +5  幸运 +7  重量: 20  持久: 12  需魔法27</item>
+		<item>x01~三倍经验勋章  攻击: 3-3  道术: 3-3  魔法: 3-3  重量: 1  持久: 30  需等级1</item>
+		<item>a32~圣魔项链  魔法: 0-9  敏捷 +3  重量: 1  持久: 6  需魔法32</item>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+	</WareHouse>
+</LegendHero>

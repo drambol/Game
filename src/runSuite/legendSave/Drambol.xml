@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?><LegendHero>
+	<CurrentChar>
+		<name>Drambol</name>
+		<career>战士</career>
+		<gender>女</gender>
+		<level>52</level>
+		<exp>7901579</exp>
+		<dc>9-10</dc>
+		<sc>0-0</sc>
+		<mc>0-0</mc>
+		<ac>6-7</ac>
+		<mac>0-0</mac>
+		<hp>1080</hp>
+		<mp>273</mp>
+		<hit>17</hit>
+		<dex>15</dex>
+		<weapon>w30|BLUE|~怒斩+7  攻击: 12-37  道术: 0-1  准确 +3  攻击速度 +2  幸运 +7  重量: 85  持久: 35  需攻击46</weapon>
+		<upgradeCount>7</upgradeCount>
+		<armor>c32~凰天魔衣  防御: 8-12  魔御: 8-9  攻击: 2-2  道术: 3-7  魔法: 3-5  重量: 23  持久: 50  需等级45</armor>
+		<helmet>h08|RED|~圣战头盔  防御: 4-6  魔御: 2-3  攻击: 0-4  道术: 0-1  魔法: 0-3  重量: 10  持久: 8  需攻击40</helmet>
+		<amulet>A10|RED|~白色虎齿项链  攻击: 0-3  道术: 1-1  魔法: 0-3  幸运 +1  魔法躲避 +30%  重量: 1  持久: 8  需道术11</amulet>
+		<medal>x03~高级暴率勋章  魔御: 0-1  攻击: 3-4  道术: 3-3  魔法: 3-3  重量: 1  持久: 10  需等级1</medal>
+		<leftBracelet>i11|BLUE|~金手镯  魔御: 2-6  攻击: 0-2  魔法: 0-1  重量: 1  持久: 8  需等级23</leftBracelet>
+		<rightBracelet>i11|RED|~金手镯  防御: 0-1  魔御: 2-5  攻击: 0-2  道术: 0-1  魔法: 0-3  重量: 1  持久: 10  需等级23</rightBracelet>
+		<leftRing>R16~狂风戒指  攻击: 0-2  攻击速度 +1  毒物躲避 +20%  重量: 1  持久: 5  需等级19</leftRing>
+		<rightRing>r40~麻痹戒指  攻击: 0-1  重量: 1  持久: 5  需等级16</rightRing>
+		<belt>b07~烈焰腰带  防御: 2-2  魔御: 0-4  魔法: 1-1  重量: 1  持久: 5  需魔法30</belt>
+		<boots>o03|RED|~紫绸靴  防御: 0-4  魔御: 0-1  攻击: 0-2  道术: 0-1  魔法: 0-3  重量: 1  持久: 8  需等级30</boots>
+		<gem>g25~绿神石+4  防御: 0-2  魔法: 0-1  毒物躲避 +50%  重量: 1  持久: 10  需等级50</gem>
+		<money>96330187</money>
+		<bless>272</bless>
+		<superOil>0</superOil>
+		<ore1>0</ore1>
+		<ore2>402</ore2>
+		<charm1>0</charm1>
+		<charm2>0</charm2>
+		<charm3>10</charm3>
+	</CurrentChar>
+	<WareHouse>
+		<item>w37~玄天[损]  攻击: 8-32  道术: 5-15  准确 +2  重量: 44  持久: 25  需等级43</item>
+		<item>w36~开天+7  攻击: 6-49  攻击速度 +1  幸运 +7  重量: 73  持久: 35  需等级43</item>
+		<item>w38~镇天[损]  攻击: 7-25  魔法: 5-18  准确 +2  敏捷 +2  重量: 26  持久: 20  需等级43</item>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+	</WareHouse>
+</LegendHero>

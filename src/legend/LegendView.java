@@ -51,8 +51,10 @@ public class LegendView extends JFrame implements ActionListener {
 	private Box box1 = Box.createVerticalBox();
 	private Box boxH = Box.createVerticalBox();
 	private JPanel pHeader = new JPanel();
+	private JPanel pHeader2 = new JPanel();
 	private JLabel labelCharInfo = new JLabel();
 	private JLabel labelDelete = new JLabel();
+	private JLabel labelExp = new JLabel();
 	private JTextField tText1 = new JTextField();
 	private JTextField tText2 = new JTextField();
 	private JPanel pText = new JPanel();
@@ -119,7 +121,9 @@ public class LegendView extends JFrame implements ActionListener {
 		panel[11].add(buttonSave);
 		pHeader.add(labelCharInfo, BorderLayout.CENTER);
 		pHeader.add(labelDelete, BorderLayout.CENTER);
+		pHeader2.add(labelExp, BorderLayout.LINE_END);
 		box0.add(pHeader, BorderLayout.AFTER_LAST_LINE);
+		box0.add(pHeader2, BorderLayout.AFTER_LAST_LINE);
 		for(int i = 0; i < 6; i++) {
 			box0.add(jpEquipment[i], BorderLayout.AFTER_LAST_LINE);
 		}
@@ -165,6 +169,8 @@ public class LegendView extends JFrame implements ActionListener {
 	public void actionPerformed(ActionEvent actionevent) {
 		int equip = -1;
 		int store = -1;
+		int exp = 0;
+		float dropRate = 0;
 		if (actionevent.getSource() == buttonKill) {
 //			enableAllButtons(false);
 			LegendFunction lengendFunction = new LegendFunction(buttonGroup.getSelectedButtonText());
@@ -178,11 +184,12 @@ public class LegendView extends JFrame implements ActionListener {
 						buttonEquip[i].removeActionListener(this);
 						buttonStore[i].removeActionListener(this);
 					}
-					lengendFunction.addExp();
+					exp = lengendFunction.addExp();
 					if (lengendFunction.levelUp) {
 						reactForLevelUp();
 					}
 					String[] str = legend.getItemFromMonster(buttonGroup.getSelectedButtonText());
+					dropRate = legend.dropRate;
 					for(int i = 0; i < 10; i++) {
 						if (str[i] != null && !str[i].substring(0, 1).equals("*")) {
 							label[i].setColoredText(str[i]);
@@ -211,6 +218,7 @@ public class LegendView extends JFrame implements ActionListener {
 				new WarningView(this, "Not eligible to kill this monster!", 1);
 			}
 //			enableAllButtons(true);
+			labelExp.setText("Exp: " + exp + ", DropRate: " + dropRate);
 			return;
 		}
 		if (actionevent.getSource() == buttonUW) {
@@ -372,8 +380,13 @@ public class LegendView extends JFrame implements ActionListener {
 		String boots = xmlParser.getNodeByName("boots").getTextContent();
 		String gem = xmlParser.getNodeByName("gem").getTextContent();
 		
+		String exp = "";
+		String luck = "";
+		
 		labelDelete.setForeground(Color.RED);
 		labelDelete.setText("Delete");
+		labelExp.setForeground(Color.GRAY);
+		labelExp.setText("Exp: N/A, DropRate: 1.0");
 		lbEquipment[0].setText(LegendConstant.Weapon);
 		showDetail(lbEquipment[1], weapon);
 		lbEquipment[2].setText(LegendConstant.Armor);

@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?><LegendHero>
+	<CurrentChar>
+		<name>卢卡尔</name>
+		<career>战士</career>
+		<gender>男</gender>
+		<level>50</level>
+		<exp>2527013</exp>
+		<dc>9-10</dc>
+		<sc>0-0</sc>
+		<mc>0-0</mc>
+		<ac>6-7</ac>
+		<mac>0-0</mac>
+		<hp>1009</hp>
+		<mp>257</mp>
+		<hit>17</hit>
+		<dex>15</dex>
+		<weapon>w36~开天+7  攻击: 6-49  攻击速度 +1  幸运 +7  重量: 73  持久: 35  需等级43</weapon>
+		<upgradeCount>7</upgradeCount>
+		<armor>c31~凤天魔甲  防御: 8-13  魔御: 8-8  攻击: 2-2  道术: 3-5  魔法: 3-5  重量: 23  持久: 50  需等级45</armor>
+		<helmet>h05|RED|~祈祷头盔  防御: 3-5  魔御: 1-6  攻击: 0-4  道术: 0-1  重量: 2  持久: 5  需等级15</helmet>
+		<amulet>A09|RED|~灯笼项链  攻击: 1-0  道术: 0-1  魔法: 0-3  魔法躲避 +50%  重量: 1  持久: 8  需等级18</amulet>
+		<medal>x03~高级暴率勋章  攻击: 3-3  道术: 3-3  魔法: 3-3  重量: 1  持久: 10  需等级1</medal>
+		<leftBracelet>i11|BLUE|~金手镯  防御: 0-1  魔御: 2-5  攻击: 0-2  道术: 0-1  重量: 1  持久: 7  需等级23</leftBracelet>
+		<rightBracelet>i11|BLUE|~金手镯  防御: 0-2  魔御: 2-5  攻击: 0-1  道术: 0-1  重量: 1  持久: 7  需等级23</rightBracelet>
+		<leftRing>r40~麻痹戒指  攻击: 0-1  重量: 1  持久: 5  需等级16</leftRing>
+		<rightRing>r28|RED|~雷霆战戒  攻击: 0-12  道术: 0-1  魔法: 0-3  重量: 1  持久: 7  需攻击45</rightRing>
+		<belt>b05|RED|~雷霆腰带  防御: 2-4  魔御: 0-2  攻击: 1-4  道术: 0-1  魔法: 0-1  重量: 2  持久: 7  需攻击45</belt>
+		<boots>o01|RED|~布鞋  防御: 0-4  魔御: 0-3  攻击: 0-1  道术: 0-1  魔法: 0-2  重量: 1  持久: 6  需等级15</boots>
+		<gem>g25~绿神石+4  攻击: 0-1  道术: 0-1  魔法: 0-1  毒物躲避 +50%  重量: 1  持久: 10  需等级50</gem>
+		<money>276425761</money>
+		<bless>215</bless>
+		<superOil>0</superOil>
+		<ore1>0</ore1>
+		<ore2>108</ore2>
+		<charm1>0</charm1>
+		<charm2>0</charm2>
+		<charm3>4</charm3>
+	</CurrentChar>
+	<WareHouse>
+		<item>h07|RED|~黑铁头盔  防御: 4-5  魔御: 2-6  攻击: 0-1  道术: 0-3  魔法: 0-1  重量: 20  持久: 10  需攻击46</item>
+		<item>x01~三倍经验勋章  攻击: 3-3  道术: 3-3  魔法: 3-3  重量: 1  持久: 30  需等级1</item>
+		<item>b04|RED|~钢铁腰带  防御: 0-4  魔御: 0-2  攻击: 0-3  道术: 0-1  魔法: 0-3  重量: 2  持久: 8  需等级35</item>
+		<item>a15|BLUE|~狂风项链  攻击: 0-4  道术: 0-1  魔法: 0-1  攻击速度 +2  重量: 1  持久: 8  需等级19</item>
+		<item>o04~避魂靴  防御: 1-3  魔御: 0-2  攻击: 0-2  重量: 2  持久: 10  需等级35</item>
+		<item>w37~玄天  攻击: 8-31  道术: 5-12  准确 +2  重量: 44  持久: 29  需等级43</item>
+		<item>c31~凤天魔甲  防御: 8-12  魔御: 8-8  攻击: 2-2  道术: 3-5  魔法: 3-5  重量: 23  持久: 50  需等级45</item>
+		<item>b07|RED|~烈焰腰带  防御: 2-4  魔御: 0-3  攻击: 0-2  道术: 0-2  魔法: 1-0  重量: 1  持久: 5  需魔法30</item>
+		<item>w29~命运之刃+7  攻击: 12-32  准确 +1  敏捷 +1  攻击速度 +2  幸运 +5  重量: 48  持久: 32  需等级35</item>
+		<item>g25~绿神石+4  毒物躲避 +50%  重量: 1  持久: 10  需等级50</item>
+		<item>A09|BLUE|~灯笼项链  攻击: 1-1  道术: 0-2  幸运 +1  魔法躲避 +30%  重量: 1  持久: 8  需等级18</item>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+	</WareHouse>
+</LegendHero>

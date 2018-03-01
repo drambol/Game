@@ -37,69 +37,69 @@ public class LegendFunction {
 		charLevel = Integer.parseInt(xmlParser.getNodeByName("level").getTextContent());
 		switch (monster) {
 		case LegendConstant.Monster01:
-			exp = 200;
+			exp = 400;
 			break;
 		case LegendConstant.Monster02:
-			exp = 500;
-			break;
-		case LegendConstant.Monster03:
-			exp = 800;
-			break;
-		case LegendConstant.Monster04:
 			exp = 1000;
 			break;
-		case LegendConstant.Monster05:
+		case LegendConstant.Monster03:
 			exp = 1600;
+			break;
+		case LegendConstant.Monster04:
+			exp = 2000;
+			break;
+		case LegendConstant.Monster05:
+			exp = 3200;
 			break;
 		case LegendConstant.Monster06:
-			exp = 1600;
+			exp = 3200;
 			break;
 		case LegendConstant.Monster07:
-			exp = 3000;
+			exp = 6000;
 			break;
 		case LegendConstant.Monster08:
-			exp = 2500;
+			exp = 5000;
 			break;
 		case LegendConstant.Monster09:
-			exp = 7200;
-			break;
-		case LegendConstant.Monster10:
-			exp = 5000;
-			break;
-		case LegendConstant.Monster11:
-			exp = 5000;
-			break;
-		case LegendConstant.Monster12:
-			exp = 5000;
-			break;
-		case LegendConstant.Monster13:
-			exp = 7200;
-			break;
-		case LegendConstant.Monster14:
 			exp = 9000;
 			break;
-		case LegendConstant.Monster15:
-			exp = 5000;
-			break;
-		case LegendConstant.Monster16:
+		case LegendConstant.Monster10:
 			exp = 10000;
 			break;
-		case LegendConstant.Monster17:
-			exp = 20000;
+		case LegendConstant.Monster11:
+			exp = 10000;
 			break;
-		case LegendConstant.Monster18:
+		case LegendConstant.Monster12:
+			exp = 10000;
+			break;
+		case LegendConstant.Monster13:
+			exp = 14400;
+			break;
+		case LegendConstant.Monster14:
+			exp = 18000;
+			break;
+		case LegendConstant.Monster15:
 			exp = 12000;
 			break;
-		case LegendConstant.Monster19:
+		case LegendConstant.Monster16:
 			exp = 20000;
 			break;
-		case LegendConstant.Monster20:
+		case LegendConstant.Monster17:
 			exp = 30000;
+			break;
+		case LegendConstant.Monster18:
+			exp = 30000;
+			break;
+		case LegendConstant.Monster19:
+			exp = 40000;
+			break;
+		case LegendConstant.Monster20:
+			exp = 60000;
 			break;
 		}
 	}
 	
-	public void addExp() {
+	public int addExp() {
 		xmlParser = new XmlParser("runSuite\\LegendHero.xml");
 		int n = 1;
 		String str = xmlParser.getNodeByName("medal").getTextContent().split("~")[0];
@@ -114,9 +114,10 @@ public class LegendFunction {
 			break;
 		}
 		reqExp = (int) (Math.pow(1.25, charLevel - 1) * 100);
+		int realExp = exp * n;
 		if (exp * n + currExp >= reqExp) {
 			charLevel = charLevel + 1;
-			currExp = exp * n + currExp - reqExp;
+			currExp = realExp + currExp - reqExp;
 			xmlParser.getNodeByName("level").setTextContent(String.valueOf(charLevel));
 			levelUp = true;
 			attributeGrow();
@@ -125,6 +126,7 @@ public class LegendFunction {
 		}
 		xmlParser.getNodeByName("exp").setTextContent(String.valueOf(currExp));
 		xmlParser.save();
+		return realExp;
 	}
 	
 	private void attributeGrow() {

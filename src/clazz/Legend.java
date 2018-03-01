@@ -15,13 +15,14 @@ public class Legend {
 	
 	public String[] legendItems;
 	public String[] itemCode;
+	public float dropRate;
 	
 	public String[] getItemFromMonster(String monsterCode) {
 		legendItems = new String[10];
 		itemCode = new String[10];
 		XmlParser xmlParser = new XmlParser("runSuite\\LegendMonster.xml");
 		NodeList nodeList = xmlParser.getNodeByName(monsterCode).getChildNodes();
-		float increase = parseIncrease();
+		dropRate = parseIncrease();
 		int count = 0;
 		int itemCount = 0;
 		for (int i = 0; i < nodeList.getLength(); i++) {
@@ -29,7 +30,7 @@ public class Legend {
 				String code = nodeList.item(i).getNodeName();
 				if (!code.equals("#text") && !code.substring(0, 1).contentEquals("m")) {
 					int probability = Integer.parseInt(nodeList.item(i).getTextContent());
-					if (Algorithm.thousandPercent(probability * increase)) {
+					if (Algorithm.thousandPercent(probability * dropRate)) {
 						LegendItem legendItem = new LegendItem(getItemByCode(code));
 						legendItems[count] = legendItem.printItem();
 						itemCode[count] = legendItem.code;
@@ -48,7 +49,7 @@ public class Legend {
 					}
 				} else if (code.substring(0, 2).contentEquals("mg")) {
 					int probability = Integer.parseInt(nodeList.item(i).getTextContent());
-					if (Algorithm.thousandPercent(probability * increase)) {
+					if (Algorithm.thousandPercent(probability * dropRate)) {
 						LegendItem legendItem = new LegendItem(getItemByCode(code));
 						legendItems[count] = "*" + legendItem.printMedical(1);
 						itemCode[count] = legendItem.code;
@@ -57,7 +58,7 @@ public class Legend {
 					}
 				} else if (code.contentEquals("misc1")) {
 					int probability = Integer.parseInt(nodeList.item(i).getTextContent());
-					if (Algorithm.thousandPercent(probability * increase)) {
+					if (Algorithm.thousandPercent(probability * dropRate)) {
 						LegendItem legendItem = new LegendItem(getItemByCode(code));
 						legendItems[count] = "*" + legendItem.printMedical(1);
 						itemCode[count] = legendItem.code;
@@ -96,8 +97,10 @@ public class Legend {
 	
 	private float parseIncrease() {
 		XmlParser heroXml = new XmlParser("runSuite\\LegendHero.xml");
-		String increase = heroXml.getNodeByName("medal").getTextContent().split("~")[0];
-		switch (increase) {
+		String dropRate = heroXml.getNodeByName("medal").getTextContent().split("~")[0];
+		if (dropRate.contains("|"))
+			dropRate = dropRate.substring(0, 3);
+		switch (dropRate) {
 		case "x02":
 			return 2f;
 		case "x03":

@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?><LegendHero>
+	<CurrentChar>
+		<name>Ken</name>
+		<career>战士</career>
+		<gender>男</gender>
+		<level>50</level>
+		<exp>279193</exp>
+		<dc>9-10</dc>
+		<sc>0-0</sc>
+		<mc>0-0</mc>
+		<ac>6-7</ac>
+		<mac>0-0</mac>
+		<hp>1009</hp>
+		<mp>257</mp>
+		<hit>17</hit>
+		<dex>15</dex>
+		<weapon>w36~开天+7  攻击: 6-48  攻击速度 +1  幸运 +7  重量: 73  持久: 35  需等级43</weapon>
+		<upgradeCount>7</upgradeCount>
+		<armor>c31~凤天魔甲  防御: 8-12  魔御: 8-8  攻击: 2-2  道术: 3-5  魔法: 3-5  重量: 23  持久: 50  需等级45</armor>
+		<helmet>h04|BLUE|~道士头盔  防御: 1-4  魔御: 2-6  攻击: 0-1  重量: 3  持久: 8  需等级24</helmet>
+		<amulet/>
+		<medal>x03~高级暴率勋章  防御: 0-1  攻击: 3-3  道术: 3-3  魔法: 3-3  重量: 1  持久: 10  需等级1</medal>
+		<leftBracelet>i13|RED|~辟邪手镯  防御: 0-5  魔御: 0-2  攻击: 0-2  魔法: 0-1  敏捷 +2  重量: 1  持久: 7  需等级26</leftBracelet>
+		<rightBracelet>i28~雷霆护腕  防御: 0-2  魔御: 0-2  攻击: 1-4  重量: 1  持久: 7  需攻击45</rightBracelet>
+		<leftRing>r41~复活戒指  防御: 0-1  魔御: 0-1  重量: 1  持久: 5  需等级16</leftRing>
+		<rightRing/>
+		<belt>b05~雷霆腰带  防御: 2-3  魔御: 0-1  攻击: 1-1  重量: 2  持久: 7  需攻击45</belt>
+		<boots>o05~雷霆战靴  防御: 0-3  魔御: 0-1  攻击: 1-0  道术: 0-1  重量: 2  持久: 7  需攻击45</boots>
+		<gem>g25~绿神石+4  毒物躲避 +50%  重量: 1  持久: 10  需等级50</gem>
+		<money>12563007</money>
+		<bless>167</bless>
+		<superOil>0</superOil>
+		<ore1>0</ore1>
+		<ore2>6</ore2>
+		<charm1>0</charm1>
+		<charm2>0</charm2>
+		<charm3>6</charm3>
+	</CurrentChar>
+	<WareHouse>
+		<item>a15~狂风项链  攻击: 0-4  道术: 0-1  攻击速度 +2  重量: 1  持久: 8  需等级19</item>
+		<item>x01~三倍经验勋章  攻击: 3-3  道术: 3-3  魔法: 3-3  重量: 1  持久: 30  需等级1</item>
+		<item>a24~圣战项链  攻击: 3-7  道术: 0-2  重量: 2  持久: 9  需攻击40</item>
+		<item>h11~圣龙盔  防御: 5-6  魔御: 2-3  攻击: 0-3  道术: 0-1  重量: 3  持久: 10  需等级35</item>
+		<item>w20|RED|~炼狱+7  攻击: 0-34  道术: 0-1  魔法: 0-2  准确 +4  幸运 +5  重量: 60  持久: 28  需等级26</item>
+		<item>c31~凤天魔甲  防御: 8-12  魔御: 8-8  攻击: 2-2  道术: 3-5  魔法: 3-5  重量: 23  持久: 52  需等级45</item>
+		<item>w37~玄天  攻击: 8-31  道术: 5-12  准确 +2  重量: 44  持久: 25  需等级43</item>
+		<item>r40~麻痹戒指  攻击: 0-1  重量: 1  持久: 8  需等级16</item>
+		<item>R16|RED|~狂风戒指  攻击: 0-4  道术: 0-2  魔法: 0-3  攻击速度 +1  重量: 1  持久: 5  需等级19</item>
+		<item>a30~战神项链  攻击: 3-9  幸运 +1  重量: 3  持久: 8  需攻击54</item>
+		<item>r31~战神戒指  魔御: 0-1  攻击: 0-9  重量: 2  持久: 8  需攻击54</item>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+		<item/>
+	</WareHouse>
+</LegendHero>
